@@ -4,16 +4,17 @@ import re
 import pytest
 from fastapi.testclient import TestClient
 
-from matchwise.agent import FALLBACK_REPLY, MAX_STEPS, TOOLS, run_turn, tool_definitions
+from matchwise.agent import FALLBACK_REPLY, MAX_STEPS, NOT_SAVED_NOTE, TOOLS, run_turn, tool_definitions
 from matchwise.api import app, get_embedder, get_llm
-from matchwise.llm import AgentStep, Completion, LLMClient, ToolCall
+from matchwise.llm import AgentStep, Completion, LLMClient, LLMUnavailable, ToolCall
 from matchwise.preferences import load_profile
 from conftest import BACKEND_NEVER_SALES, same_vector, save_profile
 
 
 class ScriptedAgent:
     """Fake LLM for the agent. Each step is either reply text or a list of (tool, arguments).
-    `structured` holds replies for the JSON calls tools make (extraction, reasons)."""
+    `structured` holds replies for the JSON calls tools make (extraction, reasons); an exception
+    there is raised instead, like a busy API."""
 
     model = "scripted-agent"
 
@@ -40,7 +41,10 @@ class ScriptedAgent:
         if messages[0]["content"].startswith("You check job postings"):  # the LLM limit check: nothing breaks
             ids = [int(i) for i in re.findall(r"=== job (\d+) ===", messages[1]["content"])]
             return Completion(json.dumps({"verdicts": [{"job_id": i, "breaks_limit": False} for i in ids]}), 100, 20)
-        return Completion(self.structured.pop(0), 100, 20)
+        reply = self.structured.pop(0)
+        if isinstance(reply, Exception):
+            raise reply
+        return Completion(reply, 100, 20)
 
 
 def agent_llm(steps, structured=()) -> LLMClient:
@@ -117,6 +121,37 @@ def test_tool_problems_go_back_to_the_model_as_errors(catalog, bad_call, expecte
     out = run_turn(catalog, llm, same_vector, "ana", "hi")
     assert out["reply"] == "Sorry about that." and out["tool_calls"][0]["ok"] is False
     assert expected_error in tool_results(llm, 1)[0]["error"]
+
+
+BUSY = LLMUnavailable("InternalServerError: Error code: 503")
+
+
+def test_a_failed_save_is_never_reported_as_saved(catalog):
+    llm = agent_llm(steps=[[("update_preferences", {"message": "Data analyst in Chicago"})],
+                           "Got it, I've noted that!"],                   # what the model really said
+                    structured=[BUSY])
+    out = run_turn(catalog, llm, same_vector, "ana", "Data analyst in Chicago, please.")
+
+    assert out["tool_calls"][0]["ok"] is False
+    assert "NOT SAVED" in tool_results(llm, 1)[0]["error"]               # the model is told plainly
+    assert out["reply"] == f"Got it, I've noted that!\n\n{NOT_SAVED_NOTE}"  # and the reply says it anyway
+    assert load_profile(catalog, "ana") is None
+
+    # The stored reply carries the note too, so the next turn's memory isn't the false claim.
+    llm = agent_llm(["Let's try again."])
+    run_turn(catalog, llm, same_vector, "ana", "Did you save it?")
+    remembered = [m["content"] for m in llm.transport.chat_calls[0] if m["role"] == "assistant"]
+    assert remembered == [f"Got it, I've noted that!\n\n{NOT_SAVED_NOTE}"]
+
+
+def test_a_save_that_works_on_a_second_try_needs_no_note(catalog):
+    llm = agent_llm(steps=[[("update_preferences", {"message": "backend, never sales"})],
+                           [("update_preferences", {"message": "backend, never sales"})],
+                           "Saved."],
+                    structured=[BUSY, EXTRACT])
+    out = run_turn(catalog, llm, same_vector, "ana", "Backend work, never sales.")
+    assert [c["ok"] for c in out["tool_calls"]] == [False, True]
+    assert out["reply"] == "Saved."
 
 
 def test_explain_match(catalog):

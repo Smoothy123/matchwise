@@ -37,6 +37,10 @@ log = logging.getLogger(__name__)
 MAX_STEPS = 5           # tool rounds per turn before giving up
 HISTORY_MESSAGES = 20   # earlier user/assistant messages sent with each turn
 FALLBACK_REPLY = "Sorry, I couldn't finish that. Could you say it another way?"
+# Added in code, not left to the model: with the LLM busy (503), saves failed and the model still
+# replied "I have them noted!". This makes the reply true whatever the model wrote.
+NOT_SAVED_NOTE = ("Note: your preferences were not saved this time, because the update failed. "
+                  "Please send them again.")
 
 
 class ToolError(Exception):
@@ -79,7 +83,14 @@ def compact_preferences(prefs: preferences.Preferences) -> dict:
 
 
 def update_preferences(ctx: ToolContext, args: UpdatePreferencesArgs) -> dict:
-    result = preferences.process_message(ctx.conn, ctx.llm, ctx.profile_id, args.message)
+    try:
+        result = preferences.process_message(ctx.conn, ctx.llm, ctx.profile_id, args.message)
+    except (LLMError, preferences.ConcurrentUpdate) as error:
+        # Spelled out for the model: a bare "Error code: 503" didn't stop it claiming success.
+        raise ToolError(
+            f"NOT SAVED. Nothing was stored ({type(error).__name__}). Tell them plainly that their "
+            "preferences were not saved and ask them to send them again."
+        ) from error
     return {
         "changes": [f"{op.op} {op.field} {op.value!r}" for op in result["operations"]] or ["nothing changed"],
         "notes": result["notes"],
@@ -186,6 +197,8 @@ Rules:
 - Refer to jobs as "Title at Company [#id]", so they can ask about them later.
 - Keep replies short: a few sentences, at most 5 jobs.
 - If a tool returns an error, say plainly what went wrong.
+- If update_preferences returns an error, nothing was saved. Say so, and never say you saved,
+  noted or remembered anything from that message.
 - If get_matches marks jobs with limit_check "skipped", say their hard limits couldn't be fully
   checked right now.
 
@@ -233,6 +246,13 @@ def run_turn(conn: psycopg.Connection, llm: LLMClient, embed: Embedder, profile_
             calls_made.append({"name": call.name, "arguments": call.arguments, "ok": "error" not in outcome})
     else:
         log.warning("agent profile=%s stopped after %d tool rounds", profile_id, MAX_STEPS)
+
+    saves = [call for call in calls_made if call["name"] == "update_preferences"]
+    if saves and not any(call["ok"] for call in saves):
+        # Before saving the turn, so the stored history (the agent's memory for later turns)
+        # and the API response both say it too.
+        reply = f"{reply}\n\n{NOT_SAVED_NOTE}"
+        log.warning("agent profile=%s: preferences not saved this turn", profile_id)
 
     save_turn(conn, profile_id, message, trace, reply)
     return {"reply": reply, "tool_calls": calls_made}
