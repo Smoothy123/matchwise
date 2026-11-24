@@ -59,8 +59,8 @@ export function groupTurns(rows: ChatMessage[]): Turn[] {
 
 /**
  * True when the agent tried to save preferences in this turn and no attempt worked. Seen live:
- * with the LLM busy (503), the save failed and the agent still replied "I have them noted!",
- * so the UI says it from the tool results rather than trusting the reply's wording.
+ * with the LLM busy (503), the save failed and the agent still replied "I have them noted!".
+ * The API now appends a note to such replies; the UI also flags them from the tool results.
  */
 export function preferencesNotSaved(turn: Turn): boolean {
   const saves = turn.tools.filter((tool) => tool.name === 'update_preferences');

@@ -29,10 +29,11 @@ export function TurnView({ turn }: { turn: Turn }) {
           <ReplyText text={turn.reply ?? '(No reply was saved for this message.)'} />
         </div>
         {preferencesNotSaved(turn) ? (
+          // The API now says this in the reply itself; this flag makes it impossible to miss, and
+          // still covers turns saved before that fix.
           <p className={styles.notSaved}>
             <span aria-hidden="true">! </span>
-            Your preferences weren&apos;t saved: the update failed (the language model was probably
-            busy). Send that part again to save it.
+            Preferences not saved
           </p>
         ) : null}
       </div>

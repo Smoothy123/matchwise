@@ -248,7 +248,7 @@ describe('failures', () => {
       ],
     });
     renderApp('/');
-    expect(await screen.findByText(/Your preferences weren't saved/)).toBeInTheDocument();
+    expect(await screen.findByText('Preferences not saved')).toBeInTheDocument();
     expect(screen.getByText(/1 failed/)).toBeInTheDocument();
   });
 
