@@ -218,7 +218,7 @@ def conn(db_url: str):
     """A connection to an empty test database."""
     with db.connect(db_url) as conn:
         conn.execute(
-            "TRUNCATE jobs, profiles, profile_messages, reasons_cache, refresh_runs, chat_messages RESTART IDENTITY")
+            "TRUNCATE jobs, profiles, profile_messages, reasons_cache, refresh_runs, chat_messages, limit_checks RESTART IDENTITY")
         yield conn
 
 

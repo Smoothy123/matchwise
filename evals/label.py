@@ -55,7 +55,9 @@ def build_pool(conn: psycopg.Connection, profile_id: str, prefs: Preferences, em
                keyword_depth: int) -> list[str]:
     """Union of every system's top `depth` plus keyword hits, in a shuffled order that's fixed per persona."""
     found: list[str] = []
-    for mode in Mode:
+    # Mode.checked isn't pooled separately: it returns full's ranking minus the jobs it drops, so its
+    # top 10 comes from full's top 20, which is already in the pool (judged@10 confirms this).
+    for mode in (Mode.vector, Mode.vector_filters, Mode.full):
         found += [m["source_id"] for m in match(conn, prefs, embed, mode=mode, limit=depth)]
     query = keyword_query(prefs)
     if query:

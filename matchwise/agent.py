@@ -97,9 +97,10 @@ def get_matches(ctx: ToolContext, args: GetMatchesArgs) -> list[dict]:
     found = preferences.load_profile(ctx.conn, ctx.profile_id)
     if found is None:
         raise ToolError("No preferences stored yet. Ask what they're looking for, then call update_preferences.")
-    matches = ranking.match(ctx.conn, found[0], ctx.embed, limit=args.limit)
+    matches = ranking.match(ctx.conn, found[0], ctx.embed, limit=args.limit, mode=ranking.Mode.checked, llm=ctx.llm)
     return [{"job_id": m["job_id"], "title": m["title"], "company": m["company"], "location": m["location"],
-             "remote": m["remote"], "score": m["score"], "matched_skills": m["matched_skills"]} for m in matches]
+             "remote": m["remote"], "score": m["score"], "matched_skills": m["matched_skills"],
+             "limit_check": m.get("limit_check")} for m in matches]
 
 
 JOB_FOR_EXPLAIN_SQL = """
@@ -136,7 +137,7 @@ TOOLS = {tool.name: tool for tool in [
          "Pass their own words. Call this whenever they state or change a preference.",
          UpdatePreferencesArgs, update_preferences),
     Tool("get_matches",
-         "Their best-fitting open jobs, using their stored preferences: hard limits filtered out, "
+         "Their best-fitting open jobs, using their stored preferences: hard limits filtered out and checked, "
          "the rest ranked. Use for 'what fits me?'.",
          GetMatchesArgs, get_matches),
     Tool("search_jobs",
@@ -185,6 +186,8 @@ Rules:
 - Refer to jobs as "Title at Company [#id]", so they can ask about them later.
 - Keep replies short: a few sentences, at most 5 jobs.
 - If a tool returns an error, say plainly what went wrong.
+- If get_matches marks jobs with limit_check "skipped", say their hard limits couldn't be fully
+  checked right now.
 
 What you know about them (their stored preferences):
 {preferences}"""

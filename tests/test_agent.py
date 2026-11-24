@@ -1,4 +1,5 @@
 import json
+import re
 
 import pytest
 from fastapi.testclient import TestClient
@@ -36,6 +37,9 @@ class ScriptedAgent:
         return AgentStep(None, calls, {"role": "assistant", "content": "", "tool_calls": raw}, 50, 10)
 
     def complete(self, messages):
+        if messages[0]["content"].startswith("You check job postings"):  # the LLM limit check: nothing breaks
+            ids = [int(i) for i in re.findall(r"=== job (\d+) ===", messages[1]["content"])]
+            return Completion(json.dumps({"verdicts": [{"job_id": i, "breaks_limit": False} for i in ids]}), 100, 20)
         return Completion(self.structured.pop(0), 100, 20)
 
 

@@ -15,11 +15,13 @@ from evals.data import GOOD, LABELS_JSONL, RESULTS_DIR, Label, load_extracted, l
 from evals.metrics import mean_and_ci, ndcg_at_k, precision_at_k, rate_at_k, recall_at_k
 from matchwise import db, embeddings
 from matchwise.ranking import Mode, match
+from matchwise.llm import client_from_settings
 
 VERSIONS: dict[str, Mode] = {
     "vector only": Mode.vector,
     "vector + filters": Mode.vector_filters,
     "vector + filters + re-ranking": Mode.full,
+    "+ LLM limit check": Mode.checked,
 }
 METRICS = ("P@5", "R@20", "nDCG@10", "violations@10", "judged@10")
 
@@ -77,11 +79,13 @@ def main() -> None:
     settings = get_settings()
     setup_logging("WARNING")
     prefs = load_extracted()
+    llm = client_from_settings(settings)  # for the "+ LLM limit check" version
     labels = load_labels()
     labelled_profiles = sorted({profile for profile, _ in labels})
     with db.connect(settings.database_url) as conn:
         def rank(profile_id: str, mode: Mode) -> list[str]:
-            return [m["source_id"] for m in match(conn, prefs[profile_id], embeddings.embed_texts, mode=mode, limit=20)]
+            return [m["source_id"] for m in match(conn, prefs[profile_id], embeddings.embed_texts,
+                                                  mode=mode, limit=20, llm=llm, strict_check=True)]
 
         per_version = evaluate(rank, labelled_profiles, labels)
         state = conn.execute(

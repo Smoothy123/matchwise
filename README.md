@@ -91,7 +91,7 @@ curl -s "localhost:8000/profiles/me/matches?limit=5"
 | `GET /search?q=` | semantic search over open postings |
 | `POST /profiles/{id}/messages` | update preferences from a plain-language message |
 | `GET /profiles/{id}` · `/messages` | current preferences · how each message changed them |
-| `GET /profiles/{id}/matches` | top matches with score breakdown and reasons (`mode=vector\|vector_filters\|full`, `explain=false`) |
+| `GET /profiles/{id}/matches` | top matches with score breakdown, reasons and `limit_check` status (default `mode=checked` with an LLM; also `full`, `vector_filters`, `vector`; `explain=false`) |
 | `POST /profiles/{id}/chat` · `GET` · `DELETE` | talk to the agent · the conversation with every tool call · forget it |
 | `GET /health` | counts and whether the LLM is configured |
 
@@ -111,6 +111,7 @@ scores.
 | vector only | 0.08 (0.04–0.13) | 0.51 (0.26–0.76) | 0.42 (0.28–0.55) | 0.42 | 1.00 |
 | vector + filters | 0.13 (0.07–0.20) | 0.77 (0.55–0.95) | 0.56 (0.46–0.67) | 0.13 | 1.00 |
 | vector + filters + re-ranking | 0.15 (0.07–0.23) | 0.74 (0.52–0.92) | 0.60 (0.51–0.70) | 0.13 | 1.00 |
+| **+ LLM limit check** (default) | 0.15 (0.07–0.23) | 0.63 (0.41–0.85) | 0.63 (0.52–0.73) | **0.06** | 1.00 |
 
 15 personas, 588 labelled postings (31 good matches). R@20 covers the 11 personas with at
 least one good match. Brackets: 95% bootstrap interval over personas.
@@ -131,12 +132,15 @@ What changed between versions, and why the numbers moved (paired change per pers
 - **+ re-ranking** (skills, location, seniority, salary, recency): nDCG@10 **+0.04** (−0.00 to
   +0.08), P@5 +0.01, R@20 −0.04 (−0.30 to +0.24). The gain is small, and 15 personas can't
   separate it from zero. The features mostly reorder jobs the filters already got right.
+- **+ LLM limit check** ([limit_check.py](matchwise/limit_check.py)): violations@10 **−0.07**
+  (−0.11 to −0.03), nDCG@10 **+0.03** (+0.00 to +0.07), P@5 unchanged, R@20 **−0.10**
+  (−0.29 to 0.00). It halves the violations the filters miss, at a cost in recall.
 - **Low P@5 is mostly the data.** 5,000 postings spread across the whole US contain only 31
   good fits for these 15 personas, and 4 personas have none (there are no elementary teaching
   jobs in California in the sample, for example).
 
-**The 0% violation target is not met.** 19 of the full system's 150 top-10 slots (13%)
-break a stated limit, all in ways the structured filters can't see:
+**Why the LLM limit check was added.** Without it, 19 of the full system's 150 top-10 slots
+(13%) broke a stated limit, all in ways the structured filters can't see:
 
 | Cause | Examples from the labels |
 |---|---|
@@ -145,8 +149,33 @@ break a stated limit, all in ways the structured filters can't see:
 | wording the phrase filter misses | a title ending "…Nights" against the limit "night shift" |
 | wrong structured data | a "remote" flag on an in-store welcome desk job |
 
-The next step is an LLM check of the top 10 against the person's limits. Reasons v2 already
-flags most of these as "Possible conflict with your limit".
+So after re-ranking, the LLM reads the top jobs against the person's numbered limits and drops
+the ones that break one. False alarms would quietly hide good jobs, so every flag has to be proven:
+- it may only cite the person's own limits (L1, L2, …);
+- it must quote the posting, and code checks the quote is really there;
+- missing information never counts as a violation.
+
+Checking every job it dropped against the labels:
+
+| Limit-check prompt | Dropped | Really break a limit | Okay/good jobs wrongly dropped | Precision (labelled drops) |
+|---|---|---|---|---|
+| limits-v1 | 51 | 20 | 9 (4 good) | 56% |
+| limits-v2 | 37 | 16 | 4 (3 good) | 62% |
+
+v1 read "no audit roles" as "never mentions audits", and dropped an in-house controller who
+"coordinates annual audits". v2 says a role limit is broken only when the job *is* that role.
+v2 was written after seeing v1's mistakes on these same personas, so its numbers are somewhat
+optimistic; new personas would be the clean test. What v2 still gets wrong:
+- "remote only" read too literally (remote jobs with in-person training);
+- "rotating nights" vs "overnight shifts";
+- one arithmetic slip, flagging "$60,000–$75,000" as below a $55,000 minimum. Numeric
+  comparisons belong in code, not in an LLM.
+
+**The 0% target is still not met: 6% of the top 10 break a limit.** If the LLM is down, the
+check *fails open*: cached verdicts still apply, the other jobs are kept, and each match says
+`limit_check: "skipped"`. An outage never hides every job, and never goes unnoticed. The evals
+run in strict mode instead, where a failed check stops the run rather than producing numbers
+from a half-done check.
 
 Method. Each persona's labelling pool is the union of every version's top 20 plus 10
 keyword-search hits, shown shuffled with the source hidden. Postings are graded
@@ -245,6 +274,9 @@ past the embedded part of the description don't change the embedded text.
 | "Travel Nurse" title passed a "travel nursing" limit | phrase limits check title + description and match word forms |
 | 2% of salaries implausible (hourly figures labelled yearly) | treated as unknown rather than guessed |
 | "recruiting" tagged on 13% of postings, mostly from hiring boilerplate | boilerplate stripped; self-referential terms dropped from the vocabulary |
+| 13% of top-10 results broke a limit only stated in free text | LLM limit check with proven evidence: 6% |
+| The limit check read "no audit roles" as "never mentions audits" (9 okay/good jobs dropped) | limits-v2: a role limit applies only if the job *is* that role (4 dropped) |
+| When the LLM was down, the limit check was silently skipped | each match reports `limit_check`; cached verdicts still apply; evals run strict |
 | PostgreSQL 16.12 bug broke `left()` on 13 postings | moved to 16.15, regression test |
 
 ## Key decisions
@@ -261,6 +293,11 @@ past the embedded part of the description don't change the embedded text.
   "not sales" returns *only* sales jobs. So dealbreakers are SQL filters.
 - **Filters inside the vector query.** Filtering a top-200 list afterwards can leave 3 results.
   With pgvector's iterative index scan, the index keeps searching until enough rows pass.
+- **An LLM checks hard limits after the SQL filters, and each flag must be proven.** Filters
+  only see structured fields, so the LLM reads the top jobs against the person's numbered
+  limits. A flag counts only if it cites one of those limits and quotes the posting, and code
+  checks the quote is really there. If the LLM is down, the check fails open but visibly
+  (`limit_check: "skipped"`): an outage shouldn't hide every job.
 - **Two stages.** Vector search is cheap and good at "roughly the right kind of job". Feature
   re-ranking is precise but needs structured fields, so it runs on 200 candidates. Every score
   is returned with its breakdown. The weights are hand-set and documented, not tuned on the
@@ -311,7 +348,7 @@ matchwise/   ingest · embeddings · search · preferences · filters · places 
 migrations/  numbered SQL files, applied at startup under an advisory lock
 evals/       personas, frozen preferences, pool, labels, metrics, ranking runner, judge
 docs/        scaling.md · deployment.md
-tests/       198 tests (pytest); 4 live LLM tests behind `-m live`
+tests/       206 tests (pytest); 4 live LLM tests behind `-m live`
 ```
 
 Run the tests:
@@ -328,10 +365,10 @@ docker compose run --rm app pytest -m live
 
 ## Limitations and next steps
 
-- **Dealbreakers still leak when the data hides them: 13% of top-10 slots, not 0%** (see
-  Evals). Next, a fourth version that asks the LLM to check the top 10 against the person's
-  limits, measured on the same labels. It has to remove violations without dropping good jobs
-  on false alarms; reasons v2 raised 4 false alarms out of 13 flags.
+- **Dealbreakers still leak: 6% of top-10 slots, not 0%,** even with the LLM limit check, and
+  the check costs some recall (R@20 −0.10). Next: do numeric limits (pay) in code instead of
+  the LLM, test limits-v2 on fresh personas, and offer the person "show me what was filtered
+  out" rather than hiding borderline jobs entirely.
 - **The labels and judge check came from a model.** A human spot-check of a sample of labels
   and reason scores is the next step.
 - **LightGBM re-ranker**, trained on the labels with leave-one-persona-out validation. With 15

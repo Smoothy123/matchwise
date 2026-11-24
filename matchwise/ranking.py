@@ -16,6 +16,8 @@ Modes (compared in the Phase 7 evals):
   vector           nearest by similarity only, no filters, no re-ranking
   vector_filters   dealbreaker filters, ranked by similarity
   full             filters + feature re-ranking
+  checked          full, then an LLM checks the top jobs against the hard limits and drops
+                   any that break one (limit_check.py): for limits the filters can't see
 """
 
 import logging
@@ -27,8 +29,10 @@ from enum import Enum
 import numpy as np
 import psycopg
 
+from matchwise import limit_check
 from matchwise.embeddings import SENIORITY_LABELS, Embedder
 from matchwise.filters import dealbreaker_sql
+from matchwise.llm import LLMClient
 from matchwise.places import location_matches, parse_place
 from matchwise.preferences import Preferences, Wants
 from matchwise.search import tune_hnsw
@@ -57,10 +61,15 @@ class Mode(str, Enum):
     vector = "vector"
     vector_filters = "vector_filters"
     full = "full"
+    checked = "checked"
 
 
 class NoWants(Exception):
     """The profile has only dealbreakers, so there is nothing to search for yet."""
+
+
+class LimitCheckUnavailable(Exception):
+    """Mode.checked needs an LLM, and none is configured."""
 
 
 # ---------- stage 1: retrieve ----------
@@ -221,7 +230,12 @@ def match(
     mode: Mode = Mode.full,
     limit: int = 10,
     candidates: int = CANDIDATES,
+    llm: LLMClient | None = None,
+    strict_check: bool = False,
 ) -> list[dict]:
+    """strict_check: in Mode.checked, raise if the LLM check fails instead of skipping it (for evals)."""
+    if mode == Mode.checked and llm is None:
+        raise LimitCheckUnavailable("The limit check needs the LLM: set LLM_API_KEY and LLM_MODEL in .env.")
     started = time.perf_counter()
     vector = query_vector(prefs.wants, embed)
 
@@ -250,16 +264,21 @@ def match(
         matches.append({
             **job,
             "job_id": job["id"],
-            "score": round(score, 4) if mode == Mode.full else round(job["similarity"], 4),
+            "score": round(score, 4) if mode in (Mode.full, Mode.checked) else round(job["similarity"], 4),
             "features": breakdown,
             "matched_skills": sorted(set(prefs.wants.skills) & set(job["skills"])),
         })
 
-    if mode == Mode.full:
+    if mode in (Mode.full, Mode.checked):
         matches.sort(key=lambda m: m["score"], reverse=True)
     # Other modes keep the retrieval order: nearest first.
+    reranked = time.perf_counter()
+    dropped: list[dict] = []
+    if mode == Mode.checked:
+        matches, dropped = limit_check.keep_allowed(conn, llm, prefs, matches, limit, fail_open=not strict_check)
     log.info(
-        "match mode=%s candidates=%d filters=%d retrieve_ms=%.0f rerank_ms=%.0f",
-        mode.value, len(pool), len(clauses), (retrieved - started) * 1000, (time.perf_counter() - retrieved) * 1000,
+        "match mode=%s candidates=%d filters=%d dropped_by_llm_check=%d retrieve_ms=%.0f rerank_ms=%.0f check_ms=%.0f",
+        mode.value, len(pool), len(clauses), len(dropped), (retrieved - started) * 1000,
+        (reranked - retrieved) * 1000, (time.perf_counter() - reranked) * 1000,
     )
     return matches[:limit]

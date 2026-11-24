@@ -181,13 +181,13 @@ def api(db_url, monkeypatch):
 def test_matches_come_with_reasons(catalog, api):
     client, bot = api
     save_profile(catalog, "ana", BACKEND_NEVER_SALES)
-    body = client.get("/profiles/ana/matches", params={"limit": 3}).json()
+    body = client.get("/profiles/ana/matches", params={"limit": 3, "mode": "full"}).json()
     assert body[0]["explanation"] == {
         "reason": f"Job {body[0]['job_id']} is a backend role using Python.",
         "matched_preferences": ["role: backend engineer", "skill: python"],
         "caveats": ["Salary not stated"],
     }
-    client.get("/profiles/ana/matches", params={"limit": 3})
+    client.get("/profiles/ana/matches", params={"limit": 3, "mode": "full"})
     assert len(bot.calls) == 1  # the second request was served from the cache
 
     plain = client.get("/profiles/ana/matches", params={"limit": 3, "explain": "false"}).json()

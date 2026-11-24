@@ -10,7 +10,8 @@ def test_migrate_is_idempotent(db_url):
     with db.connect(db_url) as conn:
         names = [r["name"] for r in conn.execute("SELECT name FROM schema_migrations ORDER BY name")]
     assert names == ["001_init.sql", "002_hnsw_index.sql", "003_update_vector_extension.sql", "004_profiles.sql",
-                     "005_reasons_cache.sql", "006_refresh_runs.sql", "007_chat_messages.sql"]
+                     "005_reasons_cache.sql", "006_refresh_runs.sql", "007_chat_messages.sql",
+                     "008_limit_checks.sql"]
 
 
 def test_health_reports_job_counts(db_url, conn, monkeypatch, no_lookups):

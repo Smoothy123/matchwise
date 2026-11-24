@@ -70,6 +70,7 @@ def test_evaluate_and_table():
     rankings = {
         (Mode.vector, "p1"): ["s", "a"], (Mode.vector_filters, "p1"): ["a"], (Mode.full, "p1"): ["a"],
         (Mode.vector, "p2"): ["q", "b"], (Mode.vector_filters, "p2"): ["q", "b"], (Mode.full, "p2"): ["b", "q"],
+        (Mode.checked, "p1"): ["a"], (Mode.checked, "p2"): ["b"],
     }
     results = evaluate(lambda pid, mode: rankings[(mode, pid)], ["p1", "p2"], labels)
     assert results["vector only"]["p1"]["violations@10"] == 0.5
@@ -77,7 +78,7 @@ def test_evaluate_and_table():
     assert results["vector + filters + re-ranking"]["p2"]["nDCG@10"] == 1.0
     table = markdown_table({v: summarise(s) for v, s in results.items()})
     assert table.splitlines()[0] == "| Version | P@5 | R@20 | nDCG@10 | violations@10 | judged@10 |"
-    assert len(table.splitlines()) == 5
+    assert len(table.splitlines()) == 6  # header, divider, four versions
 
 
 # ---------- freezing preferences ----------

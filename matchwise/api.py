@@ -90,6 +90,11 @@ def concurrent_update(request: Request, error: preferences.ConcurrentUpdate) -> 
     return JSONResponse(status_code=409, content={"detail": str(error)})
 
 
+@app.exception_handler(ranking.LimitCheckUnavailable)
+def limit_check_unavailable(request: Request, error: ranking.LimitCheckUnavailable) -> JSONResponse:
+    return JSONResponse(status_code=503, content={"detail": str(error)})
+
+
 @app.exception_handler(ranking.NoWants)
 def no_wants(request: Request, error: ranking.NoWants) -> JSONResponse:
     return JSONResponse(status_code=422, content={"detail": str(error)})
@@ -150,6 +155,9 @@ class MatchOut(BaseModel):
     similarity: float
     features: dict[str, FeatureScore]
     explanation: reasons.Explanation | None = None  # None if reasons were off or the LLM failed
+    # "passed", "skipped" (LLM unavailable: only the SQL filters applied), "no limits",
+    # or None in modes without the LLM limit check.
+    limit_check: str | None = None
 
 
 class ToolCallOut(BaseModel):
@@ -227,7 +235,9 @@ def get_matches(
     embed: Embed,
     client: OptionalLLM,
     limit: Annotated[int, Query(ge=1, le=50)] = 10,
-    mode: Annotated[Mode, Query(description="full = filters + re-ranking; the others are for comparison")] = Mode.full,
+    mode: Annotated[Mode | None, Query(description=(
+        "Default: checked (filters + re-ranking + LLM limit check) when the LLM is configured, else full. "
+        "vector and vector_filters are for comparison."))] = None,
     explain: Annotated[bool, Query(description="Add a plain-language reason to each match (cached)")] = True,
 ) -> list[MatchOut]:
     """The best-fitting active jobs for this profile, each with its score breakdown and a reason."""
@@ -235,7 +245,10 @@ def get_matches(
     if found is None:
         raise HTTPException(404, f"No profile {profile_id!r}. Send it a message first.")
     prefs = found[0]
-    matches = ranking.match(conn, prefs, embed, mode=mode, limit=limit)
+    # The LLM limit check halved limit violations in the evals (13% -> 6% of the top 10), so it's
+    # the default whenever an LLM is available.
+    mode = mode or (Mode.checked if client is not None else Mode.full)
+    matches = ranking.match(conn, prefs, embed, mode=mode, limit=limit, llm=client)
     if explain and client is not None:
         explanations = reasons.explain_matches(conn, client, prefs, matches)
         for match in matches:

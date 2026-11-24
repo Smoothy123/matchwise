@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-24T12:50:36+00:00",
+ "generated_at": "2026-11-24T13:24:36+00:00",
  "note": "15 personas, 588 labelled postings (31 good matches), labelled by: claude-opus-5-5. Database: 5000 active jobs after refresh run 4. Brackets: 95% bootstrap interval over personas.",
  "per_version": {
   "vector only": {
@@ -320,6 +320,113 @@
     "R@20": 1.0,
     "nDCG@10": 0.8352083229960288,
     "violations@10": 0.3,
+    "judged@10": 1.0
+   }
+  },
+  "+ LLM limit check": {
+   "backend-dev": {
+    "P@5": 0.0,
+    "R@20": 1.0,
+    "nDCG@10": 0.33044943549177797,
+    "violations@10": 0.2,
+    "judged@10": 1.0
+   },
+   "cdl-driver": {
+    "P@5": 0.4,
+    "R@20": 1.0,
+    "nDCG@10": 0.9200584361905293,
+    "violations@10": 0.0,
+    "judged@10": 1.0
+   },
+   "data-analyst": {
+    "P@5": 0.0,
+    "R@20": 0.0,
+    "nDCG@10": 0.5532357843385493,
+    "violations@10": 0.0,
+    "judged@10": 1.0
+   },
+   "digital-marketer": {
+    "P@5": 0.2,
+    "R@20": 0.5,
+    "nDCG@10": 0.40217749113883217,
+    "violations@10": 0.0,
+    "judged@10": 1.0
+   },
+   "elementary-teacher": {
+    "P@5": 0.0,
+    "R@20": null,
+    "nDCG@10": 0.914856882358379,
+    "violations@10": 0.0,
+    "judged@10": 1.0
+   },
+   "hr-recruiter": {
+    "P@5": 0.0,
+    "R@20": null,
+    "nDCG@10": 0.4932162989129127,
+    "violations@10": 0.0,
+    "judged@10": 1.0
+   },
+   "hvac-tech": {
+    "P@5": 0.2,
+    "R@20": 1.0,
+    "nDCG@10": 0.5348770935150564,
+    "violations@10": 0.0,
+    "judged@10": 1.0
+   },
+   "icu-nurse": {
+    "P@5": 0.0,
+    "R@20": null,
+    "nDCG@10": 0.7885497208855957,
+    "violations@10": 0.0,
+    "judged@10": 1.0
+   },
+   "it-project-manager": {
+    "P@5": 0.4,
+    "R@20": 0.75,
+    "nDCG@10": 0.7981332304743753,
+    "violations@10": 0.1,
+    "judged@10": 1.0
+   },
+   "litigation-paralegal": {
+    "P@5": 0.0,
+    "R@20": null,
+    "nDCG@10": 0.9083745556952364,
+    "violations@10": 0.1,
+    "judged@10": 1.0
+   },
+   "remote-support": {
+    "P@5": 0.4,
+    "R@20": 0.7142857142857143,
+    "nDCG@10": 0.4868242100042309,
+    "violations@10": 0.0,
+    "judged@10": 1.0
+   },
+   "saas-account-exec": {
+    "P@5": 0.2,
+    "R@20": 0.2,
+    "nDCG@10": 0.44863890921350064,
+    "violations@10": 0.0,
+    "judged@10": 1.0
+   },
+   "senior-accountant": {
+    "P@5": 0.2,
+    "R@20": 0.8,
+    "nDCG@10": 0.55163158315894,
+    "violations@10": 0.3,
+    "judged@10": 1.0
+   },
+   "store-manager": {
+    "P@5": 0.0,
+    "R@20": 0.0,
+    "nDCG@10": 0.38799847260820447,
+    "violations@10": 0.0,
+    "judged@10": 1.0
+   },
+   "ux-designer": {
+    "P@5": 0.2,
+    "R@20": 1.0,
+    "nDCG@10": 0.8972343548358146,
+    "violations@10": 0.2,
     "judged@10": 1.0
    }
   }
