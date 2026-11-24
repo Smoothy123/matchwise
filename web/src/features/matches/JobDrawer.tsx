@@ -1,6 +1,8 @@
 import { useId } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router';
 
+import type { Mode } from '../../api/client';
+
 import { Drawer } from '../../ui/Drawer';
 import { JobDetail } from './JobDetail';
 import type { ReasonsState } from './useRankedMatches';
@@ -16,13 +18,15 @@ export function parseJobId(value: string | null): number | null {
 interface JobDrawerProps {
   matches: RankedMatch[] | undefined;
   reasons: ReasonsState;
+  /** The ranking version `matches` came from; null on pages without one (chat, search). */
+  mode: Mode | null;
 }
 
 /**
  * The details panel, driven by the URL: ?job=<id> opens it. So a job's details can be linked to,
  * survive a reload, and the browser's Back button closes the panel, as people expect on phones.
  */
-export function JobDrawer({ matches, reasons }: JobDrawerProps) {
+export function JobDrawer({ matches, reasons, mode }: JobDrawerProps) {
   const titleId = useId();
   const [params, setParams] = useSearchParams();
   const location = useLocation();
@@ -47,7 +51,7 @@ export function JobDrawer({ matches, reasons }: JobDrawerProps) {
   return (
     <Drawer open={jobId !== null} onClose={close} labelledBy={titleId}>
       {jobId !== null ? (
-        <JobDetail jobId={jobId} match={match} reasons={reasons} titleId={titleId} />
+        <JobDetail jobId={jobId} match={match} reasons={reasons} mode={mode} titleId={titleId} />
       ) : null}
     </Drawer>
   );

@@ -55,11 +55,14 @@ function setup({
   });
 }
 
-function matchRequests(fetchMock: ReturnType<typeof setup>): (string | null)[] {
+/** Every matches request, as "mode:explain", in the order they were sent. */
+function matchRequests(fetchMock: ReturnType<typeof setup>): string[] {
   return fetchMock.mock.calls
     .map(([input]) => new URL(input instanceof Request ? input.url : input.toString()))
     .filter((url) => url.pathname.endsWith('/matches'))
-    .map((url) => url.searchParams.get('explain'));
+    .map(
+      (url) => `${url.searchParams.get('mode') ?? '-'}:${url.searchParams.get('explain') ?? '-'}`,
+    );
 }
 
 beforeEach(() => {
@@ -75,7 +78,9 @@ describe('loading matches', () => {
       await screen.findByRole('heading', { name: 'Registered Nurse, Emergency Room' }),
     ).toBeInTheDocument();
     expect(await screen.findByText(REASON.reason)).toBeInTheDocument();
-    expect(matchRequests(fetchMock)).toEqual(['false', 'true']); // in that order, never together
+    // The list, then its reasons (in that order, never together); beside them the version before
+    // the default one, to compare with.
+    expect(matchRequests(fetchMock)).toEqual(['checked:false', 'full:false', 'checked:true']);
     const [first] = within(screen.getByRole('list', { name: 'Matches' })).getAllByRole('article');
     expect(first).toHaveTextContent('#1');
     expect(within(first as HTMLElement).getByRole('img')).toHaveAccessibleName(
@@ -114,7 +119,7 @@ describe('loading matches', () => {
     renderApp('/matches');
     expect(await screen.findByText(/Reasons need the language model/)).toBeInTheDocument();
     await screen.findByRole('heading', { name: 'Registered Nurse, Emergency Room' });
-    expect(matchRequests(fetchMock)).toEqual(['false']);
+    expect(matchRequests(fetchMock)).toEqual(['full:false', 'vector_filters:false']); // no reasons
   });
 
   it('keeps the cards when the reasons fail, and can try again', async () => {
@@ -180,7 +185,10 @@ describe('sorting and filtering', () => {
     const fetchMock = setup();
     const { user, router } = renderApp('/matches');
     await screen.findByText(REASON.reason);
-    const titles = () => screen.getAllByRole('heading', { level: 2 }).map((h) => h.textContent);
+    const titles = () =>
+      within(screen.getByRole('list', { name: 'Matches' }))
+        .getAllByRole('heading', { level: 2 })
+        .map((h) => h.textContent);
     expect(titles()).toEqual([FIRST.title, SECOND.title]);
 
     await user.selectOptions(screen.getByLabelText('Sort by'), 'Highest pay');
@@ -202,7 +210,8 @@ describe('sorting and filtering', () => {
     await user.click(screen.getByRole('button', { name: 'Clear filters' }));
     expect(titles()).toEqual([SECOND.title, FIRST.title]); // the sort stays
     expect(router.state.location.search).toBe('?sort=pay');
-    expect(matchRequests(fetchMock)).toEqual(['false', 'true']); // no new requests: all client-side
+    // No new requests: sorting and filtering are all on the client.
+    expect(matchRequests(fetchMock)).toEqual(['checked:false', 'full:false', 'checked:true']);
   });
 
   it('opens with the view from a shared URL', async () => {
@@ -282,5 +291,96 @@ describe('parseJobId', () => {
     ['9999999999999999', null], // past what a JavaScript number holds exactly
   ])('%s → %s', (value, expected) => {
     expect(parseJobId(value)).toBe(expected);
+  });
+});
+
+describe('ranking versions', () => {
+  // A catalog where every step changes something.
+  const sales = makeMatch({ job_id: 1, title: 'Sales Analyst' });
+  const analystA = makeMatch({ job_id: 2, title: 'Analyst A' });
+  const analystB = makeMatch({ job_id: 3, title: 'Analyst B' });
+  const nights = makeMatch({ job_id: 4, title: 'Night Shift Analyst' });
+  const LISTS: Record<string, Match[]> = {
+    vector: [sales, analystA, analystB, nights],
+    vector_filters: [analystA, analystB, nights], // the filters remove the sales job
+    full: [analystB, analystA, nights], // re-ranking swaps A and B
+    checked: [analystB, analystA], // the LLM check drops the night-shift job
+  };
+
+  function setupVersions(health: Health = HEALTHY) {
+    return mockApi({
+      'GET /health': health,
+      'GET /profiles/p1': makeProfile(),
+      'GET /profiles/p1/matches': (url: URL) =>
+        jsonResponse(LISTS[url.searchParams.get('mode') ?? 'checked'] ?? []),
+    });
+  }
+
+  const cardTitles = () =>
+    within(screen.getByRole('list', { name: 'Matches' }))
+      .getAllByRole('heading', { level: 2 })
+      .map((h) => h.textContent);
+
+  it('starts on the default version and shows what it changed from the one before', async () => {
+    setupVersions();
+    renderApp('/matches');
+    expect(await screen.findByRole('radio', { name: /LLM limit check \(default\)/ })).toBeChecked();
+    await waitFor(() => {
+      expect(cardTitles()).toEqual(['Analyst B', 'Analyst A']);
+    });
+    const leftOut = await screen.findByRole('region', { name: 'Left out by “+ LLM limit check”' });
+    expect(leftOut).toHaveTextContent(
+      'The language model found they break one of your hard limits.',
+    );
+    expect(within(leftOut).getByRole('link', { name: 'Night Shift Analyst' })).toBeInTheDocument();
+  });
+
+  it('switches version from the toggle, keeping it in the URL', async () => {
+    const fetchMock = setupVersions();
+    const { user, router } = renderApp('/matches');
+    await screen.findByRole('radio', { name: /LLM limit check/ });
+
+    await user.click(screen.getByRole('radio', { name: '+ Re-ranking' }));
+    expect(router.state.location.search).toBe('?mode=full');
+    await waitFor(() => {
+      expect(cardTitles()).toEqual(['Analyst B', 'Analyst A', 'Night Shift Analyst']);
+    });
+    expect(screen.getAllByText('▲1')).toHaveLength(1); // B moved up from "+ Hard-limit filters"
+    expect(screen.getByText(/up 1 from \+ Hard-limit filters/)).toBeInTheDocument();
+    expect(screen.getByText(/Re-ranking only changed their order/)).toBeInTheDocument();
+
+    await user.click(screen.getByRole('radio', { name: '+ Hard-limit filters' }));
+    const leftOut = await screen.findByRole('region', {
+      name: 'Left out by “+ Hard-limit filters”',
+    });
+    expect(leftOut).toHaveTextContent('They break one of your hard limits.');
+    expect(within(leftOut).getByText('Sales Analyst')).toBeInTheDocument();
+    // Reasons are only ever asked for on the default version, to save LLM calls.
+    const reasonRequests = matchRequests(fetchMock).filter((r) => r.endsWith(':true'));
+    expect(reasonRequests.length).toBeGreaterThan(0);
+    expect(reasonRequests.every((r) => r === 'checked:true')).toBe(true);
+  });
+
+  it('shows similarity, not a score breakdown, for the versions ranked by meaning alone', async () => {
+    setupVersions();
+    renderApp('/matches?mode=vector');
+    await waitFor(() => {
+      expect(cardTitles()[0]).toBe('Sales Analyst');
+    });
+    const [first] = screen.getAllByRole('article');
+    expect(within(first as HTMLElement).getByText('Similarity')).toBeInTheDocument();
+    expect(within(first as HTMLElement).queryByRole('img')).not.toBeInTheDocument(); // no score bar
+    expect(screen.queryByRole('region', { name: /Left out/ })).not.toBeInTheDocument(); // first step
+  });
+
+  it('without an LLM, the check is unavailable and re-ranking is the default, even from a link', async () => {
+    const fetchMock = setupVersions(NO_LLM);
+    renderApp('/matches?mode=checked');
+    expect(await screen.findByRole('radio', { name: /LLM limit check/ })).toBeDisabled();
+    expect(screen.getByRole('radio', { name: /Re-ranking \(default\)/ })).toBeChecked();
+    await waitFor(() => {
+      expect(cardTitles()).toHaveLength(3);
+    });
+    expect(matchRequests(fetchMock).some((r) => r.startsWith('checked'))).toBe(false);
   });
 });

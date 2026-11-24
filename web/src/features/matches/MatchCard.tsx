@@ -1,13 +1,14 @@
 import { useId } from 'react';
 import { Link, useSearchParams } from 'react-router';
 
+import type { Mode } from '../../api/client';
 import { formatDate, formatPay, seniorityLabel } from '../../lib/format';
 import { Skeleton } from '../../ui/Skeleton';
 import { formatScore } from './format';
 import { LimitCheck } from './LimitCheck';
 import styles from './MatchCard.module.css';
 import { ScoreBar } from './ScoreBar';
-import type { ReasonsState } from './useRankedMatches';
+import type { Movement, ReasonsState } from './useRankedMatches';
 import type { RankedMatch } from './view';
 
 const CAVEATS_ON_CARD = 2;
@@ -15,6 +16,32 @@ const CAVEATS_ON_CARD = 2;
 interface MatchCardProps {
   match: RankedMatch;
   reasons: ReasonsState;
+  mode: Mode;
+  /** Its change in place from the previous ranking version, and that version's name. */
+  movement?: { change: Movement; since: string };
+}
+
+/** Versions that order by similarity alone: the feature breakdown didn't decide their order. */
+export function ranksBySimilarity(mode: Mode): boolean {
+  return mode === 'vector' || mode === 'vector_filters';
+}
+
+function MovementBadge({ change, since }: { change: Movement; since: string }) {
+  const [mark, words] =
+    change.kind === 'new'
+      ? ['New', `new, not in the top 10 of ${since}`]
+      : change.kind === 'same'
+        ? ['=', `same place as in ${since}`]
+        : [
+            `${change.kind === 'up' ? '▲' : '▼'}${String(change.by)}`,
+            `${change.kind} ${String(change.by)} from ${since}`,
+          ];
+  return (
+    <span className={`${styles.movement} ${styles[change.kind]}`}>
+      <span aria-hidden="true">{mark}</span>
+      <span className="visually-hidden">, {words}</span>
+    </span>
+  );
 }
 
 /** The link that opens the details drawer: the current URL plus ?job=<id>, so it can be shared. */
@@ -25,7 +52,7 @@ export function useJobLink(jobId: number) {
   return { search: `?${next.toString()}` };
 }
 
-export function MatchCard({ match, reasons }: MatchCardProps) {
+export function MatchCard({ match, reasons, mode, movement }: MatchCardProps) {
   const titleId = useId();
   const jobLink = useJobLink(match.job_id);
   const pay = formatPay(match.salary_min, match.salary_max, match.salary_currency);
@@ -44,6 +71,7 @@ export function MatchCard({ match, reasons }: MatchCardProps) {
       <div className={styles.head}>
         <p className={styles.rank}>
           <span className="visually-hidden">Rank </span>#{match.rank}
+          {movement ? <MovementBadge change={movement.change} since={movement.since} /> : null}
         </p>
         <div className={styles.titles}>
           <h2 id={titleId} className={styles.title}>
@@ -56,11 +84,14 @@ export function MatchCard({ match, reasons }: MatchCardProps) {
           </p>
         </div>
         <p className={styles.score}>
-          <span className={styles.scoreLabel}>Score</span> {formatScore(match.score)}
+          <span className={styles.scoreLabel}>
+            {ranksBySimilarity(mode) ? 'Similarity' : 'Score'}
+          </span>{' '}
+          {formatScore(match.score)}
         </p>
       </div>
 
-      <ScoreBar score={match.score} features={match.features} />
+      {ranksBySimilarity(mode) ? null : <ScoreBar score={match.score} features={match.features} />}
 
       <ul className={styles.facts} aria-label="Key facts">
         {facts.map((fact) => (
@@ -68,7 +99,7 @@ export function MatchCard({ match, reasons }: MatchCardProps) {
         ))}
       </ul>
 
-      {reasons === 'off' ? null : (
+      {reasons === 'off' || reasons === 'other-version' ? null : (
         <div className={styles.reason}>
           {reasons === 'loading' ? (
             <div aria-hidden="true" className={styles.reasonSkeleton}>

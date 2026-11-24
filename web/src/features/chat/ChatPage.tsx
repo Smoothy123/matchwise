@@ -191,7 +191,7 @@ export default function ChatPage() {
         </p>
       ) : null}
 
-      <JobDrawer matches={undefined} reasons="off" />
+      <JobDrawer matches={undefined} reasons="off" mode={null} />
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import type { Mode } from '../../api/client';
 import { useJob } from '../../api/queries';
 import { formatDate, formatPay, seniorityLabel } from '../../lib/format';
 import { ErrorState } from '../../ui/ErrorState';
@@ -5,6 +6,7 @@ import { Skeleton } from '../../ui/Skeleton';
 import { featureParts, formatScore } from './format';
 import styles from './JobDetail.module.css';
 import { LimitCheck } from './LimitCheck';
+import { ranksBySimilarity } from './MatchCard';
 import { FeatureLegend, ScoreBar } from './ScoreBar';
 import type { ReasonsState } from './useRankedMatches';
 import type { RankedMatch } from './view';
@@ -14,10 +16,12 @@ interface JobDetailProps {
   /** Present when the job is in the person's matches; a job linked from elsewhere has none. */
   match: RankedMatch | undefined;
   reasons: ReasonsState;
+  /** The ranking version the match came from; null when opened from chat or search. */
+  mode: Mode | null;
   titleId: string;
 }
 
-export function JobDetail({ jobId, match, reasons, titleId }: JobDetailProps) {
+export function JobDetail({ jobId, match, reasons, mode, titleId }: JobDetailProps) {
   const job = useJob(jobId);
   // The match is already in memory, so its facts show at once; the full posting loads beside it.
   const facts = match ?? job.data;
@@ -58,7 +62,7 @@ export function JobDetail({ jobId, match, reasons, titleId }: JobDetailProps) {
         ) : null}
       </header>
 
-      {match ? <MatchSections match={match} reasons={reasons} /> : null}
+      {match && mode ? <MatchSections match={match} reasons={reasons} mode={mode} /> : null}
 
       {job.data && job.data.skills.length > 0 ? (
         <section className={styles.section} aria-labelledby={`${titleId}-skills`}>
@@ -102,14 +106,26 @@ export function JobDetail({ jobId, match, reasons, titleId }: JobDetailProps) {
   );
 }
 
-function MatchSections({ match, reasons }: { match: RankedMatch; reasons: ReasonsState }) {
+function MatchSections({
+  match,
+  reasons,
+  mode,
+}: {
+  match: RankedMatch;
+  reasons: ReasonsState;
+  mode: Mode;
+}) {
   const explanation = match.explanation ?? null;
   const parts = featureParts(match.features);
   return (
     <>
       <section className={styles.section}>
         <h3>Why it fits</h3>
-        {reasons === 'off' ? (
+        {reasons === 'other-version' ? (
+          <p className={styles.muted}>
+            Reasons are written for the default ranking version only, to save language-model calls.
+          </p>
+        ) : reasons === 'off' ? (
           <p className={styles.muted}>
             Reasons need the language model, which is off on this server.
           </p>
@@ -157,13 +173,21 @@ function MatchSections({ match, reasons }: { match: RankedMatch; reasons: Reason
           <LimitCheck status={match.limit_check} showDetail />
         ) : (
           <p className={styles.muted}>
-            The automatic filters applied; this ranking mode skips the language-model check.
+            {mode === 'vector'
+              ? 'This version applies no hard limits at all: it ranks by meaning only.'
+              : 'Your hard limits were applied as filters; this version skips the language-model check.'}
           </p>
         )}
       </section>
 
       <section className={styles.section}>
         <h3>Score breakdown</h3>
+        {ranksBySimilarity(mode) ? (
+          <p className={styles.muted}>
+            This version orders jobs by similarity alone ({formatScore(match.score)} here), so the
+            breakdown below didn&apos;t decide its place; it&apos;s what re-ranking would use.
+          </p>
+        ) : null}
         <p className={styles.muted}>
           Each part is a value from 0 to 1 times its weight. Only the parts you&apos;ve expressed a
           view on count, and their weights are shared out to add up to 1, so the contributions add

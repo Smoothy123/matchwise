@@ -154,7 +154,7 @@ export default function SearchPage() {
         {count}
       </p>
       <div className={styles.body}>{body}</div>
-      <JobDrawer matches={undefined} reasons="off" />
+      <JobDrawer matches={undefined} reasons="off" mode={null} />
     </>
   );
 }

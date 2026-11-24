@@ -78,17 +78,23 @@ export function useProfile(profileId: string) {
   });
 }
 
-/** `version` undefined means the profile isn't known yet, so there's nothing to rank. */
+/**
+ * `version` undefined means the profile isn't known yet, so there's nothing to rank.
+ * `keepPrevious`: while a new key loads (another ranking version, new preferences), keep
+ * showing the last list, flagged with isPlaceholderData, instead of an empty loading state.
+ */
 export function useMatches(
   profileId: string,
   version: number | undefined,
   query: MatchQuery,
   enabled = true,
+  keepPrevious = false,
 ) {
   return useQuery({
     queryKey: queryKeys.matches(profileId, version ?? 0, query),
     queryFn: ({ signal }) => getMatches(profileId, query, signal),
     enabled: enabled && version !== undefined,
+    placeholderData: keepPrevious ? keepPreviousData : undefined,
   });
 }
 

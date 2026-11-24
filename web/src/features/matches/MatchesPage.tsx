@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
 import { Link, useSearchParams } from 'react-router';
 
-import { ApiError } from '../../api/client';
+import { ApiError, type Mode } from '../../api/client';
+import { isMode, previousVersion, versionFor } from '../../data/rankingVersions';
 import { Button } from '../../ui/Button';
 import { EmptyState } from '../../ui/EmptyState';
 import { ErrorState } from '../../ui/ErrorState';
@@ -9,18 +10,30 @@ import { PageHeader } from '../../ui/PageHeader';
 import { summarisePreferences } from '../preferences/summary';
 import { useProfileId } from '../profile/profileId';
 import { JobDrawer } from './JobDrawer';
-import { MatchCard, MatchCardSkeleton } from './MatchCard';
+import { MatchCard, MatchCardSkeleton, ranksBySimilarity } from './MatchCard';
 import styles from './MatchesPage.module.css';
 import { MatchToolbar } from './MatchToolbar';
 import { FeatureLegend } from './ScoreBar';
+import { LeftOut } from './LeftOut';
 import { MATCH_LIMIT, useRankedMatches, type ReasonsState } from './useRankedMatches';
+import { VersionPicker } from './VersionPicker';
 import { applyView, readView, writeView, type ViewOptions } from './view';
 
 export default function MatchesPage() {
   const profileId = useProfileId();
-  const { profile, ranked, explained, matches, reasons } = useRankedMatches(profileId);
   const [params, setParams] = useSearchParams();
+  const requestedMode = params.get('mode');
+  const { profile, ranked, explained, matches, reasons, mode, defaultMode, llmOn, comparison } =
+    useRankedMatches(profileId, isMode(requestedMode) ? requestedMode : null);
   const view = readView(params);
+  const setMode = (next: Mode) => {
+    const nextParams = new URLSearchParams(params);
+    if (next === defaultMode) nextParams.delete('mode');
+    else nextParams.set('mode', next);
+    nextParams.delete('job');
+    setParams(nextParams, { replace: true });
+  };
+  const previous = mode ? previousVersion(mode) : null;
   const setView = (next: ViewOptions) => {
     // replace: changing a filter shouldn't add a Back-button step per keystroke
     setParams(writeView(params, next), { replace: true });
@@ -92,8 +105,10 @@ export default function MatchesPage() {
         <p>Every posting close to what you want breaks one of your hard limits.</p>
       </EmptyState>
     );
-  } else {
+  } else if (mode) {
     const visible = applyView(matches, view);
+    // While another version loads, the last list stays on screen, dimmed (keepPreviousData).
+    const stale = ranked.isPlaceholderData;
     body = (
       <>
         <MatchToolbar
@@ -107,25 +122,47 @@ export default function MatchesPage() {
           onRetry={() => void explained.refetch()}
           retrying={explained.isFetching}
         />
-        <div className={styles.legend}>
-          <span>Score parts:</span>
-          <FeatureLegend
-            present={new Set(matches.flatMap((match) => Object.keys(match.features)))}
-          />
-        </div>
+        {ranksBySimilarity(mode) ? null : (
+          <div className={styles.legend}>
+            <span>Score parts:</span>
+            <FeatureLegend
+              present={new Set(matches.flatMap((match) => Object.keys(match.features)))}
+            />
+          </div>
+        )}
         {visible.length > 0 ? (
-          <ol className={styles.list} aria-label="Matches">
-            {visible.map((match) => (
-              <li key={match.job_id}>
-                <MatchCard match={match} reasons={reasons} />
-              </li>
-            ))}
+          <ol
+            className={`${styles.list} ${stale ? styles.stale : ''}`}
+            aria-label="Matches"
+            aria-busy={stale}
+          >
+            {visible.map((match) => {
+              const change = comparison?.movement.get(match.job_id);
+              return (
+                <li key={match.job_id}>
+                  <MatchCard
+                    match={match}
+                    reasons={reasons}
+                    mode={mode}
+                    movement={change && previous ? { change, since: previous.label } : undefined}
+                  />
+                </li>
+              );
+            })}
           </ol>
         ) : (
           <EmptyState title="No matches fit these filters">
             <p>Clear the filters above to see all {matches.length} again.</p>
           </EmptyState>
         )}
+        {previous && comparison && !stale ? (
+          <LeftOut
+            step={versionFor(mode)}
+            previous={previous}
+            jobs={comparison.leftOut}
+            checkSkipped={matches.some((match) => match.limit_check === 'skipped')}
+          />
+        ) : null}
       </>
     );
   }
@@ -152,8 +189,13 @@ export default function MatchesPage() {
           <Link to="/">Change them in the chat</Link>
         </p>
       ) : null}
+      {profile.data && mode && defaultMode ? (
+        <div className={styles.versions}>
+          <VersionPicker mode={mode} defaultMode={defaultMode} llmOn={llmOn} onChange={setMode} />
+        </div>
+      ) : null}
       <div className={styles.body}>{body}</div>
-      <JobDrawer matches={matches} reasons={reasons} />
+      <JobDrawer matches={matches} reasons={reasons} mode={mode ?? null} />
     </>
   );
 }
@@ -178,6 +220,11 @@ function ReasonsStatus({
           <Button size="sm" onClick={onRetry} disabled={retrying}>
             {retrying ? 'Trying again…' : 'Try again'}
           </Button>
+        </p>
+      ) : reasons === 'other-version' ? (
+        <p>
+          Reasons are written for the default version only, to save language-model calls. The badges
+          show how each job moved from the version before.
         </p>
       ) : reasons === 'off' ? (
         <p>
