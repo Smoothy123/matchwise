@@ -159,6 +159,10 @@ def test_chat_endpoints(catalog, client):
 
     history = client.get("/profiles/ana/chat").json()
     assert [h["role"] for h in history] == ["user", "assistant", "tool", "assistant"]
+    # The tool request is typed and drops Gemini's thought signature; its result names the call it answers.
+    assert history[1]["tool_calls"] == [{"id": "call_1_0", "function": {
+        "name": "update_preferences", "arguments": json.dumps({"message": "backend, never sales"})}}]
+    assert history[2]["tool_call_id"] == "call_1_0" and history[0]["tool_call_id"] is None
     assert client.delete("/profiles/ana/chat").json() == {"deleted_messages": 4}
     assert client.get("/profiles/ana/chat").json() == []
     assert client.get("/profiles/ana").status_code == 200   # preferences outlive the chat

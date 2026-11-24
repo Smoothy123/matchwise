@@ -4,7 +4,7 @@ import logging
 from collections.abc import Iterator
 from contextlib import asynccontextmanager
 from datetime import datetime
-from typing import Annotated
+from typing import Annotated, Any, Literal
 
 import psycopg
 from fastapi import Depends, FastAPI, HTTPException, Path, Query, Request
@@ -114,6 +114,33 @@ def no_wants(request: Request, error: ranking.NoWants) -> JSONResponse:
 
 # ---------- models ----------
 
+class ErrorOut(BaseModel):
+    """The body of every error except request validation (422), whose `detail` is a list."""
+    detail: str
+
+
+ERROR_DESCRIPTIONS = {
+    404: "No such profile: a profile exists once it has been sent a message",
+    409: "The profile changed while this message was processed; send it again",
+    502: "The language model kept returning invalid output; nothing was changed",
+    503: "The language model is not configured or is unavailable right now",
+}
+
+
+def errors(*codes: int) -> dict[int | str, dict[str, Any]]:
+    """Declare a route's error responses, so the OpenAPI schema (and the types the frontend
+    generates from it) lists every status the route can return, not just 200 and 422."""
+    return {code: {"model": ErrorOut, "description": ERROR_DESCRIPTIONS[code]} for code in codes}
+
+
+class HealthOut(BaseModel):
+    status: Literal["ok"]
+    jobs: int
+    active_jobs: int
+    embedded_jobs: int
+    llm_configured: bool
+
+
 class SearchResult(BaseModel):
     id: int
     title: str
@@ -168,8 +195,8 @@ class MatchOut(BaseModel):
     features: dict[str, FeatureScore]
     explanation: reasons.Explanation | None = None  # None if reasons were off or the LLM failed
     # "passed", "skipped" (LLM unavailable: only the SQL filters applied), "no limits",
-    # or None in modes without the LLM limit check.
-    limit_check: str | None = None
+    # or None in modes without the LLM limit check. Jobs that break a limit are never returned.
+    limit_check: Literal["passed", "skipped", "no limits"] | None = None
 
 
 class ToolCallOut(BaseModel):
@@ -183,12 +210,29 @@ class ChatOut(BaseModel):
     tool_calls: list[ToolCallOut]
 
 
+class ToolCallFunction(BaseModel):
+    name: str
+    arguments: str  # JSON text, exactly as the model wrote it
+
+
+class StoredToolCall(BaseModel):
+    """A tool request as saved. Provider extras (Gemini's thought signatures) aren't returned:
+    the agent only needs them within a turn, and they mean nothing to a client."""
+    id: str
+    function: ToolCallFunction
+
+
 class ChatMessageOut(BaseModel):
     turn: int
-    role: str
-    content: str | None
-    tool_calls: list[dict] | None
+    role: Literal["user", "assistant", "tool"]
+    content: str | None   # a tool row's content is the tool's JSON result: {"result": ...} or {"error": ...}
+    tool_calls: list[StoredToolCall] | None   # set on assistant rows that ask for tools
+    tool_call_id: str | None                  # set on tool rows: which call this result answers
     created_at: datetime
+
+
+class ChatResetOut(BaseModel):
+    deleted_messages: int
 
 
 class HistoryItem(BaseModel):
@@ -204,14 +248,14 @@ class HistoryItem(BaseModel):
 # ---------- routes ----------
 
 @app.get("/health")
-def health(conn: Conn, request: Request) -> dict:
+def health(conn: Conn, request: Request) -> HealthOut:
     counts = conn.execute(
         """SELECT count(*) AS jobs,
                   count(*) FILTER (WHERE is_active) AS active_jobs,
                   count(*) FILTER (WHERE is_active AND embedding IS NOT NULL) AS embedded_jobs
            FROM jobs"""
     ).fetchone()
-    return {"status": "ok", **counts, "llm_configured": request.app.state.llm is not None}
+    return HealthOut(status="ok", **counts, llm_configured=request.app.state.llm is not None)
 
 
 @app.get("/search")
@@ -225,13 +269,13 @@ def search(
     return search_jobs(conn, query_vector, limit)
 
 
-@app.post("/profiles/{profile_id}/messages")
+@app.post("/profiles/{profile_id}/messages", responses=errors(409, 502, 503))
 def post_message(profile_id: ProfileId, body: MessageIn, conn: Conn, client: LLM) -> MessageOut:
     """Read a plain-language message and update the profile's stored preferences."""
     return preferences.process_message(conn, client, profile_id, body.message)
 
 
-@app.get("/profiles/{profile_id}")
+@app.get("/profiles/{profile_id}", responses=errors(404))
 def get_profile(profile_id: ProfileId, conn: Conn) -> ProfileOut:
     found = preferences.load_profile(conn, profile_id)
     if found is None:
@@ -240,7 +284,13 @@ def get_profile(profile_id: ProfileId, conn: Conn) -> ProfileOut:
     return ProfileOut(profile_id=profile_id, version=version, preferences=prefs)
 
 
-@app.get("/profiles/{profile_id}/matches")
+@app.get("/profiles/{profile_id}/matches", responses={
+    **errors(404, 503),
+    422: {"description": "Invalid parameters (a list of problems), or the profile has only dealbreakers "
+                         "so there is nothing to search for yet (a message)",
+          "content": {"application/json": {"schema": {"anyOf": [
+              {"$ref": "#/components/schemas/HTTPValidationError"}, {"$ref": "#/components/schemas/ErrorOut"}]}}}},
+})
 def get_matches(
     profile_id: ProfileId,
     conn: Conn,
@@ -268,7 +318,7 @@ def get_matches(
     return matches
 
 
-@app.post("/profiles/{profile_id}/chat")
+@app.post("/profiles/{profile_id}/chat", responses=errors(503))
 def chat(profile_id: ProfileId, body: MessageIn, conn: Conn, embed: Embed, client: LLM) -> ChatOut:
     """Talk to the agent. It remembers this conversation and the profile's stored preferences."""
     return agent.run_turn(conn, client, embed, profile_id, body.message)
@@ -281,12 +331,12 @@ def get_chat(profile_id: ProfileId, conn: Conn) -> list[ChatMessageOut]:
 
 
 @app.delete("/profiles/{profile_id}/chat")
-def delete_chat(profile_id: ProfileId, conn: Conn) -> dict:
+def delete_chat(profile_id: ProfileId, conn: Conn) -> ChatResetOut:
     """Forget the conversation; stored preferences stay."""
-    return {"deleted_messages": agent.reset_chat(conn, profile_id)}
+    return ChatResetOut(deleted_messages=agent.reset_chat(conn, profile_id))
 
 
-@app.get("/profiles/{profile_id}/messages")
+@app.get("/profiles/{profile_id}/messages", responses=errors(404))
 def get_messages(profile_id: ProfileId, conn: Conn) -> list[HistoryItem]:
     if preferences.load_profile(conn, profile_id) is None:
         raise HTTPException(404, f"No profile {profile_id!r}.")

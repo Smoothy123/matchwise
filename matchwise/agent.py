@@ -255,7 +255,7 @@ def save_turn(conn: psycopg.Connection, profile_id: str, message: str, trace: li
 
 def chat_history(conn: psycopg.Connection, profile_id: str) -> list[dict]:
     return conn.execute(
-        """SELECT turn, role, content, tool_calls, created_at FROM chat_messages
+        """SELECT turn, role, content, tool_calls, tool_call_id, created_at FROM chat_messages
            WHERE profile_id = %s ORDER BY id""",
         (profile_id,),
     ).fetchall()
