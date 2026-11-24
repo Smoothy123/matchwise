@@ -12,3 +12,8 @@ __pycache__/
 .venv/
 venv/
 .DS_Store
+
+# The web frontend's dependencies and builds (the API image doesn't serve them)
+web/node_modules/
+web/dist/
+web/coverage/

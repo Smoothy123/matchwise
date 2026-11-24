@@ -41,7 +41,8 @@ services:
     volumes:
       - ./:/app       # live code in development; the image also contains a copy
       - models:/models  # Hugging Face model cache, so MiniLM downloads once
-    command: uvicorn matchwise.api:app --host 0.0.0.0 --port 8000 --reload
+    # Watch only the Python code: scanning the whole mount would also walk web/node_modules.
+    command: uvicorn matchwise.api:app --host 0.0.0.0 --port 8000 --reload --reload-dir matchwise
 
 volumes:
   pgdata:
