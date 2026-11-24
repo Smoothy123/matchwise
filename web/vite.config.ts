@@ -1,11 +1,18 @@
 import react from '@vitejs/plugin-react';
+import { searchForWorkspaceRoot } from 'vite';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   plugins: [react()],
   // The API's CORS_ORIGINS allows exactly these ports. Without strictPort, Vite would quietly
   // move to 5174 when 5173 is busy, and every API call would then fail with a CORS error.
-  server: { port: 5173, strictPort: true },
+  server: {
+    port: 5173,
+    strictPort: true,
+    // The Evals page imports the committed eval results from ../evals/results at build time.
+    // The dev server only serves files inside web/ unless a folder is allowed here.
+    fs: { allow: [searchForWorkspaceRoot(process.cwd()), '../evals/results'] },
+  },
   preview: { port: 4173, strictPort: true },
   test: {
     environment: 'jsdom',

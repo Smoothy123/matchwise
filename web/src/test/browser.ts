@@ -36,10 +36,24 @@ class FakeIntersectionObserver {
   }
 }
 
+/** Every observed element reports this width (jsdom has no layout). */
+export const CHART_WIDTH = 480;
+
+class FakeResizeObserver {
+  constructor(private readonly callback: (entries: { contentRect: { width: number } }[]) => void) {}
+  observe() {
+    this.callback([{ contentRect: { width: CHART_WIDTH } }]);
+  }
+  disconnect() {
+    // nothing to clean up
+  }
+}
+
 export function installBrowserStubs() {
   viewport.atBottom = true;
   observers.clear();
   vi.stubGlobal('IntersectionObserver', FakeIntersectionObserver);
+  vi.stubGlobal('ResizeObserver', FakeResizeObserver);
   scrollToMock.mockClear();
   vi.stubGlobal('scrollTo', scrollToMock);
   vi.stubGlobal('matchMedia', (query: string) => ({
