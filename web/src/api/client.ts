@@ -113,6 +113,14 @@ interface RequestOptions {
 
 async function request<T>(path: string, options: RequestOptions = {}): Promise<T> {
   const { method = 'GET', query = {}, body, signal, timeoutMs = TIMEOUTS.default } = options;
+  // The flag itself, not isDemo(): Vite replaces it with a constant at build time, so in a normal
+  // build this branch is dead code and the bundler drops it, recordings and all. In tests,
+  // vi.stubEnv can still switch it on.
+  if (import.meta.env.VITE_DEMO_MODE === 'true') {
+    // The demo build answers from recordings, and never calls a server.
+    const { demoRequest } = await import('../demo/demoApi');
+    return (await demoRequest(method, path, query)) as T;
+  }
   const url = new URL(API_URL + path);
   for (const [key, value] of Object.entries(query)) {
     if (value !== undefined && value !== null) url.searchParams.set(key, String(value));

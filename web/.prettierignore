@@ -4,4 +4,4 @@ node_modules
 openapi.json
 src/api/schema.gen.ts
 # Written by scripts/record-fixtures.mjs and replayed as recorded
-cypress/fixtures/recorded/*.json
+src/demo/recorded/*.json

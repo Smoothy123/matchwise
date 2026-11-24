@@ -1,4 +1,4 @@
-// Records real API responses for the end-to-end tests (and, later, the demo mode).
+// Records real API responses for the demo mode and the end-to-end tests (src/demo/recorded/).
 //
 //   node scripts/record-fixtures.mjs <profile-id>    (with the API running)
 //
@@ -18,7 +18,10 @@ if (!profileId) {
   console.error('Usage: node scripts/record-fixtures.mjs <profile-id>');
   process.exit(1);
 }
-const OUT = new URL('../cypress/fixtures/recorded/', import.meta.url);
+const OUT = new URL('../src/demo/recorded/', import.meta.url);
+// The Search page's example searches (SEARCH_EXAMPLES in SearchPage.tsx; a test checks they match).
+const SEARCHES = ['python backend engineer, remote', 'ICU nurse in Texas', 'not sales'];
+const SEARCH_LIMIT = 20; // the first page and one "Show 10 more"
 const MODES = ['vector', 'vector_filters', 'full', 'checked'];
 
 async function get(path) {
@@ -86,6 +89,13 @@ explained.forEach((m) => jobIds.add(m.job_id));
 await save('matches-checked-explained.json', explained);
 console.log(`reasons: ${explained.filter((m) => m.explanation).length} of ${explained.length}`);
 
+const searches = {};
+for (const q of SEARCHES) {
+  searches[q] = await get(`/search?q=${encodeURIComponent(q)}&limit=${SEARCH_LIMIT}`);
+  searches[q].forEach((r) => jobIds.add(r.id));
+}
+await save('search.json', searches);
+
 const jobs = {};
 for (const id of [...jobIds].sort((a, b) => a - b)) jobs[id] = await get(`/jobs/${id}`);
 await save('jobs.json', jobs);
@@ -96,4 +106,6 @@ await save('recording.json', {
   jobs: jobIds.size,
   note: 'Responses recorded from the real Matchwise API (see scripts/record-fixtures.mjs). Not live data.',
 });
-console.log(`Saved ${jobIds.size} jobs and the conversation to cypress/fixtures/recorded/`);
+console.log(
+  `Saved ${jobIds.size} jobs, ${SEARCHES.length} searches and the conversation to src/demo/recorded/`,
+);

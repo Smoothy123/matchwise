@@ -1,10 +1,15 @@
 // Serves the production build and runs Cypress against it, then stops the server.
 //   node scripts/e2e.mjs          the recorded tests (no API needed)
 //   node scripts/e2e.mjs --live   the live test (needs the API, its database and its LLM)
+//   node scripts/e2e.mjs --demo   the demo build (run `npm run build:demo` first)
 // Only Node's own modules: no extra dependency to start a server and wait for it.
 import { spawn } from 'node:child_process';
 
-const live = process.argv.includes('--live');
+const suite = process.argv.includes('--live')
+  ? 'live'
+  : process.argv.includes('--demo')
+    ? 'demo'
+    : 'recorded';
 const URL = 'http://localhost:4173';
 
 const preview = spawn(
@@ -31,7 +36,7 @@ if (!up) {
 
 const cypress = spawn(process.execPath, ['node_modules/cypress/bin/cypress', 'run'], {
   stdio: 'inherit',
-  env: { ...process.env, CYPRESS_LIVE: live ? '1' : '0' },
+  env: { ...process.env, CYPRESS_SUITE: suite },
 });
 const code = await new Promise((resolve) => cypress.on('exit', resolve));
 preview.kill();

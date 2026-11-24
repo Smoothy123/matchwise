@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { Link } from 'react-router';
 
 import { useHealth } from '../../api/queries';
+import { isDemo } from '../../lib/demo';
 import { useOnlineStatus } from '../../lib/useOnlineStatus';
 import { Button } from '../../ui/Button';
 import { ConfirmDialog } from '../../ui/ConfirmDialog';
@@ -41,7 +42,9 @@ export default function ChatPage() {
 
   const llmOff = health.data?.llm_configured === false;
   let blockedReason: string | null = null;
-  if (llmOff) blockedReason = 'Chat needs the language model, which is off on this server.';
+  if (isDemo())
+    blockedReason = 'Demo: this conversation was recorded, so new messages can’t be sent.';
+  else if (llmOff) blockedReason = 'Chat needs the language model, which is off on this server.';
   else if (!online) blockedReason = "You're offline. You can send once you're back online.";
   else if (pending) blockedReason = 'Waiting for the reply…';
 
@@ -67,7 +70,7 @@ export default function ChatPage() {
             onClick={() => {
               setConfirmingClear(true);
             }}
-            disabled={(turns?.length ?? 0) === 0 || pending !== null || clear.isPending}
+            disabled={isDemo() || (turns?.length ?? 0) === 0 || pending !== null || clear.isPending}
           >
             Clear conversation
           </Button>
@@ -166,7 +169,7 @@ export default function ChatPage() {
           onChange={setDraft}
           onSend={send}
           blockedReason={blockedReason}
-          inputDisabled={llmOff}
+          inputDisabled={llmOff || isDemo()}
           inputRef={inputRef}
         />
       </div>

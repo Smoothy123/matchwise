@@ -1,4 +1,5 @@
 import { useHealth } from '../api/queries';
+import { isDemo } from '../lib/demo';
 import styles from './HealthBadge.module.css';
 
 type Tone = 'neutral' | 'success' | 'warning' | 'danger';
@@ -9,7 +10,10 @@ export function HealthBadge() {
   const health = useHealth();
   let tone: Tone;
   let label: string;
-  if (health.isError) {
+  if (isDemo()) {
+    tone = 'warning';
+    label = 'Demo · recorded data';
+  } else if (health.isError) {
     tone = 'danger';
     label = 'API offline';
   } else if (health.isPending) {

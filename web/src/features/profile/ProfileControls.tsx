@@ -1,6 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
+import { isDemo } from '../../lib/demo';
 import { Button } from '../../ui/Button';
 import { ConfirmDialog } from '../../ui/ConfirmDialog';
 import styles from './ProfileControls.module.css';
@@ -18,6 +19,14 @@ export function ProfileControls() {
     // Drop everything cached for the old profile; queries for the new id start empty.
     queryClient.removeQueries({ predicate: (query) => query.queryKey.includes(oldId) });
     setConfirming(false);
+  }
+
+  if (isDemo()) {
+    return (
+      <div className={styles.controls}>
+        <p className={styles.id}>Demo profile: one recorded conversation</p>
+      </div>
+    );
   }
 
   return (

@@ -1,0 +1,989 @@
+{
+  "python backend engineer, remote": [
+    {
+      "id": 1617,
+      "title": "Python Developer",
+      "company": "Radiansys Inc.",
+      "location": "San Jose, CA",
+      "remote": true,
+      "seniority": "mid_senior",
+      "skills": [
+        "airflow",
+        "etl",
+        "flask",
+        "python",
+        "rest api",
+        "scheduling",
+        "spark"
+      ],
+      "snippet": "Role : Python DeveloperLocation – San Jose ,CA( Onsite OR remote) Requirements• Must Have Experience• Experience with Python, Object Oriented programming• Develop and maintain RESTful APIs & backend services in Python that use technologies ",
+      "similarity": 0.5805047923476935
+    },
+    {
+      "id": 1081,
+      "title": "Python Developer",
+      "company": "Compunnel Inc.",
+      "location": "New York City Metropolitan Area",
+      "remote": false,
+      "seniority": "mid_senior",
+      "skills": [
+        "etl",
+        "express.js",
+        "node.js",
+        "python"
+      ],
+      "snippet": "The Full Stack Engineer is responsible for both front end and backend development tasks, including design, develop, and maintain web applications and database tasks. This individual will be well versed with required programming languages th",
+      "similarity": 0.5634441375732422
+    },
+    {
+      "id": 4840,
+      "title": "Contract Developer",
+      "company": "EBSCO Information Services",
+      "location": "United States",
+      "remote": true,
+      "seniority": "unknown",
+      "skills": [
+        "django",
+        "elasticsearch",
+        "fastapi",
+        "flask",
+        "postgresql",
+        "python",
+        "rest api"
+      ],
+      "snippet": "Key Responsibilities:Design, develop and test backend features using Python, Postgres, Elasticsearch and FastAPIIntegrate our platform with learning management systems like PowerSchool and BannerImplement the IMS 1EdTech OpenBadge standard ",
+      "similarity": 0.5139939785003662
+    },
+    {
+      "id": 3054,
+      "title": "Frontend Developer",
+      "company": "DataAnnotation",
+      "location": "San Antonio, Texas Metropolitan Area",
+      "remote": true,
+      "seniority": "unknown",
+      "skills": [
+        "c#",
+        "c++",
+        "html",
+        "javascript",
+        "python",
+        "sql"
+      ],
+      "snippet": "DataAnnotation is committed to creating quality AI. Join our team to help train AI chatbots while gaining the flexibility of remote work and choosing your own schedule.\nWe are looking for a proficient Frontend Developer to join our team to ",
+      "similarity": 0.5132461190223694
+    },
+    {
+      "id": 2663,
+      "title": "Frontend Developer",
+      "company": "DataAnnotation",
+      "location": "Sunnyvale, CA",
+      "remote": true,
+      "seniority": "unknown",
+      "skills": [
+        "c#",
+        "c++",
+        "html",
+        "javascript",
+        "python",
+        "sql"
+      ],
+      "snippet": "DataAnnotation is committed to creating quality AI. Join our team to help train AI chatbots while gaining the flexibility of remote work and choosing your own schedule.\nWe are looking for a proficient Frontend Developer to join our team to ",
+      "similarity": 0.5073915719985962
+    },
+    {
+      "id": 785,
+      "title": "Frontend Developer",
+      "company": "DataAnnotation",
+      "location": "San Jose, CA",
+      "remote": true,
+      "seniority": "unknown",
+      "skills": [
+        "c#",
+        "c++",
+        "html",
+        "javascript",
+        "python",
+        "sql"
+      ],
+      "snippet": "DataAnnotation is committed to creating quality AI. Join our team to help train AI chatbots while gaining the flexibility of remote work and choosing your own schedule.\nWe are looking for a proficient Frontend Developer to join our team to ",
+      "similarity": 0.5058283504349985
+    },
+    {
+      "id": 3387,
+      "title": "Back End Developer",
+      "company": "DataAnnotation",
+      "location": "Miami-Fort Lauderdale Area",
+      "remote": false,
+      "seniority": "unknown",
+      "skills": [
+        "c#",
+        "c++",
+        "html",
+        "javascript",
+        "python",
+        "sql"
+      ],
+      "snippet": "DataAnnotation is committed to creating quality AI. Join our team to help train AI chatbots while gaining the flexibility of remote work and choosing your own schedule.\nWe are looking for a proficient Back End Developer to join our team to ",
+      "similarity": 0.5027392506599426
+    },
+    {
+      "id": 1978,
+      "title": "Web Developer",
+      "company": "DataAnnotation",
+      "location": "Dallas-Fort Worth Metroplex",
+      "remote": true,
+      "seniority": "unknown",
+      "skills": [
+        "c#",
+        "c++",
+        "html",
+        "javascript",
+        "python",
+        "sql"
+      ],
+      "snippet": "DataAnnotation is committed to creating quality AI. Join our team to help train AI chatbots while gaining the flexibility of remote work and choosing your own schedule.\nWe are looking for a proficient Web Developer to join our team to train",
+      "similarity": 0.46317383866466133
+    },
+    {
+      "id": 4150,
+      "title": "Senior Software Engineer - Open Source",
+      "company": "Reflex",
+      "location": "San Francisco Bay Area",
+      "remote": false,
+      "seniority": "unknown",
+      "skills": [
+        "css",
+        "github",
+        "html",
+        "javascript",
+        "python",
+        "react"
+      ],
+      "snippet": "Reflex is an open-source framework to build web apps in pure Python and deploy them with a single command. This can be anything from a small data science/internal app to a large multi-page web app.\nWe launched in December and have seen rapi",
+      "similarity": 0.46162000527262737
+    },
+    {
+      "id": 904,
+      "title": "Software Engineer",
+      "company": "Viasat",
+      "location": "Greater Phoenix Area",
+      "remote": true,
+      "seniority": "unknown",
+      "skills": [
+        "angular",
+        "ansible",
+        "aws",
+        "bash",
+        "c++",
+        "devops",
+        "git",
+        "golang",
+        "jenkins",
+        "kubernetes",
+        "linux",
+        "machine learning",
+        "node.js",
+        "python",
+        "react",
+        "tcp/ip"
+      ],
+      "snippet": "About Us\n\nOne team. Global challenges. Infinite opportunities. At Viasat, we’re on a mission to deliver connections with the capacity to change the world. For more than 35 years, Viasat has helped shape how consumers, businesses, government",
+      "similarity": 0.4560812737893307
+    },
+    {
+      "id": 4797,
+      "title": "Software Developer",
+      "company": "DataAnnotation",
+      "location": "Raleigh-Durham-Chapel Hill Area",
+      "remote": true,
+      "seniority": "unknown",
+      "skills": [
+        "c#",
+        "c++",
+        "html",
+        "javascript",
+        "python",
+        "sql"
+      ],
+      "snippet": "Software Developer (Contract)\nDataAnnotation is committed to creating quality AI. Join our team to help train AI chatbots while gaining the flexibility of remote work and choosing your own schedule.\nWe are looking for a proficient Software ",
+      "similarity": 0.45326051394578815
+    },
+    {
+      "id": 4239,
+      "title": "Software Engineer",
+      "company": "DataAnnotation",
+      "location": "Greater Tampa Bay Area",
+      "remote": true,
+      "seniority": "unknown",
+      "skills": [
+        "c#",
+        "c++",
+        "html",
+        "javascript",
+        "python",
+        "sql"
+      ],
+      "snippet": "DataAnnotation is committed to creating quality AI. Join our team to help train AI chatbots while gaining the flexibility of remote work and choosing your own schedule.\nWe are looking for a proficient Software Engineer to join our team to t",
+      "similarity": 0.45070979586723214
+    },
+    {
+      "id": 1873,
+      "title": "Python Developer with AI/ML",
+      "company": "Q1 Technologies, Inc.",
+      "location": "Charlotte, NC",
+      "remote": false,
+      "seniority": "unknown",
+      "skills": [
+        "data analysis",
+        "django",
+        "numpy",
+        "pandas",
+        "python",
+        "sql",
+        "tableau"
+      ],
+      "snippet": "Role – Python Developer with AI/MLLocation – Charlotte, NC (Onsite)Job Type – Fulltime \nVisa - GC/GC-EAD/USC\nJob Description:  • Minimum of 8+ years of experience• Strong knowledge of Python programming• Knowledge of AI/ML based solutions i",
+      "similarity": 0.43361995019793886
+    },
+    {
+      "id": 1199,
+      "title": "Python Developer (looking for local candidates to AZ)",
+      "company": "Quantum World Technologies Inc.",
+      "location": "Phoenix, AZ",
+      "remote": false,
+      "seniority": "unknown",
+      "skills": [
+        "agile",
+        "ci/cd",
+        "deep learning",
+        "django",
+        "flask",
+        "git",
+        "kafka",
+        "machine learning",
+        "python",
+        "unix"
+      ],
+      "snippet": "Job Role: Python DeveloperLocation: Phoenix, AZ (Hybrid)Duration: Long Term JD8+ years of commercial software development experienceProficiency with distributed/multi-tier systems and application development, including excellent programming",
+      "similarity": 0.43151232191993794
+    },
+    {
+      "id": 2505,
+      "title": "Production Engineer",
+      "company": "Meta",
+      "location": "Seattle, WA",
+      "remote": false,
+      "seniority": "unknown",
+      "skills": [
+        "c++",
+        "java",
+        "machine learning",
+        "php",
+        "python",
+        "tcp/ip",
+        "unix"
+      ],
+      "snippet": "Production Engineers at Meta are hybrid software/systems engineers who ensure that Meta's services run smoothly and have the capacity for future growth. They are embedded in every one of Meta's product and infrastructure teams, and are core",
+      "similarity": 0.42074627938110487
+    },
+    {
+      "id": 3862,
+      "title": "Senior Front-End Engineer (remote)",
+      "company": "myGwork - LGBTQ+ Business Community",
+      "location": "Sacramento, CA",
+      "remote": true,
+      "seniority": "mid_senior",
+      "skills": [
+        "agile",
+        "ansible",
+        "aws",
+        "ci/cd",
+        "devops",
+        "docker",
+        "github",
+        "html",
+        "jenkins",
+        "jquery",
+        "kubernetes",
+        "linux",
+        "react"
+      ],
+      "snippet": "This inclusive employer is a member of myGwork – the largest global platform for the LGBTQ+ business community.  \n\nSummary\n\nResponsible for the core software engineering tasks in a project team. The individual will be required to work with ",
+      "similarity": 0.41658806800842285
+    },
+    {
+      "id": 127,
+      "title": "Java Application Developer",
+      "company": "SP Software Solutions",
+      "location": "Alpharetta, GA",
+      "remote": false,
+      "seniority": "associate",
+      "skills": [
+        "agile",
+        "git",
+        "github",
+        "gitlab",
+        "java",
+        "mongodb",
+        "mysql",
+        "postgresql",
+        "python",
+        "react",
+        "rest api",
+        "sql"
+      ],
+      "snippet": "Role: Java DeveloperLocation: Alpharetta, Georgia, United StatesDuration: 1 year\nWe are currently seeking an experienced backend developer with 3+ years of experience and expertise in supporting and creating the backend infrastructure for a",
+      "similarity": 0.41593697667121887
+    },
+    {
+      "id": 2357,
+      "title": "Senior Software Engineer",
+      "company": "CodeMonk",
+      "location": "United States",
+      "remote": true,
+      "seniority": "mid_senior",
+      "skills": [
+        "agile",
+        "deep learning",
+        "git",
+        "machine learning",
+        "python",
+        "pytorch",
+        "scala",
+        "scikit-learn",
+        "tensorflow"
+      ],
+      "snippet": "Company:At CodeMonk, we’re venturing into new territories, shaping the future of diverse and decentralised teams. We know finding the right talents and teams is a major challenge in today’s skills market. That’s why we’re creating a gateway",
+      "similarity": 0.40949735045433044
+    },
+    {
+      "id": 131,
+      "title": "Senior Cloverleaf Developer",
+      "company": "Parkar Digital",
+      "location": "United States",
+      "remote": true,
+      "seniority": "unknown",
+      "skills": [
+        "python",
+        "sql"
+      ],
+      "snippet": "Job Title: Cloverleaf DeveloperJob Location: RemoteJob Duration: Contract ( only Citizens)Job description:• We are seeking a skilled Cloverleaf Developer proficient in Tcl or equivalent scripting language, with expertise in healthcare integ",
+      "similarity": 0.40800431919072233
+    },
+    {
+      "id": 748,
+      "title": "Software Engineer - ML",
+      "company": "Talener",
+      "location": "Springfield, IL",
+      "remote": true,
+      "seniority": "associate",
+      "skills": [
+        "aws",
+        "ci/cd",
+        "docker",
+        "machine learning",
+        "python",
+        "terraform"
+      ],
+      "snippet": "Overview: Our direct client has been a trusted source of knowledge and information for over two centuries. This historic organization provides accurate, reliable, and comprehensive content to learners and educators worldwide. As the organiz",
+      "similarity": 0.40665755232229595
+    }
+  ],
+  "ICU nurse in Texas": [
+    {
+      "id": 4510,
+      "title": "Registered Nurse (RN) | Intensive Care Unit (ICU) - Contract - Nights",
+      "company": "HealthTrust Workforce Solutions",
+      "location": "Decatur, TX",
+      "remote": false,
+      "seniority": "mid_senior",
+      "skills": [
+        "icu",
+        "registered nurse"
+      ],
+      "snippet": "Entrust Your Career to HealthTrust!\n\nAt HealthTrust, we believe that healthcare is not defined by the four walls in which it is practiced. It’s defined by its people. We pride ourselves on crafting opportunities which expand skill sets, bro",
+      "similarity": 0.6366244554519653
+    },
+    {
+      "id": 3945,
+      "title": "Clinical Director - Cardiovascular ICU",
+      "company": "CHRISTUS Health",
+      "location": "Texarkana, TX",
+      "remote": false,
+      "seniority": "unknown",
+      "skills": [
+        "compliance",
+        "icu"
+      ],
+      "snippet": "Description\n\nSummary:\n\nManages the nursing services and staff for a department; ensures quality and full compliance with relevant policies and standards.\n\nResponsibilities\n\n Implementing and monitoring programs and practices for the deliver",
+      "similarity": 0.6301262003108155
+    },
+    {
+      "id": 161,
+      "title": "Patient Care Assistant ICU PRN Nights Ft. Thomas",
+      "company": "St. Elizabeth Healthcare",
+      "location": "Fort Thomas, KY",
+      "remote": false,
+      "seniority": "entry",
+      "skills": [
+        "customer service",
+        "icu",
+        "licensed practical nurse",
+        "patient care",
+        "registered nurse"
+      ],
+      "snippet": "Job Description\n\nResponsible for coordinating and maintaining the clerical functions and duties of a designated unit/program. Utilizes Customer Service skills when greeting patient/visitors and answering telephone. Demonstrates the ability ",
+      "similarity": 0.6189622510098081
+    },
+    {
+      "id": 4640,
+      "title": "Patient Care Technician-Burn ICU (Part Time) Days",
+      "company": "Mercy",
+      "location": "Springfield, MO",
+      "remote": false,
+      "seniority": "entry",
+      "skills": [
+        "basic life support",
+        "certified nursing assistant",
+        "icu",
+        "licensed practical nurse",
+        "patient care",
+        "registered nurse"
+      ],
+      "snippet": "We’re a Little Different\n\nOur mission is clear. We bring to life a healing ministry through our compassionate care and exceptional service.\n\nAt Mercy, we believe in careers that match the unique gifts of unique individuals – careers that no",
+      "similarity": 0.6138607263565063
+    },
+    {
+      "id": 2770,
+      "title": "RN - Medical ICU",
+      "company": "Swedish",
+      "location": "Everett, WA",
+      "remote": false,
+      "seniority": "mid_senior",
+      "skills": [
+        "basic life support",
+        "icu",
+        "registered nurse"
+      ],
+      "snippet": "Description\n\nFor 0.5 to 1.0 FTE (20 hours - 40 hours per week) $10,000 Hiring Bonus for eligible candidates who meet all conditions for payment - this is in addition to the fantastic benefits and compensation package offered by Providence.\n",
+      "similarity": 0.6095812320709229
+    },
+    {
+      "id": 914,
+      "title": "Intensive care unit (ICU) RN - 10K Sign on bonus",
+      "company": "Connected Health Care",
+      "location": "San Jose, CA",
+      "remote": false,
+      "seniority": "entry",
+      "skills": [
+        "acls",
+        "basic life support",
+        "icu",
+        "registered nurse"
+      ],
+      "snippet": "Job Description\n\nJob Title: ICU Registered Nurse (RN) - San Jose, CA\n\nCompany: Connected Health Care\n\nAre you a passionate ICU Registered Nurse (RN) looking for a rewarding opportunity in San Jose, CA? Connected Health Care, a premier recru",
+      "similarity": 0.5898514986038208
+    },
+    {
+      "id": 5378,
+      "title": "RN - ICU - Days",
+      "company": "INTEGRIS Health",
+      "location": "Oklahoma City, OK",
+      "remote": false,
+      "seniority": "mid_senior",
+      "skills": [
+        "acls",
+        "basic life support",
+        "cpr",
+        "home health",
+        "icu",
+        "patient care",
+        "registered nurse",
+        "risk management"
+      ],
+      "snippet": "Job Description\n\nThe Staff Registered Nurse assumes responsibility for the management and delivery of patient care utilizing the nursing process May be required to float to other units. May be required to participate in on call status. This",
+      "similarity": 0.5865522869496185
+    },
+    {
+      "id": 4933,
+      "title": "Registered Nurse | PCU/Stepdown | Seasonal Days",
+      "company": "United Surgical Partners International, Inc",
+      "location": "Frisco, TX",
+      "remote": false,
+      "seniority": "mid_senior",
+      "skills": [
+        "acls",
+        "compliance",
+        "ehr",
+        "patient care",
+        "registered nurse"
+      ],
+      "snippet": "The RN has the responsibility to plan, direct organize, coordinate and implement all nursing care services for the Post-surgical and Medical patients in a manner suitable to accepted standards of care. He / she ensures the highest quality a",
+      "similarity": 0.5643168091773987
+    },
+    {
+      "id": 1340,
+      "title": "RN Registered Nurse ICU",
+      "company": "HCA Florida Oak Hill Hospital",
+      "location": "Brooksville, FL",
+      "remote": false,
+      "seniority": "mid_senior",
+      "skills": [
+        "acls",
+        "basic life support",
+        "behavioral health",
+        "icu",
+        "patient care",
+        "registered nurse"
+      ],
+      "snippet": "Description\n\nIntroduction\n\nAre you looking for a place to deliver excellent care patients deserve? At HCA Florida Oak Hill Hospital we support our colleagues in their positions. Join our Team as a(an) RN Registered Nurse ICU and access prog",
+      "similarity": 0.5632002614021155
+    },
+    {
+      "id": 4888,
+      "title": "Travel Nurse RN - ICU/Critical Care - $2,076 per week in Ukiah, CA",
+      "company": "TravelNurseSource",
+      "location": "Ukiah, CA",
+      "remote": false,
+      "seniority": "mid_senior",
+      "skills": [
+        "icu",
+        "registered nurse"
+      ],
+      "snippet": "TravelNurseSource is working with Amare Medical Network to find a qualified ICU/Critical Care RN in Ukiah, California, 95482!\n\nPay Information\n\n$2,076 per week\n\nAbout The Position\n\nICU registered nurses (RNs) provide care to critical medica",
+      "similarity": 0.555234968662262
+    },
+    {
+      "id": 1530,
+      "title": "Registered Nurse Operating Room - Texas Health Ft. Worth Midtown",
+      "company": "SCA Health",
+      "location": "Fort Worth, TX",
+      "remote": false,
+      "seniority": "mid_senior",
+      "skills": [
+        "acls",
+        "basic life support",
+        "patient care",
+        "registered nurse"
+      ],
+      "snippet": "Overview\n\nToday, SCA Health has grown to 11,000 teammates who care for 1 million patients each year and support physician specialists holistically in many aspects of patient care. Together, our teammates create value in specialty care by al",
+      "similarity": 0.543467012437165
+    },
+    {
+      "id": 5185,
+      "title": "Registered Nurse",
+      "company": "The US Oncology Network",
+      "location": "Austin, TX",
+      "remote": false,
+      "seniority": "mid_senior",
+      "skills": [
+        "basic life support",
+        "compliance",
+        "licensed practical nurse",
+        "patient care",
+        "registered nurse"
+      ],
+      "snippet": "Overview\n\n Texas Oncology  is looking for a   Clinic Registered Nurse (RN)   to join our team! This position will support  the Medical Oncology Department at 4101 James Casey Street #100 location in Austin, Texas  .   This is a full-time Mo",
+      "similarity": 0.5303174257278442
+    },
+    {
+      "id": 835,
+      "title": "Registered Nurse- PICU - PRN",
+      "company": "VCU Health",
+      "location": "Richmond, VA",
+      "remote": false,
+      "seniority": "mid_senior",
+      "skills": [
+        "basic life support",
+        "icu",
+        "licensed practical nurse",
+        "registered nurse"
+      ],
+      "snippet": "**$5,000 Sign On Bonus for offers accepted by June 30, 2024. Terms and Conditions apply**\n\nThe Pediatric ICU Unit at VCU Medical Center provides the only full-service children's care in central Virginia including a Level 1 pediatric Trauma ",
+      "similarity": 0.526895162237271
+    },
+    {
+      "id": 5171,
+      "title": "Patient Safety Attendant",
+      "company": "Rio Grande Regional Hospital",
+      "location": "McAllen, TX",
+      "remote": false,
+      "seniority": "entry",
+      "skills": [
+        "behavioral health",
+        "patient care"
+      ],
+      "snippet": "Description\n\nIntroduction\n\nDo you want to join an organization that invests in you as a(an) Patient Safety Attendant? At Rio Grande Regional Hospital, you come first. HCA Healthcare has committed up to $300 million in programs to support ou",
+      "similarity": 0.5210428237915039
+    },
+    {
+      "id": 5238,
+      "title": "Registered Nurse, Trauma SICU, 36 hrs/wk",
+      "company": "Beth Israel Lahey Health",
+      "location": "Boston, MA",
+      "remote": false,
+      "seniority": "mid_senior",
+      "skills": [
+        "basic life support",
+        "registered nurse"
+      ],
+      "snippet": "When you join the growing BILH team, you're not just taking a job, you’re making a difference in people’s lives.\n\nJob Type:\n\nRegular\n\nScheduled Hours:\n\n36\n\nWork Shift:\n\nRotating (United States of America)\n\nTrauma SICU is a 9 bed intensive c",
+      "similarity": 0.5148248076438904
+    },
+    {
+      "id": 4455,
+      "title": "Patient Care Assistant/CNA- Internal Med; FT Nights",
+      "company": "The University of Kansas Health System",
+      "location": "Kansas City, KS",
+      "remote": false,
+      "seniority": "unknown",
+      "skills": [
+        "certified nursing assistant",
+        "customer service",
+        "patient care",
+        "registered nurse"
+      ],
+      "snippet": "Position Title\n\nPatient Care Assistant/CNA- Internal Med; FT Nights\n\nBell Hospital\n\nPosition Summary / Career Interest\n\nBH 42 – Internal Medicine\n\nUnit 42 is a 33-bed medical surgical unit that specializes in internal medicine to provide co",
+      "similarity": 0.5134818263937141
+    },
+    {
+      "id": 1739,
+      "title": "THFW TECHN PHARMACY I REG",
+      "company": "Texas Health Resources",
+      "location": "Fort Worth, TX",
+      "remote": true,
+      "seniority": "unknown",
+      "skills": [],
+      "snippet": "24002913\n\nAre you looking for a rewarding career with family-friendly hours and top-notch benefits? We’re looking for qualified Registered Pharmacy Technicians like you to join our Texas Health family.\n\nPosition Highlights\n\nTexas Health For",
+      "similarity": 0.5133981704711914
+    },
+    {
+      "id": 5033,
+      "title": "Technician I",
+      "company": "Rochester Regional Health",
+      "location": "Rochester, NY",
+      "remote": false,
+      "seniority": "entry",
+      "skills": [
+        "icu",
+        "patient care",
+        "registered nurse"
+      ],
+      "snippet": "How We Care For You\n\nAt Rochester Regional Health, we are dedicated to getting health care right. Our robust benefits and total rewards foster employee wellbeing, professional development and personal growth. We care for your career while c",
+      "similarity": 0.5125173330307007
+    },
+    {
+      "id": 4812,
+      "title": "Nurse - RN - Emergency Department / ED",
+      "company": "Solomon Page",
+      "location": "Bluffton, IN",
+      "remote": false,
+      "seniority": "mid_senior",
+      "skills": [
+        "patient care",
+        "registered nurse"
+      ],
+      "snippet": "Our client is looking to add a Registered Nurse to their team.\n\nJob Details:\n\nLocation: Bluffton, Indiana Duration: 13 Weeks Start Date: 05/20/2024 Shift: 3x12 Nights Estimated Gross Weekly Pay: $1,916\n\nQualifications: \n\nCurrent Indiana lic",
+      "similarity": 0.5110698938369751
+    },
+    {
+      "id": 1633,
+      "title": "Senior Medical Case Manager",
+      "company": null,
+      "location": "Lubbock, TX",
+      "remote": false,
+      "seniority": "associate",
+      "skills": [
+        "case management",
+        "customer service",
+        "registered nurse"
+      ],
+      "snippet": "Job Description Senior Medical Case ManagerRequisition ID2024-25140\nJob Locations\nUS-TX-Lubbock\nPosition TypeRegular Full-Time\nCategory\nMedical Case Management\n\nBusiness Unit\nBUS_TPA US\n\n\n\nExcellence In Everything We Touch\n\n\nPosition Summar",
+      "similarity": 0.5056875046677893
+    }
+  ],
+  "not sales": [
+    {
+      "id": 5049,
+      "title": "Global VP of Sales",
+      "company": "adam.ai",
+      "location": "San Francisco Bay Area",
+      "remote": true,
+      "seniority": "unknown",
+      "skills": [
+        "b2b",
+        "customer success",
+        "forecasting"
+      ],
+      "snippet": "OverviewWe are looking for a Global VP of Sales to shape our sales organization and scale revenue to the next level. The ideal candidate will be responsible for developing key growth sales, architecting enterprise sales strategies and targe",
+      "similarity": 0.45068348041969775
+    },
+    {
+      "id": 4958,
+      "title": "Area Sales Manager",
+      "company": "Masonite®",
+      "location": "Illinois, United States",
+      "remote": false,
+      "seniority": "unknown",
+      "skills": [
+        "customer service"
+      ],
+      "snippet": "We heard you knock!\n\nSales - Delivering Results\n\nWork with the Regional Sales Manager and channel marketing team to develop and implement sales growth strategies to increase Masonite's market share within assigned territory.Partner with and",
+      "similarity": 0.44391785074749357
+    },
+    {
+      "id": 5357,
+      "title": "Retail Sales - Shoes - Stonebriar Centre",
+      "company": "Nordstrom",
+      "location": "Frisco, TX",
+      "remote": false,
+      "seniority": "entry",
+      "skills": [
+        "excel"
+      ],
+      "snippet": "The ideal Salesperson is passionate about fashion and styling and has the ability to cultivate and grow a customer following, both digitally and in-store. \nA day in the life… Set and achieve sales goals, for both in-store and digital sellin",
+      "similarity": 0.431027041941077
+    },
+    {
+      "id": 4240,
+      "title": "Outside Sales Engineer",
+      "company": "Pasona N A, Inc.",
+      "location": "Florence, KY",
+      "remote": false,
+      "seniority": "mid_senior",
+      "skills": [
+        "accounting",
+        "cold calling",
+        "data entry",
+        "excel",
+        "microsoft office",
+        "negotiation",
+        "project management",
+        "quickbooks"
+      ],
+      "snippet": "A Japanese trading company is looking for a competitive sales engineer to develop sales. Generates and follows up on sales leads in their territory and ensures customer satisfaction.\nJob Title: Sales EngineerLocation: Florence KYSalary: 75-",
+      "similarity": 0.42010358452179597
+    },
+    {
+      "id": 4378,
+      "title": "Canadian National Sales Manager",
+      "company": "Klein Tools",
+      "location": "Mansfield, TX",
+      "remote": false,
+      "seniority": "mid_senior",
+      "skills": [
+        "b2b",
+        "data analysis",
+        "excel",
+        "microsoft office"
+      ],
+      "snippet": "Klein Tools is a dynamic, fast-paced and results driven company dedicated to launching hundreds of innovative products each year. Are you ready to make an impact?\n\nPerks for you include:\n\n Paid Vacations & Holidays Profit Sharing & Matching",
+      "similarity": 0.4174936214096998
+    },
+    {
+      "id": 2965,
+      "title": "Sales Manager - Safety",
+      "company": "Wesco",
+      "location": "United States",
+      "remote": true,
+      "seniority": "entry",
+      "skills": [
+        "forecasting",
+        "logistics",
+        "supply chain"
+      ],
+      "snippet": "Job Description\n\nAs a Sales Manager - Safety, you will provide strategic direction and progressive leadership to achieve sales and profit goals within a region, specific line(s) of business or channels. You will design and recommend sales a",
+      "similarity": 0.4126605495619119
+    },
+    {
+      "id": 2257,
+      "title": "Sales Associate (Part-Time) - Shops at Merrick Park",
+      "company": "Alo Yoga",
+      "location": "Coral Gables, FL",
+      "remote": false,
+      "seniority": "entry",
+      "skills": [
+        "customer service",
+        "excel"
+      ],
+      "snippet": "WHY JOIN ALO?\n\nMindful movement. It’s at the core of why we do what we do at Alo—it’s our calling. Because mindful movement in the studio leads to better living. It changes who yogis are off the mat, making their lives and their communities",
+      "similarity": 0.411047672566911
+    },
+    {
+      "id": 3413,
+      "title": "Sales And Marketing Specialist",
+      "company": "Malibu Events Promotions",
+      "location": "Raleigh, NC",
+      "remote": false,
+      "seniority": "unknown",
+      "skills": [],
+      "snippet": "Do you thrive in the dynamic world of sales and marketing?We're searching for a passionate and results-oriented Sales And Marketing Specialist to join our growing team. You'll be a strategic thinker with the ability to translate vision into",
+      "similarity": 0.4107672029276377
+    },
+    {
+      "id": 306,
+      "title": "Outside Sales Representative | MTS",
+      "company": "Spectrum Community Solutions",
+      "location": "Corpus Christi, TX",
+      "remote": false,
+      "seniority": "entry",
+      "skills": [
+        "cold calling",
+        "customer service",
+        "quality control"
+      ],
+      "snippet": "Sells products and services to customers in assigned non-bulk multi-dwelling units (MDU) areas/properties with 20+ doors through door-to-door solicitation and lobby events.\n\nActively and consistently support all efforts to simplify and enha",
+      "similarity": 0.4100286716205681
+    },
+    {
+      "id": 948,
+      "title": "Outside Sales Professional",
+      "company": "Terminix",
+      "location": "Ronkonkoma, NY",
+      "remote": false,
+      "seniority": "entry",
+      "skills": [
+        "customer service",
+        "osha"
+      ],
+      "snippet": "Benefits Start Day 1 for Full-Time Colleagues - No Waiting Period!\n\nFor more information about our benefits, see below!\n\nWe are proud to be a member of the Rentokil family of companies, the global leader in Pest Control and other services a",
+      "similarity": 0.39948273304207793
+    },
+    {
+      "id": 4127,
+      "title": "Sales Lead - Chico's",
+      "company": "Chico's FAS, Inc.",
+      "location": "Harrisburg, PA",
+      "remote": false,
+      "seniority": "mid_senior",
+      "skills": [
+        "customer service"
+      ],
+      "snippet": "Join our chic team, dedicated to a styling and social experience that inspires women to express their individuality.\n\nPosition Objective\n\nThe Sales Lead is responsible for supporting Management in in promoting a customer and product-focused",
+      "similarity": 0.39838177571405387
+    },
+    {
+      "id": 2961,
+      "title": "Sales Manager",
+      "company": "Uline",
+      "location": "Jurupa Valley, CA",
+      "remote": false,
+      "seniority": "unknown",
+      "skills": [],
+      "snippet": "Anaheim, California\n\nSales Manager\n\nPay from $120,000 to $150,000 per year\n\nStrong customer relationships built on trust - that’s the foundation of Uline’s sales culture! As Sales Manager at our California location, you’ll guide and develop",
+      "similarity": 0.39791752124815927
+    },
+    {
+      "id": 3431,
+      "title": "Sales Account Executive",
+      "company": "Nexstar Media Group, Inc.",
+      "location": "High Point, NC",
+      "remote": false,
+      "seniority": "mid_senior",
+      "skills": [],
+      "snippet": "The Sales Account Executive generates advertising revenue by calling on established agencies, cold-calling new prospects and convincing potential clients of the merits of television advertising.\n\nImplements strategies to consistently grow r",
+      "similarity": 0.3969341577926787
+    },
+    {
+      "id": 3097,
+      "title": "Sales Team Manager - Mayfaire",
+      "company": "Belk",
+      "location": "Wilmington, North Carolina, United States",
+      "remote": false,
+      "seniority": "mid_senior",
+      "skills": [
+        "audit",
+        "customer service",
+        "excel",
+        "osha"
+      ],
+      "snippet": "The Sales Team Manager reports to the Assistant Store Manager- Selling or Store Manager and ensures and drives efficient execution of the selling function within their store. The Sales Team Manager position is an exempt position that requir",
+      "similarity": 0.3967185143567903
+    },
+    {
+      "id": 4507,
+      "title": "Neuroscience Sales Specialist- Washington, DC",
+      "company": "Amplity Health",
+      "location": "Washington, DC",
+      "remote": false,
+      "seniority": "unknown",
+      "skills": [
+        "compliance",
+        "crm",
+        "excel"
+      ],
+      "snippet": "Come join the true partner of global healthcare companies, Amplity Health. We continually challenge the boundaries of medical and commercial strategies to accelerate the approval and launch of new drugs to improve the lives of patients.\n\nEx",
+      "similarity": 0.3962894441908936
+    },
+    {
+      "id": 1119,
+      "title": "Full-Time Sales Lead - White House Black Market",
+      "company": "Chico's FAS, Inc.",
+      "location": "Deer Park, AL",
+      "remote": false,
+      "seniority": "mid_senior",
+      "skills": [
+        "customer service"
+      ],
+      "snippet": "Join our fashion-obsessed team, dedicated to a styling and social experience that makes women feel beautiful.\n\nPosition Objective\n\nThe Sales Lead is responsible for supporting Management in in promoting a customer and product-focused sales ",
+      "similarity": 0.39474630983195913
+    },
+    {
+      "id": 515,
+      "title": "Store Manager (Southampton Boutique)",
+      "company": "ba&sh",
+      "location": "Southampton, NY",
+      "remote": false,
+      "seniority": "unknown",
+      "skills": [],
+      "snippet": "Store/Shop Manager Job descriptionJoin the ba&sh family and make your career shine!As Manager of a point of sale you will motivate, supervise and develop a dynamic sales team.You are a brand ambassador with some key tasks:Point of sale admi",
+      "similarity": 0.3935554985072919
+    },
+    {
+      "id": 1504,
+      "title": "SBS Branch Sales Manager (Selling Manager)",
+      "company": "Sharp Business USA",
+      "location": "Tampa, FL",
+      "remote": false,
+      "seniority": "mid_senior",
+      "skills": [
+        "behavioral health",
+        "crm",
+        "salesforce"
+      ],
+      "snippet": "Overview\n\nTo support our growing business, Sharp Electronics is looking for a  Selling Sales Manager  to increase sales in our Business Systems division. We are currently hiring for opportunities in our Tampa area sales office.\n\nThe Selling",
+      "similarity": 0.39104322248439727
+    },
+    {
+      "id": 2800,
+      "title": "Sales Specialist Manager",
+      "company": "HubSpot",
+      "location": "Cambridge, MA",
+      "remote": false,
+      "seniority": "entry",
+      "skills": [
+        "compliance",
+        "crm",
+        "hubspot"
+      ],
+      "snippet": "As a Sales Specialist Manager, you will hire, train, coach, and lead a team of new and established Sales Specialists in a fast-paced and rapidly changing environment.\n\nThe Sales Specialist team was formed in 2020 to cover a singular product",
+      "similarity": 0.38761839940438336
+    },
+    {
+      "id": 5205,
+      "title": "General Manager, Global Head of Digital Sales",
+      "company": "Convera",
+      "location": "New York, NY",
+      "remote": false,
+      "seniority": "mid_senior",
+      "skills": [
+        "account management",
+        "b2b",
+        "compliance",
+        "customer success"
+      ],
+      "snippet": "We are looking for a General Manager, Global Head of Digital Sales, reporting to the Chief Commercial Officer of Convera, to drive the transformation of our Small and Medium Business (SMB) sales function to achieve our growth ambitions. Wit",
+      "similarity": 0.3864951567059569
+    }
+  ]
+}

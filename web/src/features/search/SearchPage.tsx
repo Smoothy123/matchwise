@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router';
 
 import type { SearchResult } from '../../api/client';
 import { useSearch } from '../../api/queries';
+import { isDemo } from '../../lib/demo';
 import { seniorityLabel } from '../../lib/format';
 import { useDebouncedValue } from '../../lib/useDebouncedValue';
 import { Button } from '../../ui/Button';
@@ -18,7 +19,12 @@ export const DEBOUNCE_MS = 300;
 export const PAGE = 10;
 const MAX_LIMIT = 50; // the API's own maximum
 
-const EXAMPLES = ['python backend engineer, remote', 'ICU nurse in Texas', 'not sales'];
+/** Also the searches recorded for the demo mode (scripts/record-fixtures.mjs). */
+export const SEARCH_EXAMPLES = [
+  'python backend engineer, remote',
+  'ICU nurse in Texas',
+  'not sales',
+];
 
 /** ?limit= as a whole page count between PAGE and MAX_LIMIT; anything else means one page. */
 export function readLimit(value: string | null): number {
@@ -58,7 +64,7 @@ export default function SearchPage() {
       <div className={styles.intro}>
         <p>Try one of these:</p>
         <ul className={styles.examples}>
-          {EXAMPLES.map((example) => (
+          {SEARCH_EXAMPLES.map((example) => (
             <li key={example}>
               <Link to={{ search: `?q=${encodeURIComponent(example)}` }}>{example}</Link>
             </li>
@@ -122,7 +128,11 @@ export default function SearchPage() {
     <>
       <PageHeader
         title="Search"
-        description="Look for jobs by meaning. This ignores your preferences and hard limits; your Matches page applies them."
+        description={
+          isDemo()
+            ? 'Look for jobs by meaning. In the demo, only the example searches were recorded.'
+            : 'Look for jobs by meaning. This ignores your preferences and hard limits; your Matches page applies them.'
+        }
       />
       <form
         role="search"

@@ -23,7 +23,9 @@
     "test:coverage": "vitest run --coverage",
     "e2e": "npm run build && node scripts/e2e.mjs",
     "e2e:live": "npm run build && node scripts/e2e.mjs --live",
-    "e2e:open": "cypress open"
+    "e2e:open": "cypress open",
+    "build:demo": "VITE_DEMO_MODE=true npm run build",
+    "e2e:demo": "npm run build:demo && node scripts/e2e.mjs --demo"
   },
   "dependencies": {
     "@tanstack/react-query": "5.108.4",

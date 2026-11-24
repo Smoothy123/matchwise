@@ -1,20 +1,20 @@
 /**
  * The main flow, in a real browser, on the production build: a new person says what they want in
  * the chat, and their matches appear. The API's responses were recorded from the real API
- * (scripts/record-fixtures.mjs) and are replayed here, so the test is fast and deterministic and
+ * (scripts/record-fixtures.mjs, kept in src/demo/recorded/) and are replayed here, so the test is fast and deterministic and
  * needs no backend or LLM. `npm run e2e:live` runs the same story against the live stack.
  */
-import chatHistory from '../fixtures/recorded/chat-history.json';
-import chatReply from '../fixtures/recorded/chat-reply.json';
-import health from '../fixtures/recorded/health.json';
-import jobs from '../fixtures/recorded/jobs.json';
-import checkedExplained from '../fixtures/recorded/matches-checked-explained.json';
-import checked from '../fixtures/recorded/matches-checked.json';
-import full from '../fixtures/recorded/matches-full.json';
-import vectorFilters from '../fixtures/recorded/matches-vector_filters.json';
-import vector from '../fixtures/recorded/matches-vector.json';
-import preferenceHistory from '../fixtures/recorded/preference-history.json';
-import profile from '../fixtures/recorded/profile.json';
+import chatHistory from '../../src/demo/recorded/chat-history.json';
+import chatReply from '../../src/demo/recorded/chat-reply.json';
+import health from '../../src/demo/recorded/health.json';
+import jobs from '../../src/demo/recorded/jobs.json';
+import checkedExplained from '../../src/demo/recorded/matches-checked-explained.json';
+import checked from '../../src/demo/recorded/matches-checked.json';
+import full from '../../src/demo/recorded/matches-full.json';
+import vectorFilters from '../../src/demo/recorded/matches-vector_filters.json';
+import vector from '../../src/demo/recorded/matches-vector.json';
+import preferenceHistory from '../../src/demo/recorded/preference-history.json';
+import profile from '../../src/demo/recorded/profile.json';
 
 const API = String(Cypress.expose('apiUrl'));
 const MATCHES: Record<string, unknown> = {
