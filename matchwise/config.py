@@ -3,8 +3,12 @@
 import logging
 import os
 from dataclasses import dataclass
+from urllib.parse import urlsplit
 
 GEMINI_OPENAI_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/openai/"
+
+# The web frontend's dev server (npm run dev) and production preview (npm run preview).
+DEFAULT_CORS_ORIGINS = "http://localhost:5173,http://localhost:4173"
 
 
 @dataclass(frozen=True)
@@ -32,6 +36,26 @@ def get_settings() -> Settings:
         # Interactive requests should fail fast; long eval runs can afford to wait out a busy API.
         llm_max_retries=int(os.environ.get("LLM_MAX_RETRIES") or 2),
     )
+
+
+def cors_origins(value: str | None = None) -> list[str]:
+    """Origins whose pages may call the API from a browser, from CORS_ORIGINS (comma-separated).
+
+    Unset means the local dev origins; set but empty means none. A mistyped origin would
+    fail silently in the browser (it just never matches), so each one is checked here and a
+    bad one stops the app at startup instead.
+    """
+    raw = os.environ.get("CORS_ORIGINS", DEFAULT_CORS_ORIGINS) if value is None else value
+    origins = []
+    for item in raw.split(","):
+        origin = item.strip().rstrip("/")  # browsers never send a trailing slash
+        if not origin:
+            continue
+        parts = urlsplit(origin)
+        if parts.scheme not in ("http", "https") or not parts.netloc or parts.path or parts.query:
+            raise ValueError(f"CORS_ORIGINS: {origin!r} is not an origin like https://app.example.com")
+        origins.append(origin)
+    return origins
 
 
 def setup_logging(level: str = "INFO") -> None:

@@ -8,11 +8,12 @@ from typing import Annotated
 
 import psycopg
 from fastapi import Depends, FastAPI, HTTPException, Path, Query, Request
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, StringConstraints
 
 from matchwise import agent, db, embeddings, llm, preferences, ranking, reasons
-from matchwise.config import get_settings, setup_logging
+from matchwise.config import cors_origins, get_settings, setup_logging
 from matchwise.preferences import Operation, Preferences
 from matchwise.ranking import Mode
 from matchwise.search import search_jobs
@@ -36,6 +37,17 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="Matchwise", lifespan=lifespan)
+
+# Lets the web frontend (a different origin) call the API from the browser. Middleware must be
+# added before the app starts, so the origins are read here, not in lifespan. No cookies or
+# auth headers are used, so credentials stay off.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=cors_origins(),
+    allow_methods=["GET", "POST", "DELETE"],
+    allow_headers=["Content-Type"],
+    max_age=600,  # browsers may reuse a preflight answer for 10 minutes
+)
 
 
 # ---------- dependencies ----------
