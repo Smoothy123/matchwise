@@ -1,0 +1,260 @@
+# Skills vocabulary: one skill per line, "canonical | alias | alias".
+# Matching is case-insensitive on whole terms (see matchwise/skills.py).
+# Terms that are also everyday words are left out on purpose:
+# go (use golang), r, c, swift, spring (use spring boot), epic, node, rails, tax.
+# So are words job ads use about their own hiring process: recruiting, recruitment,
+# talent acquisition, onboarding. In the LinkedIn sample, under 20% of postings
+# tagged with them were HR jobs. Recruiter roles are still found by title and by
+# LinkedIn's "Human Resources" job function.
+
+# --- Programming languages
+python
+java
+javascript | ecmascript
+typescript
+c++ | cpp
+c# | c sharp
+.net | dotnet | asp.net
+golang
+rust
+ruby | ruby on rails
+php
+kotlin
+scala
+objective-c
+matlab
+sql | t-sql | pl/sql
+bash | shell scripting
+
+# --- Data stores
+postgresql | postgres
+mysql
+sql server | mssql
+oracle
+mongodb | mongo
+redis
+elasticsearch | elastic search
+snowflake
+bigquery
+redshift
+databricks
+
+# --- Data and ML
+data analysis | data analytics
+etl | data pipelines
+statistics | statistical analysis
+a/b testing | ab testing
+excel | microsoft excel | ms excel
+vba
+tableau
+power bi | powerbi
+looker
+pandas
+numpy
+scikit-learn | sklearn
+tensorflow
+pytorch
+spark | apache spark | pyspark
+hadoop
+kafka | apache kafka
+airflow | apache airflow
+dbt
+machine learning
+deep learning
+nlp | natural language processing
+computer vision
+llm | llms | large language models
+generative ai | genai
+
+# --- Web and mobile
+react | react.js | reactjs
+react native
+angular | angularjs
+vue | vue.js | vuejs
+node.js | nodejs
+next.js | nextjs
+express.js | expressjs
+django
+flask
+fastapi
+spring boot | spring framework
+graphql
+rest api | rest apis | restful
+microservices
+html | html5
+css | css3
+jquery
+android
+ios
+
+# --- Infrastructure and tooling
+git
+github
+gitlab
+linux
+unix
+docker
+kubernetes | k8s
+terraform
+ansible
+jenkins
+ci/cd | continuous integration
+aws | amazon web services
+azure | microsoft azure
+gcp | google cloud | google cloud platform
+serverless
+devops
+site reliability | sre
+cybersecurity | information security | infosec
+network security
+penetration testing
+siem
+tcp/ip
+selenium
+unit testing
+quality assurance
+
+# --- Business software
+salesforce
+sap
+servicenow
+workday
+jira
+confluence
+hubspot
+quickbooks
+erp
+crm
+microsoft office | ms office
+powerpoint
+
+# --- Design
+figma
+photoshop | adobe photoshop
+illustrator | adobe illustrator
+indesign | adobe indesign
+adobe creative suite | adobe creative cloud
+ux design | user experience
+ui design | user interface design
+autocad
+solidworks
+revit
+gis | arcgis
+
+# --- Product, project and process
+product management
+project management
+pmp
+agile
+scrum
+kanban
+stakeholder management
+six sigma | lean six sigma
+lean manufacturing
+
+# --- Finance and accounting
+accounting
+bookkeeping
+accounts payable
+accounts receivable
+financial analysis
+financial modeling | financial modelling
+budgeting
+forecasting
+gaap
+cpa
+audit | auditing
+tax preparation
+payroll
+underwriting
+risk management
+compliance
+anti-money laundering | aml
+
+# --- Sales and marketing
+b2b
+b2c
+lead generation
+account management
+business development
+cold calling
+negotiation
+seo | search engine optimization
+sem | search engine marketing
+google analytics
+google ads
+digital marketing
+social media marketing
+content marketing
+copywriting
+email marketing
+marketing automation
+market research
+public relations
+brand management
+
+# --- Customer and operations
+customer service
+customer success
+call center
+supply chain
+logistics
+procurement
+inventory management
+vendor management
+operations management
+forklift
+data entry
+scheduling
+
+# --- Healthcare
+patient care
+registered nurse | rn
+licensed practical nurse | lpn
+certified nursing assistant | cna
+basic life support | bls
+acls
+cpr
+ehr | emr | electronic health records | electronic medical records
+medical billing
+medical coding
+icd-10
+hipaa
+phlebotomy
+physical therapy
+occupational therapy
+case management
+behavioral health
+home health
+icu
+medication administration
+
+# --- People, legal and admin
+hris
+employee relations
+benefits administration
+litigation
+legal research
+paralegal
+contract negotiation
+
+# --- Trades and manufacturing
+cdl | commercial driver's license
+welding
+hvac
+plc | plc programming
+cnc | cnc machining
+blueprint reading
+osha
+preventive maintenance
+quality control
+gmp | good manufacturing practice
+
+# --- Teaching
+lesson planning
+curriculum development
+
+# --- Languages
+spanish
+french
+mandarin

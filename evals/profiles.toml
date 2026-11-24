@@ -1,0 +1,100 @@
+# Eval personas, written the way real people describe what they want.
+# Each runs through the real preference extractor once (python -m evals.extract),
+# and the result is frozen in profiles_extracted.json.
+# When labelling, judge postings against these messages: what the person SAID,
+# not what the extractor understood.
+
+[[profile]]
+id = "backend-dev"
+messages = [
+  "I'm a mid-level backend engineer, mostly Python and PostgreSQL with some AWS. I'd like remote work or something in Texas. No contract roles.",
+  "Also, nothing in sales or consulting please.",
+]
+
+[[profile]]
+id = "icu-nurse"
+messages = [
+  "Registered nurse with four years in the ICU. I want to stay in Texas, it has to be Texas. Ideally day shifts. I won't do travel nursing.",
+  "Actually night shifts are a hard no for me now.",
+]
+
+[[profile]]
+id = "data-analyst"
+messages = [
+  "Entry-level data analyst: SQL, Excel and Tableau. Remote only, and I need at least $55k a year.",
+]
+
+[[profile]]
+id = "cdl-driver"
+messages = [
+  "I drive trucks with a class A CDL. Looking for local or regional routes, only in Illinois, Indiana or Ohio. No overnight long-haul.",
+]
+
+[[profile]]
+id = "senior-accountant"
+messages = [
+  "CPA with six years in public accounting. I want an in-house senior accountant or controller role in Chicago or New York, at least $90,000. Nothing entry-level.",
+  "And no audit roles, I'm done with audit.",
+]
+
+[[profile]]
+id = "digital-marketer"
+messages = [
+  "I do digital marketing: social media, content and SEO, about three years in. New York or remote. Never sales or commission-only jobs.",
+]
+
+[[profile]]
+id = "hr-recruiter"
+messages = [
+  "HR generalist moving into recruiting. I know Workday and HRIS systems. Chicago or Dallas would be great. Full-time only, no temp or contract work.",
+]
+
+[[profile]]
+id = "remote-support"
+messages = [
+  "Customer service rep looking for remote work only. I'm bilingual in Spanish. Part-time is fine. I won't work for Amazon.",
+]
+
+[[profile]]
+id = "store-manager"
+messages = [
+  "Assistant store manager ready to step up to store manager, retail or grocery. Florida or Georgia.",
+  "Georgia is off the table now, Florida only. And no overnight shifts.",
+]
+
+[[profile]]
+id = "elementary-teacher"
+messages = [
+  "Certified elementary school teacher. Interested in teaching, tutoring or curriculum development roles in California. Not interested in substitute teaching.",
+]
+
+[[profile]]
+id = "litigation-paralegal"
+messages = [
+  "Paralegal with litigation experience, looking in Los Angeles or San Diego. Contract work is fine. Never personal injury firms.",
+]
+
+[[profile]]
+id = "hvac-tech"
+messages = [
+  "HVAC technician, EPA certified, I also do general building maintenance. Full-time in Pennsylvania or New Jersey. No on-call weekends.",
+]
+
+[[profile]]
+id = "it-project-manager"
+messages = [
+  "Senior project manager with a PMP, agile and scrum, mostly IT projects. Remote preferred, otherwise Atlanta. Minimum $120k. No construction industry.",
+]
+
+[[profile]]
+id = "ux-designer"
+messages = [
+  "Product and UX designer, Figma, three years. I want a remote role or something in Seattle, at a tech company. No agency work and no contract roles.",
+  "I'd also consider New York now.",
+]
+
+[[profile]]
+id = "saas-account-exec"
+messages = [
+  "Experienced B2B account executive selling SaaS. I want a sales role, remote, with at least $100k base. Not interested in retail sales.",
+]

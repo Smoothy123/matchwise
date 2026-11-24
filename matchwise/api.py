@@ -1,0 +1,268 @@
+"""HTTP API. Routes stay thin: they validate input and call the modules that do the work."""
+
+import logging
+from collections.abc import Iterator
+from contextlib import asynccontextmanager
+from datetime import datetime
+from typing import Annotated
+
+import psycopg
+from fastapi import Depends, FastAPI, HTTPException, Path, Query, Request
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel, StringConstraints
+
+from matchwise import agent, db, embeddings, llm, preferences, ranking, reasons
+from matchwise.config import get_settings, setup_logging
+from matchwise.preferences import Operation, Preferences
+from matchwise.ranking import Mode
+from matchwise.search import search_jobs
+
+log = logging.getLogger(__name__)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    settings = get_settings()
+    setup_logging(settings.log_level)
+    db.migrate(settings.database_url)
+    app.state.pool = db.create_pool(settings.database_url)
+    try:
+        app.state.llm = llm.client_from_settings(settings)
+    except llm.LLMNotConfigured as error:
+        app.state.llm = None
+        log.warning("LLM features are off: %s", error)
+    yield
+    app.state.pool.close()
+
+
+app = FastAPI(title="Matchwise", lifespan=lifespan)
+
+
+# ---------- dependencies ----------
+
+def get_conn(request: Request) -> Iterator[psycopg.Connection]:
+    """One pooled connection per request, returned to the pool afterwards."""
+    with request.app.state.pool.connection() as conn:
+        yield conn
+
+
+def get_embedder() -> embeddings.Embedder:
+    """The real model; tests override this dependency with a fast fake."""
+    return embeddings.embed_texts
+
+
+def get_llm(request: Request) -> llm.LLMClient:
+    if request.app.state.llm is None:
+        raise HTTPException(503, "The LLM is not configured: set LLM_API_KEY and LLM_MODEL in .env.")
+    return request.app.state.llm
+
+
+def get_optional_llm(request: Request) -> llm.LLMClient | None:
+    """For features that still work without an LLM (matches without reasons)."""
+    return request.app.state.llm
+
+
+Conn = Annotated[psycopg.Connection, Depends(get_conn)]
+Embed = Annotated[embeddings.Embedder, Depends(get_embedder)]
+LLM = Annotated[llm.LLMClient, Depends(get_llm)]
+OptionalLLM = Annotated[llm.LLMClient | None, Depends(get_optional_llm)]
+ProfileId = Annotated[str, Path(pattern=r"^[A-Za-z0-9_-]{1,64}$")]
+
+
+# ---------- errors ----------
+
+@app.exception_handler(llm.LLMOutputError)
+def llm_output_error(request: Request, error: llm.LLMOutputError) -> JSONResponse:
+    log.error("%s", error)
+    return JSONResponse(status_code=502, content={
+        "detail": "The language model kept returning invalid output, so nothing was changed. Please try again."})
+
+
+@app.exception_handler(llm.LLMUnavailable)
+def llm_unavailable(request: Request, error: llm.LLMUnavailable) -> JSONResponse:
+    log.error("%s", error)
+    return JSONResponse(status_code=503, content={
+        "detail": "The language model is unavailable right now, so nothing was changed. Please try again."})
+
+
+@app.exception_handler(preferences.ConcurrentUpdate)
+def concurrent_update(request: Request, error: preferences.ConcurrentUpdate) -> JSONResponse:
+    return JSONResponse(status_code=409, content={"detail": str(error)})
+
+
+@app.exception_handler(ranking.NoWants)
+def no_wants(request: Request, error: ranking.NoWants) -> JSONResponse:
+    return JSONResponse(status_code=422, content={"detail": str(error)})
+
+
+# ---------- models ----------
+
+class SearchResult(BaseModel):
+    id: int
+    title: str
+    company: str | None
+    location: str | None
+    remote: bool
+    seniority: str
+    skills: list[str]
+    snippet: str
+    similarity: float
+
+
+class MessageIn(BaseModel):
+    message: Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=2000)]
+
+
+class MessageOut(BaseModel):
+    profile_id: str
+    version: int
+    preferences: Preferences
+    operations: list[Operation]
+    notes: list[str]
+
+
+class ProfileOut(BaseModel):
+    profile_id: str
+    version: int
+    preferences: Preferences
+
+
+class FeatureScore(BaseModel):
+    value: float         # the feature itself, 0..1
+    weight: float        # its share of the score, after leaving out features that don't apply
+    contribution: float  # value x weight; the contributions add up to the score
+
+
+class MatchOut(BaseModel):
+    job_id: int
+    title: str
+    company: str | None
+    location: str | None
+    remote: bool
+    seniority: str
+    employment_type: str | None
+    salary_min: int | None
+    salary_max: int | None
+    posted_at: datetime | None
+    skills: list[str]
+    matched_skills: list[str]
+    score: float
+    similarity: float
+    features: dict[str, FeatureScore]
+    explanation: reasons.Explanation | None = None  # None if reasons were off or the LLM failed
+
+
+class ToolCallOut(BaseModel):
+    name: str
+    arguments: str
+    ok: bool
+
+
+class ChatOut(BaseModel):
+    reply: str
+    tool_calls: list[ToolCallOut]
+
+
+class ChatMessageOut(BaseModel):
+    turn: int
+    role: str
+    content: str | None
+    tool_calls: list[dict] | None
+    created_at: datetime
+
+
+class HistoryItem(BaseModel):
+    version: int
+    content: str
+    operations: list[Operation]
+    notes: list[str]
+    model: str
+    prompt_version: str
+    created_at: datetime
+
+
+# ---------- routes ----------
+
+@app.get("/health")
+def health(conn: Conn, request: Request) -> dict:
+    counts = conn.execute(
+        """SELECT count(*) AS jobs,
+                  count(*) FILTER (WHERE is_active) AS active_jobs,
+                  count(*) FILTER (WHERE is_active AND embedding IS NOT NULL) AS embedded_jobs
+           FROM jobs"""
+    ).fetchone()
+    return {"status": "ok", **counts, "llm_configured": request.app.state.llm is not None}
+
+
+@app.get("/search")
+def search(
+    conn: Conn,
+    embed: Embed,
+    q: Annotated[str, Query(min_length=2, max_length=500, description="What you're looking for, in plain words")],
+    limit: Annotated[int, Query(ge=1, le=50)] = 10,
+) -> list[SearchResult]:
+    query_vector = embed([q])[0]
+    return search_jobs(conn, query_vector, limit)
+
+
+@app.post("/profiles/{profile_id}/messages")
+def post_message(profile_id: ProfileId, body: MessageIn, conn: Conn, client: LLM) -> MessageOut:
+    """Read a plain-language message and update the profile's stored preferences."""
+    return preferences.process_message(conn, client, profile_id, body.message)
+
+
+@app.get("/profiles/{profile_id}")
+def get_profile(profile_id: ProfileId, conn: Conn) -> ProfileOut:
+    found = preferences.load_profile(conn, profile_id)
+    if found is None:
+        raise HTTPException(404, f"No profile {profile_id!r}. Send it a message first.")
+    prefs, version = found
+    return ProfileOut(profile_id=profile_id, version=version, preferences=prefs)
+
+
+@app.get("/profiles/{profile_id}/matches")
+def get_matches(
+    profile_id: ProfileId,
+    conn: Conn,
+    embed: Embed,
+    client: OptionalLLM,
+    limit: Annotated[int, Query(ge=1, le=50)] = 10,
+    mode: Annotated[Mode, Query(description="full = filters + re-ranking; the others are for comparison")] = Mode.full,
+    explain: Annotated[bool, Query(description="Add a plain-language reason to each match (cached)")] = True,
+) -> list[MatchOut]:
+    """The best-fitting active jobs for this profile, each with its score breakdown and a reason."""
+    found = preferences.load_profile(conn, profile_id)
+    if found is None:
+        raise HTTPException(404, f"No profile {profile_id!r}. Send it a message first.")
+    prefs = found[0]
+    matches = ranking.match(conn, prefs, embed, mode=mode, limit=limit)
+    if explain and client is not None:
+        explanations = reasons.explain_matches(conn, client, prefs, matches)
+        for match in matches:
+            match["explanation"] = explanations.get(match["job_id"])
+    return matches
+
+
+@app.post("/profiles/{profile_id}/chat")
+def chat(profile_id: ProfileId, body: MessageIn, conn: Conn, embed: Embed, client: LLM) -> ChatOut:
+    """Talk to the agent. It remembers this conversation and the profile's stored preferences."""
+    return agent.run_turn(conn, client, embed, profile_id, body.message)
+
+
+@app.get("/profiles/{profile_id}/chat")
+def get_chat(profile_id: ProfileId, conn: Conn) -> list[ChatMessageOut]:
+    """The whole conversation, including every tool call and result."""
+    return agent.chat_history(conn, profile_id)
+
+
+@app.delete("/profiles/{profile_id}/chat")
+def delete_chat(profile_id: ProfileId, conn: Conn) -> dict:
+    """Forget the conversation; stored preferences stay."""
+    return {"deleted_messages": agent.reset_chat(conn, profile_id)}
+
+
+@app.get("/profiles/{profile_id}/messages")
+def get_messages(profile_id: ProfileId, conn: Conn) -> list[HistoryItem]:
+    if preferences.load_profile(conn, profile_id) is None:
+        raise HTTPException(404, f"No profile {profile_id!r}.")
+    return preferences.list_messages(conn, profile_id)

@@ -1,0 +1,27 @@
+# Secrets: only .env.example is committed
+.env
+.env.*
+!.env.example
+
+# Data files (downloaded datasets, snapshots) — never committed
+data/*
+!data/README.md
+
+# Model and tool caches
+.cache/
+.hf_cache/
+*.onnx
+*.safetensors
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/

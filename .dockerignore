@@ -1,0 +1,14 @@
+# Keep secrets, data and caches out of the image
+.env
+.env.*
+!.env.example
+data/
+.cache/
+.hf_cache/
+.git/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.DS_Store

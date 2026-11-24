@@ -1,0 +1,541 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "prompt_version": "preferences-v2",
+ "extracted_at": "2026-11-24T10:35:48+00:00",
+ "profiles": {
+  "backend-dev": {
+   "wants": {
+    "roles": [
+     "backend engineer"
+    ],
+    "skills": [
+     "python",
+     "postgresql",
+     "aws"
+    ],
+    "locations": [
+     "Texas"
+    ],
+    "industries": [],
+    "seniority": [
+     "mid_senior"
+    ],
+    "remote": true,
+    "min_salary": null,
+    "other": []
+   },
+   "dealbreakers": {
+    "exclude_title_words": [
+     "sales",
+     "consulting"
+    ],
+    "exclude_functions": [
+     "Sales",
+     "Consulting"
+    ],
+    "exclude_industries": [],
+    "exclude_companies": [],
+    "exclude_description_phrases": [],
+    "exclude_seniority": [],
+    "exclude_employment_types": [
+     "Contract"
+    ],
+    "only_locations": [],
+    "only_remote": false,
+    "min_salary": null
+   }
+  },
+  "icu-nurse": {
+   "wants": {
+    "roles": [
+     "Registered nurse"
+    ],
+    "skills": [
+     "icu"
+    ],
+    "locations": [
+     "Texas"
+    ],
+    "industries": [],
+    "seniority": [],
+    "remote": null,
+    "min_salary": null,
+    "other": []
+   },
+   "dealbreakers": {
+    "exclude_title_words": [
+     "travel"
+    ],
+    "exclude_functions": [],
+    "exclude_industries": [],
+    "exclude_companies": [],
+    "exclude_description_phrases": [
+     "night shift"
+    ],
+    "exclude_seniority": [],
+    "exclude_employment_types": [],
+    "only_locations": [
+     "Texas"
+    ],
+    "only_remote": false,
+    "min_salary": null
+   }
+  },
+  "data-analyst": {
+   "wants": {
+    "roles": [
+     "data analyst"
+    ],
+    "skills": [
+     "sql",
+     "excel",
+     "tableau"
+    ],
+    "locations": [],
+    "industries": [],
+    "seniority": [
+     "entry"
+    ],
+    "remote": true,
+    "min_salary": null,
+    "other": []
+   },
+   "dealbreakers": {
+    "exclude_title_words": [],
+    "exclude_functions": [],
+    "exclude_industries": [],
+    "exclude_companies": [],
+    "exclude_description_phrases": [],
+    "exclude_seniority": [],
+    "exclude_employment_types": [],
+    "only_locations": [],
+    "only_remote": true,
+    "min_salary": 55000
+   }
+  },
+  "cdl-driver": {
+   "wants": {
+    "roles": [
+     "truck driver"
+    ],
+    "skills": [
+     "class a cdl"
+    ],
+    "locations": [],
+    "industries": [],
+    "seniority": [],
+    "remote": null,
+    "min_salary": null,
+    "other": [
+     "local or regional routes"
+    ]
+   },
+   "dealbreakers": {
+    "exclude_title_words": [],
+    "exclude_functions": [],
+    "exclude_industries": [],
+    "exclude_companies": [],
+    "exclude_description_phrases": [
+     "long haul"
+    ],
+    "exclude_seniority": [],
+    "exclude_employment_types": [],
+    "only_locations": [
+     "Illinois",
+     "Indiana",
+     "Ohio"
+    ],
+    "only_remote": false,
+    "min_salary": null
+   }
+  },
+  "senior-accountant": {
+   "wants": {
+    "roles": [
+     "senior accountant",
+     "controller"
+    ],
+    "skills": [],
+    "locations": [
+     "Chicago, IL",
+     "New York, NY"
+    ],
+    "industries": [],
+    "seniority": [],
+    "remote": null,
+    "min_salary": 90000,
+    "other": []
+   },
+   "dealbreakers": {
+    "exclude_title_words": [
+     "audit"
+    ],
+    "exclude_functions": [],
+    "exclude_industries": [],
+    "exclude_companies": [],
+    "exclude_description_phrases": [],
+    "exclude_seniority": [
+     "entry"
+    ],
+    "exclude_employment_types": [],
+    "only_locations": [],
+    "only_remote": false,
+    "min_salary": null
+   }
+  },
+  "digital-marketer": {
+   "wants": {
+    "roles": [
+     "digital marketer"
+    ],
+    "skills": [
+     "social media",
+     "content",
+     "seo"
+    ],
+    "locations": [
+     "New York, NY"
+    ],
+    "industries": [],
+    "seniority": [
+     "mid_senior"
+    ],
+    "remote": true,
+    "min_salary": null,
+    "other": []
+   },
+   "dealbreakers": {
+    "exclude_title_words": [
+     "sales"
+    ],
+    "exclude_functions": [
+     "Sales"
+    ],
+    "exclude_industries": [],
+    "exclude_companies": [],
+    "exclude_description_phrases": [
+     "commission-only"
+    ],
+    "exclude_seniority": [],
+    "exclude_employment_types": [],
+    "only_locations": [],
+    "only_remote": false,
+    "min_salary": null
+   }
+  },
+  "hr-recruiter": {
+   "wants": {
+    "roles": [
+     "recruiter"
+    ],
+    "skills": [
+     "workday",
+     "hris"
+    ],
+    "locations": [
+     "Chicago, IL",
+     "Dallas, TX"
+    ],
+    "industries": [],
+    "seniority": [],
+    "remote": null,
+    "min_salary": null,
+    "other": []
+   },
+   "dealbreakers": {
+    "exclude_title_words": [],
+    "exclude_functions": [],
+    "exclude_industries": [],
+    "exclude_companies": [],
+    "exclude_description_phrases": [],
+    "exclude_seniority": [],
+    "exclude_employment_types": [
+     "Temporary",
+     "Contract"
+    ],
+    "only_locations": [],
+    "only_remote": false,
+    "min_salary": null
+   }
+  },
+  "remote-support": {
+   "wants": {
+    "roles": [
+     "customer service rep"
+    ],
+    "skills": [
+     "bilingual in spanish"
+    ],
+    "locations": [],
+    "industries": [],
+    "seniority": [],
+    "remote": null,
+    "min_salary": null,
+    "other": []
+   },
+   "dealbreakers": {
+    "exclude_title_words": [],
+    "exclude_functions": [],
+    "exclude_industries": [],
+    "exclude_companies": [
+     "Amazon"
+    ],
+    "exclude_description_phrases": [],
+    "exclude_seniority": [],
+    "exclude_employment_types": [],
+    "only_locations": [],
+    "only_remote": true,
+    "min_salary": null
+   }
+  },
+  "store-manager": {
+   "wants": {
+    "roles": [
+     "store manager"
+    ],
+    "skills": [],
+    "locations": [
+     "Florida"
+    ],
+    "industries": [
+     "retail",
+     "grocery"
+    ],
+    "seniority": [],
+    "remote": null,
+    "min_salary": null,
+    "other": []
+   },
+   "dealbreakers": {
+    "exclude_title_words": [],
+    "exclude_functions": [],
+    "exclude_industries": [],
+    "exclude_companies": [],
+    "exclude_description_phrases": [
+     "overnight shifts"
+    ],
+    "exclude_seniority": [],
+    "exclude_employment_types": [],
+    "only_locations": [
+     "Florida"
+    ],
+    "only_remote": false,
+    "min_salary": null
+   }
+  },
+  "elementary-teacher": {
+   "wants": {
+    "roles": [
+     "elementary school teacher",
+     "teaching",
+     "tutoring",
+     "curriculum development"
+    ],
+    "skills": [],
+    "locations": [
+     "California"
+    ],
+    "industries": [],
+    "seniority": [],
+    "remote": null,
+    "min_salary": null,
+    "other": []
+   },
+   "dealbreakers": {
+    "exclude_title_words": [
+     "substitute"
+    ],
+    "exclude_functions": [],
+    "exclude_industries": [],
+    "exclude_companies": [],
+    "exclude_description_phrases": [],
+    "exclude_seniority": [],
+    "exclude_employment_types": [],
+    "only_locations": [],
+    "only_remote": false,
+    "min_salary": null
+   }
+  },
+  "litigation-paralegal": {
+   "wants": {
+    "roles": [
+     "Paralegal"
+    ],
+    "skills": [
+     "litigation"
+    ],
+    "locations": [
+     "Los Angeles, CA",
+     "San Diego, CA"
+    ],
+    "industries": [],
+    "seniority": [],
+    "remote": null,
+    "min_salary": null,
+    "other": []
+   },
+   "dealbreakers": {
+    "exclude_title_words": [
+     "personal injury"
+    ],
+    "exclude_functions": [],
+    "exclude_industries": [],
+    "exclude_companies": [],
+    "exclude_description_phrases": [],
+    "exclude_seniority": [],
+    "exclude_employment_types": [],
+    "only_locations": [],
+    "only_remote": false,
+    "min_salary": null
+   }
+  },
+  "hvac-tech": {
+   "wants": {
+    "roles": [
+     "HVAC technician",
+     "general building maintenance"
+    ],
+    "skills": [
+     "epa certified"
+    ],
+    "locations": [],
+    "industries": [],
+    "seniority": [],
+    "remote": null,
+    "min_salary": null,
+    "other": []
+   },
+   "dealbreakers": {
+    "exclude_title_words": [],
+    "exclude_functions": [],
+    "exclude_industries": [],
+    "exclude_companies": [],
+    "exclude_description_phrases": [
+     "on-call weekends"
+    ],
+    "exclude_seniority": [],
+    "exclude_employment_types": [
+     "Part-time",
+     "Contract",
+     "Temporary",
+     "Internship",
+     "Volunteer",
+     "Other"
+    ],
+    "only_locations": [
+     "Pennsylvania",
+     "New Jersey"
+    ],
+    "only_remote": false,
+    "min_salary": null
+   }
+  },
+  "it-project-manager": {
+   "wants": {
+    "roles": [
+     "project manager"
+    ],
+    "skills": [
+     "pmp",
+     "agile",
+     "scrum"
+    ],
+    "locations": [
+     "Atlanta, GA"
+    ],
+    "industries": [
+     "IT"
+    ],
+    "seniority": [
+     "mid_senior"
+    ],
+    "remote": true,
+    "min_salary": 120000,
+    "other": []
+   },
+   "dealbreakers": {
+    "exclude_title_words": [],
+    "exclude_functions": [],
+    "exclude_industries": [
+     "construction"
+    ],
+    "exclude_companies": [],
+    "exclude_description_phrases": [],
+    "exclude_seniority": [],
+    "exclude_employment_types": [],
+    "only_locations": [],
+    "only_remote": false,
+    "min_salary": null
+   }
+  },
+  "ux-designer": {
+   "wants": {
+    "roles": [
+     "Product designer",
+     "UX designer"
+    ],
+    "skills": [
+     "figma"
+    ],
+    "locations": [
+     "Seattle, WA",
+     "New York, NY"
+    ],
+    "industries": [
+     "Tech"
+    ],
+    "seniority": [],
+    "remote": true,
+    "min_salary": null,
+    "other": []
+   },
+   "dealbreakers": {
+    "exclude_title_words": [],
+    "exclude_functions": [],
+    "exclude_industries": [
+     "Agency"
+    ],
+    "exclude_companies": [],
+    "exclude_description_phrases": [],
+    "exclude_seniority": [],
+    "exclude_employment_types": [
+     "Contract"
+    ],
+    "only_locations": [],
+    "only_remote": false,
+    "min_salary": null
+   }
+  },
+  "saas-account-exec": {
+   "wants": {
+    "roles": [
+     "Account Executive",
+     "sales role"
+    ],
+    "skills": [
+     "saas"
+    ],
+    "locations": [],
+    "industries": [],
+    "seniority": [],
+    "remote": true,
+    "min_salary": 100000,
+    "other": []
+   },
+   "dealbreakers": {
+    "exclude_title_words": [
+     "retail"
+    ],
+    "exclude_functions": [],
+    "exclude_industries": [],
+    "exclude_companies": [],
+    "exclude_description_phrases": [],
+    "exclude_seniority": [],
+    "exclude_employment_types": [],
+    "only_locations": [],
+    "only_remote": false,
+    "min_salary": null
+   }
+  }
+ }
+}

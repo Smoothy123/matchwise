@@ -1,0 +1,327 @@
+{
+ "generated_at": "2026-11-24T12:50:36+00:00",
+ "note": "15 personas, 588 labelled postings (31 good matches), labelled by: claude-opus-5-5. Database: 5000 active jobs after refresh run 4. Brackets: 95% bootstrap interval over personas.",
+ "per_version": {
+  "vector only": {
+   "backend-dev": {
+    "P@5": 0.0,
+    "R@20": 0.0,
+    "nDCG@10": 0.08083227384484634,
+    "violations@10": 0.8,
+    "judged@10": 1.0
+   },
+   "cdl-driver": {
+    "P@5": 0.0,
+    "R@20": 0.5,
+    "nDCG@10": 0.0,
+    "violations@10": 1.0,
+    "judged@10": 1.0
+   },
+   "data-analyst": {
+    "P@5": 0.0,
+    "R@20": 0.0,
+    "nDCG@10": 0.37242195272496226,
+    "violations@10": 0.4,
+    "judged@10": 1.0
+   },
+   "digital-marketer": {
+    "P@5": 0.2,
+    "R@20": 1.0,
+    "nDCG@10": 0.516822968831198,
+    "violations@10": 0.2,
+    "judged@10": 1.0
+   },
+   "elementary-teacher": {
+    "P@5": 0.0,
+    "R@20": null,
+    "nDCG@10": 0.8630152897016883,
+    "violations@10": 0.1,
+    "judged@10": 1.0
+   },
+   "hr-recruiter": {
+    "P@5": 0.0,
+    "R@20": null,
+    "nDCG@10": 0.44793214080335986,
+    "violations@10": 0.1,
+    "judged@10": 1.0
+   },
+   "hvac-tech": {
+    "P@5": 0.2,
+    "R@20": 1.0,
+    "nDCG@10": 0.6575323299081114,
+    "violations@10": 0.1,
+    "judged@10": 1.0
+   },
+   "icu-nurse": {
+    "P@5": 0.0,
+    "R@20": null,
+    "nDCG@10": 0.2032389337527008,
+    "violations@10": 0.7,
+    "judged@10": 1.0
+   },
+   "it-project-manager": {
+    "P@5": 0.2,
+    "R@20": 1.0,
+    "nDCG@10": 0.6207666414916164,
+    "violations@10": 0.1,
+    "judged@10": 1.0
+   },
+   "litigation-paralegal": {
+    "P@5": 0.0,
+    "R@20": null,
+    "nDCG@10": 0.9726647310833559,
+    "violations@10": 0.2,
+    "judged@10": 1.0
+   },
+   "remote-support": {
+    "P@5": 0.0,
+    "R@20": 0.14285714285714285,
+    "nDCG@10": 0.0,
+    "violations@10": 1.0,
+    "judged@10": 1.0
+   },
+   "saas-account-exec": {
+    "P@5": 0.2,
+    "R@20": 0.2,
+    "nDCG@10": 0.4095791342811634,
+    "violations@10": 0.0,
+    "judged@10": 1.0
+   },
+   "senior-accountant": {
+    "P@5": 0.2,
+    "R@20": 0.8,
+    "nDCG@10": 0.3290285126036167,
+    "violations@10": 0.3,
+    "judged@10": 1.0
+   },
+   "store-manager": {
+    "P@5": 0.0,
+    "R@20": 0.0,
+    "nDCG@10": 0.16840259024349513,
+    "violations@10": 0.8,
+    "judged@10": 1.0
+   },
+   "ux-designer": {
+    "P@5": 0.2,
+    "R@20": 1.0,
+    "nDCG@10": 0.6062493248765826,
+    "violations@10": 0.5,
+    "judged@10": 1.0
+   }
+  },
+  "vector + filters": {
+   "backend-dev": {
+    "P@5": 0.0,
+    "R@20": 0.0,
+    "nDCG@10": 0.28976880430413443,
+    "violations@10": 0.3,
+    "judged@10": 1.0
+   },
+   "cdl-driver": {
+    "P@5": 0.4,
+    "R@20": 1.0,
+    "nDCG@10": 0.9200584361905293,
+    "violations@10": 0.0,
+    "judged@10": 1.0
+   },
+   "data-analyst": {
+    "P@5": 0.0,
+    "R@20": 1.0,
+    "nDCG@10": 0.595205289161038,
+    "violations@10": 0.0,
+    "judged@10": 1.0
+   },
+   "digital-marketer": {
+    "P@5": 0.2,
+    "R@20": 0.5,
+    "nDCG@10": 0.37061294442664394,
+    "violations@10": 0.2,
+    "judged@10": 1.0
+   },
+   "elementary-teacher": {
+    "P@5": 0.0,
+    "R@20": null,
+    "nDCG@10": 0.8630152897016883,
+    "violations@10": 0.1,
+    "judged@10": 1.0
+   },
+   "hr-recruiter": {
+    "P@5": 0.0,
+    "R@20": null,
+    "nDCG@10": 0.45449827622138,
+    "violations@10": 0.0,
+    "judged@10": 1.0
+   },
+   "hvac-tech": {
+    "P@5": 0.2,
+    "R@20": 1.0,
+    "nDCG@10": 0.5175857101991203,
+    "violations@10": 0.2,
+    "judged@10": 1.0
+   },
+   "icu-nurse": {
+    "P@5": 0.0,
+    "R@20": null,
+    "nDCG@10": 0.5618918191694954,
+    "violations@10": 0.2,
+    "judged@10": 1.0
+   },
+   "it-project-manager": {
+    "P@5": 0.2,
+    "R@20": 1.0,
+    "nDCG@10": 0.6207666414916164,
+    "violations@10": 0.1,
+    "judged@10": 1.0
+   },
+   "litigation-paralegal": {
+    "P@5": 0.0,
+    "R@20": null,
+    "nDCG@10": 0.9726647310833559,
+    "violations@10": 0.2,
+    "judged@10": 1.0
+   },
+   "remote-support": {
+    "P@5": 0.4,
+    "R@20": 1.0,
+    "nDCG@10": 0.4759295413831851,
+    "violations@10": 0.2,
+    "judged@10": 1.0
+   },
+   "saas-account-exec": {
+    "P@5": 0.2,
+    "R@20": 0.2,
+    "nDCG@10": 0.4095791342811634,
+    "violations@10": 0.0,
+    "judged@10": 1.0
+   },
+   "senior-accountant": {
+    "P@5": 0.2,
+    "R@20": 0.8,
+    "nDCG@10": 0.3290285126036167,
+    "violations@10": 0.3,
+    "judged@10": 1.0
+   },
+   "store-manager": {
+    "P@5": 0.0,
+    "R@20": 1.0,
+    "nDCG@10": 0.38799847260820447,
+    "violations@10": 0.0,
+    "judged@10": 1.0
+   },
+   "ux-designer": {
+    "P@5": 0.2,
+    "R@20": 1.0,
+    "nDCG@10": 0.6646644434768445,
+    "violations@10": 0.2,
+    "judged@10": 1.0
+   }
+  },
+  "vector + filters + re-ranking": {
+   "backend-dev": {
+    "P@5": 0.0,
+    "R@20": 1.0,
+    "nDCG@10": 0.33044943549177797,
+    "violations@10": 0.2,
+    "judged@10": 1.0
+   },
+   "cdl-driver": {
+    "P@5": 0.4,
+    "R@20": 1.0,
+    "nDCG@10": 0.9200584361905293,
+    "violations@10": 0.0,
+    "judged@10": 1.0
+   },
+   "data-analyst": {
+    "P@5": 0.0,
+    "R@20": 0.0,
+    "nDCG@10": 0.6019704921229444,
+    "violations@10": 0.0,
+    "judged@10": 1.0
+   },
+   "digital-marketer": {
+    "P@5": 0.2,
+    "R@20": 0.5,
+    "nDCG@10": 0.40217749113883217,
+    "violations@10": 0.0,
+    "judged@10": 1.0
+   },
+   "elementary-teacher": {
+    "P@5": 0.0,
+    "R@20": null,
+    "nDCG@10": 0.7827392871477702,
+    "violations@10": 0.1,
+    "judged@10": 1.0
+   },
+   "hr-recruiter": {
+    "P@5": 0.0,
+    "R@20": null,
+    "nDCG@10": 0.4932162989129127,
+    "violations@10": 0.0,
+    "judged@10": 1.0
+   },
+   "hvac-tech": {
+    "P@5": 0.2,
+    "R@20": 1.0,
+    "nDCG@10": 0.5175857101991203,
+    "violations@10": 0.2,
+    "judged@10": 1.0
+   },
+   "icu-nurse": {
+    "P@5": 0.0,
+    "R@20": null,
+    "nDCG@10": 0.5734923014668308,
+    "violations@10": 0.2,
+    "judged@10": 1.0
+   },
+   "it-project-manager": {
+    "P@5": 0.4,
+    "R@20": 0.75,
+    "nDCG@10": 0.759953965679147,
+    "violations@10": 0.2,
+    "judged@10": 1.0
+   },
+   "litigation-paralegal": {
+    "P@5": 0.0,
+    "R@20": null,
+    "nDCG@10": 0.8936633189697701,
+    "violations@10": 0.2,
+    "judged@10": 1.0
+   },
+   "remote-support": {
+    "P@5": 0.4,
+    "R@20": 0.8571428571428571,
+    "nDCG@10": 0.4778720631186241,
+    "violations@10": 0.2,
+    "judged@10": 1.0
+   },
+   "saas-account-exec": {
+    "P@5": 0.2,
+    "R@20": 0.2,
+    "nDCG@10": 0.44863890921350064,
+    "violations@10": 0.0,
+    "judged@10": 1.0
+   },
+   "senior-accountant": {
+    "P@5": 0.2,
+    "R@20": 0.8,
+    "nDCG@10": 0.55163158315894,
+    "violations@10": 0.3,
+    "judged@10": 1.0
+   },
+   "store-manager": {
+    "P@5": 0.0,
+    "R@20": 1.0,
+    "nDCG@10": 0.38799847260820447,
+    "violations@10": 0.0,
+    "judged@10": 1.0
+   },
+   "ux-designer": {
+    "P@5": 0.2,
+    "R@20": 1.0,
+    "nDCG@10": 0.8352083229960288,
+    "violations@10": 0.3,
+    "judged@10": 1.0
+   }
+  }
+ }
+}

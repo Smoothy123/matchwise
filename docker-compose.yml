@@ -1,0 +1,48 @@
+# `docker compose up` is the whole setup: Postgres starts, `init` migrates and loads the
+# sample (once) and embeds it, then the API starts. Needs .env and data/raw/ (see README).
+services:
+  db:
+    image: pgvector/pgvector:0.8.6-pg16
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "${DB_PORT:-5433}:5432"   # 5433 on the host so it never clashes with a local Postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  init:
+    build: .
+    env_file: .env
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./:/app
+      - models:/models
+    command: python -m matchwise.bootstrap   # quick no-op once everything is loaded
+
+  app:
+    build: .
+    env_file: .env
+    depends_on:
+      db:
+        condition: service_healthy
+      init:
+        condition: service_completed_successfully
+    ports:
+      - "${APP_PORT:-8000}:8000"
+    volumes:
+      - ./:/app       # live code in development; the image also contains a copy
+      - models:/models  # Hugging Face model cache, so MiniLM downloads once
+    command: uvicorn matchwise.api:app --host 0.0.0.0 --port 8000 --reload
+
+volumes:
+  pgdata:
+  models:
