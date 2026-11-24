@@ -60,3 +60,10 @@ const DATE = new Intl.DateTimeFormat(LOCALE, {
 export function formatDate(iso: string | null): string | null {
   return iso ? DATE.format(new Date(iso)) : null;
 }
+
+const DATE_TIME = new Intl.DateTimeFormat(LOCALE, { dateStyle: 'medium', timeStyle: 'short' });
+
+/** When the person did something: in their own time zone (unlike posting dates, which are UTC). */
+export function formatDateTime(iso: string): string {
+  return DATE_TIME.format(new Date(iso));
+}

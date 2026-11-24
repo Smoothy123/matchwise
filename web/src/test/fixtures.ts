@@ -142,3 +142,21 @@ export const chatRows = {
     created_at: AT,
   }),
 };
+
+// ---------- search ----------
+
+import type { SearchResult } from '../api/client';
+
+export function makeResults(query: string, count: number): SearchResult[] {
+  return Array.from({ length: count }, (_, i) => ({
+    id: 1000 + i,
+    title: `${query} job ${String(i + 1)}`,
+    company: 'Acme',
+    location: 'Austin, TX',
+    remote: i % 2 === 0,
+    seniority: 'mid_senior',
+    skills: ['python', 'sql'],
+    snippet: 'A posting about this role',
+    similarity: 0.6 - i * 0.01,
+  }));
+}

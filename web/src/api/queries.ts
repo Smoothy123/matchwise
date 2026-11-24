@@ -2,15 +2,17 @@
  * TanStack Query setup: the cache policy, the query keys, and one hook per kind of server data.
  * Components never call fetch or the client directly for reads; they use these hooks.
  */
-import { QueryClient, useQuery } from '@tanstack/react-query';
+import { keepPreviousData, QueryClient, useQuery } from '@tanstack/react-query';
 
 import {
   ApiError,
   getChat,
+  getPreferenceHistory,
   getHealth,
   getJob,
   getMatches,
   getProfile,
+  searchJobs,
   type MatchQuery,
 } from './client';
 
@@ -54,6 +56,7 @@ export const queryKeys = {
   job: (jobId: number) => ['job', jobId] as const,
   chat: (profileId: string) => ['chat', profileId] as const,
   preferenceHistory: (profileId: string) => ['preference-history', profileId] as const,
+  search: (query: string, limit: number) => ['search', query, limit] as const,
 };
 
 export const HEALTH_POLL_MS = 30_000;
@@ -103,5 +106,26 @@ export function useChatHistory(profileId: string) {
   return useQuery({
     queryKey: queryKeys.chat(profileId),
     queryFn: ({ signal }) => getChat(profileId, signal),
+  });
+}
+
+/** Every message that changed the preferences, oldest first; empty before the first one. */
+export function usePreferenceHistory(profileId: string) {
+  return useQuery({
+    queryKey: queryKeys.preferenceHistory(profileId),
+    queryFn: ({ signal }) => getPreferenceHistory(profileId, signal),
+  });
+}
+
+/** Jobs by meaning. `query` is already debounced and trimmed; under 2 characters nothing runs. */
+export function useSearch(query: string, limit: number) {
+  return useQuery({
+    queryKey: queryKeys.search(query, limit),
+    queryFn: ({ signal }) => searchJobs({ q: query, limit }, signal),
+    enabled: query.length >= 2,
+    // Keep showing the previous results while the next ones load, instead of flashing a
+    // skeleton on every pause in typing.
+    placeholderData: keepPreviousData,
+    staleTime: 5 * 60_000, // the postings change once a day
   });
 }

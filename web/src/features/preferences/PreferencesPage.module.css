@@ -1,0 +1,151 @@
+.body {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.loading {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.current {
+  display: grid;
+  gap: var(--space-4);
+}
+
+@media (min-width: 48rem) {
+  .current {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+}
+
+.card {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.card h2,
+.timeline h2 {
+  font-size: var(--text-lg);
+}
+
+.hint,
+.none,
+.meta {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.fields {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.field dt {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+
+.values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-2);
+  margin-block-start: var(--space-1);
+  padding: 0;
+  list-style: none;
+}
+
+.values li {
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-muted);
+}
+
+.timeline {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.messages {
+  display: grid;
+  gap: var(--space-4);
+  padding: 0;
+  list-style: none;
+}
+
+/* A vertical line joins the entries, oldest at the top. */
+.entry {
+  display: grid;
+  gap: var(--space-2);
+  padding-inline-start: var(--space-4);
+  border-inline-start: 2px solid var(--color-border);
+}
+
+.entryHead {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.version {
+  color: var(--color-text);
+  font-weight: var(--weight-bold);
+}
+
+.said {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-accent-soft);
+  overflow-wrap: anywhere;
+}
+
+.changes {
+  display: grid;
+  gap: var(--space-1);
+  padding: 0;
+  list-style: none;
+}
+
+.changes li {
+  display: grid;
+  grid-template-columns: 1.25rem 1fr;
+  gap: var(--space-2);
+}
+
+.mark {
+  font-weight: var(--weight-bold);
+  text-align: center;
+}
+
+.add .mark {
+  color: var(--color-success);
+}
+
+.remove .mark,
+.clear .mark {
+  color: var(--color-danger);
+}
+
+.set .mark {
+  color: var(--color-accent);
+}
+
+.evidence {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.note {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-muted);
+  font-size: var(--text-sm);
+}
