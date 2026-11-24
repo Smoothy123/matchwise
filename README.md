@@ -19,7 +19,10 @@ AGENT: ... matches your preference for a registered nurse role in Texas, and it'
 ```
 
 Python 3.11 · FastAPI · Postgres 16 + pgvector (HNSW) · sentence-transformers (MiniLM, local) ·
-Gemini (free tier) through one small client · Docker Compose · pytest
+Gemini (free tier) through one small client · Docker Compose · pytest ·
+**web frontend:** React 18 · TypeScript · Vite · TanStack Query · Vitest · Cypress ([below](#web-frontend))
+
+![The Matches page: ranked jobs with a score breakdown, the reason each one fits, and its caveats](docs/screenshots/matches.webp)
 
 ## How it works
 
@@ -93,10 +96,123 @@ curl -s "localhost:8000/profiles/me/matches?limit=5"
 | `GET /profiles/{id}` · `/messages` | current preferences · how each message changed them |
 | `GET /profiles/{id}/matches` | top matches with score breakdown, reasons and `limit_check` status (default `mode=checked` with an LLM; also `full`, `vector_filters`, `vector`; `explain=false`) |
 | `POST /profiles/{id}/chat` · `GET` · `DELETE` | talk to the agent · the conversation with every tool call · forget it |
+| `GET /jobs/{id}` | one posting with its full description |
 | `GET /health` | counts and whether the LLM is configured |
 
 Daily refresh: `docker compose run --rm app python -m matchwise.refresh day --seed 1`
 simulates and applies a day of churn.
+
+## Web frontend
+
+A React app in [`web/`](web) for everything above: talk to the agent, see your matches and why they fit,
+compare the four ranking versions, follow how each message changed your preferences, search, and read the evals.
+
+| Chat | Details | Evals |
+|---|---|---|
+| ![Chat with the agent: the reply, the tools it used, and a flag where a save failed](docs/screenshots/chat.webp) | ![A job's details: why it fits, the hard-limit check, the score breakdown and the posting](docs/screenshots/details.webp) | ![The Evals page: one chart per metric across the four ranking versions](docs/screenshots/evals.webp) |
+| **Ranking versions** | **Phone, dark mode** | |
+| ![Matches in the re-ranking version: badges show how each job moved, and a list shows what the step left out](docs/screenshots/versions.webp) | ![The Matches page on a phone in dark mode](docs/screenshots/mobile-dark.webp) | |
+
+Screenshots from the production build against the real API (`docs/screenshots/`).
+
+**Public demo.** A free host can't run the API well (it needs about 465 MB of RAM, and the free LLM tier is shared
+by every visitor through an API with no authentication), so the public link is a **demo build**: it replays
+responses recorded from the real API, in the browser, and says so on every page. How it's deployed, the free
+options and their limits: [docs/web-deployment.md](docs/web-deployment.md).
+
+### Run it locally
+
+Start the API first (`docker compose up`, above), then, with Node 22 (`web/.nvmrc`):
+
+```bash
+cd web && nvm use && npm ci && npm run dev
+```
+
+Open http://localhost:5173. The only setting is `VITE_API_URL` (default `http://localhost:8000`; see
+`web/.env.example`); the API allows the dev and preview origins through `CORS_ORIGINS`.
+
+| Command (in `web/`) | What it does |
+|---|---|
+| `npm run check` | formatting, lint, types, unit and component tests with coverage |
+| `npm run e2e` | Cypress on the production build, replaying responses recorded from the API |
+| `npm run e2e:live` | the same flow against the running API and its LLM (slow, uses quota) |
+| `npm run build:demo` · `npm run e2e:demo` | the demo build, and its test (no backend at all) |
+| `npm run lighthouse -- <label>` | Lighthouse on the production build (`npm run preview` first) |
+| `npm run api:sync` | regenerates the TypeScript types from the running API's OpenAPI schema |
+
+### How it's built
+
+```mermaid
+flowchart LR
+    pages["Pages: features/chat, matches, preferences, search, evals<br/>(each its own lazy-loaded chunk)"] --> hooks["api/queries.ts<br/>TanStack Query: cache, retries, keys"]
+    hooks --> client["api/client.ts: the only fetch<br/>timeouts, cancellation, ApiError"]
+    client -->|HTTP| api[(FastAPI)]
+    client -.->|demo build only| demo["demo/demoApi.ts<br/>recorded responses"]
+    schema["api/schema.gen.ts<br/>generated from /openapi.json"] -.->|types| client
+    results["evals/results/*.json, *.md"] -.->|bundled at build time| pages
+```
+
+- **Server data** lives in TanStack Query's cache, keyed so that invalidation can't miss: matches are keyed by the
+  profile's version, so a preference change can never show an old ranking.
+- **UI state that should survive a reload or be shareable lives in the URL:** sort and filters, the ranking
+  version, the open job (`?job=`), the search text.
+- **Styling** is CSS Modules on design tokens (CSS custom properties, light and dark), with no UI kit.
+- **Folders:** `api/` (client, generated types, query hooks), `app/` (layout, routes, health, errors),
+  `features/<page>/`, `ui/` (shared components), `lib/` (formatting, small hooks), `data/` (ranking versions and
+  eval results), `demo/` (recordings), `styles/` (tokens).
+
+### Quality
+
+Lighthouse on the production build, mobile settings, median of 3 runs
+([details and before/after](web/docs/accessibility-performance.md)):
+
+| Page | Performance | Accessibility | Best practices | SEO | LCP | CLS |
+|---|---|---|---|---|---|---|
+| Chat | 100 | 100 | 100 | 100 | 1.37 s | 0 |
+| Matches | 100 | 100 | 100 | 100 | 1.45 s | 0 |
+| Preferences | 100 | 100 | 100 | 100 | 1.38 s | 0 |
+| Search | 100 | 100 | 100 | 100 | 1.39 s | 0 |
+| Evals | 100 | 100 | 100 | 100 | 1.22 s | 0 |
+
+- **Accessibility beyond Lighthouse:** axe-core finds no violations in real Chrome on seven views, in light and dark
+  mode; every page works by keyboard, at 320 px wide, at 200% text and in forced-colours (high-contrast) mode.
+- **Tests:** 218 unit and component tests (Vitest and Testing Library, with axe on every page). Coverage: 96%
+  of statements, 87% of branches, 96% of functions, 98% of lines, with thresholds that fail the build if it
+  drops.
+- **End to end (Cypress):** the main flow (a new person describes what they want in the chat, and their matches
+  appear) runs on responses recorded from the API in CI, against the live stack on request, and on the demo
+  build, which must work with no backend.
+- **CI:** [.github/workflows/web.yml](.github/workflows/web.yml) runs all of it on every push that touches `web/`.
+
+### Key decisions (frontend)
+
+- **Types generated from the API's OpenAPI schema,** not written by hand. A backend test compares the live schema
+  with the copy the types came from, so the frontend can't drift from the API unnoticed. The backend was changed
+  where the frontend needed it: typed responses and errors, `GET /jobs/{id}`, CORS from an environment variable,
+  gzip, and an agent that can no longer say "saved" when the save failed (each in its own commit, with tests).
+- **TanStack Query instead of fetching in `useEffect`:** caching, deduplication, cancellation and retries in one
+  place. Retries only where they can help (network errors, a busy LLM), never for chat messages, which would be
+  saved twice.
+- **Matches load in two steps:** the ranked list (about 0.1 s) shows at once and the reasons (8–12 s the first
+  time) fill in after, with their space reserved, so nothing jumps.
+- **LLM output is untrusted input:** replies are rendered by a small parser into elements, never as HTML; and
+  where the agent's words and its tool results disagree, the UI shows the tool results.
+- **Native HTML first:** `<dialog>` for the drawer and confirmations (focus trap and Escape built in), `<details>`
+  for the tools-used line, real radio buttons for the ranking versions, `role="log"` for the conversation.
+- **Performance from measurement:** route-level code splitting, a long-lived vendor chunk, layout shifts traced to
+  their elements and removed, and one `React.memo`, where the profiler showed typing re-rendering every past chat
+  turn (11.3 ms → 0.28 ms per keystroke).
+- **The demo is honest by construction:** recordings come from the real API, every page says they're recordings,
+  and the bundler drops the demo code from normal builds.
+
+### Security, and what "no authentication" means for a demo
+
+The frontend holds no secrets: its only settings are the API's address and the demo switch, and anything in a
+`VITE_` variable is public. The API has **no authentication yet** ([docs/deployment.md](docs/deployment.md)): a
+profile id is the only key, and anyone who can reach the API can call it and spend its LLM quota. CORS doesn't
+change that; it only stops other websites from calling it from a visitor's browser. That's why the public link is
+the demo build, and why a live backend should stay private until it has sign-in and rate limits. The hosting
+config adds a Content Security Policy and other security headers ([docs/web-deployment.md](docs/web-deployment.md)).
 
 ## Evals
 
@@ -347,8 +463,9 @@ matchwise/   ingest · embeddings · search · preferences · filters · places 
              reasons · refresh · agent · llm · api · db · bootstrap
 migrations/  numbered SQL files, applied at startup under an advisory lock
 evals/       personas, frozen preferences, pool, labels, metrics, ranking runner, judge
-docs/        scaling.md · deployment.md
-tests/       206 tests (pytest); 4 live LLM tests behind `-m live`
+docs/        scaling.md · deployment.md · web-deployment.md · screenshots/
+tests/       230 tests (pytest); 4 live LLM tests behind `-m live`
+web/         the React frontend (see "Web frontend"): src/, cypress/, scripts/, docs/
 ```
 
 Run the tests:
@@ -374,7 +491,8 @@ docker compose run --rm app pytest -m live
 - **LightGBM re-ranker**, trained on the labels with leave-one-persona-out validation. With 15
   personas it may not beat the hand-set weights, and that's worth reporting either way.
 - Metro areas without a state ("Greater Houston") don't match a state-only place.
-- No authentication yet; see [docs/deployment.md](docs/deployment.md).
+- No authentication yet; see [docs/deployment.md](docs/deployment.md). It's why the public web link is a
+  recorded demo ([docs/web-deployment.md](docs/web-deployment.md)).
 - On the free tier a chat turn takes 20–30 s, almost all of it waiting on our own rate limit.
 
 ## Data and licence
