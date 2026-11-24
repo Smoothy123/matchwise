@@ -74,3 +74,26 @@ def test_search_rejects_bad_input(client, params):
 
 def test_fake_embedder_is_deterministic():
     np.testing.assert_array_equal(fake_embed(["a", "b"]), fake_embed(["a", "b"]))
+
+
+def test_job_endpoint_returns_the_whole_posting(three_jobs, client):
+    job_id = three_jobs.execute("SELECT id FROM jobs WHERE source_id = 'a'").fetchone()["id"]
+    response = client.get(f"/jobs/{job_id}")
+    assert response.status_code == 200
+    body = response.json()
+    assert body["title"] == "Along 0" and body["is_active"] is True
+    assert body["description"] == three_jobs.execute(
+        "SELECT description FROM jobs WHERE id = %s", (job_id,)).fetchone()["description"]
+
+
+def test_a_removed_job_is_still_found_but_marked(three_jobs, client):
+    job_id = three_jobs.execute("UPDATE jobs SET is_active = false WHERE source_id = 'b' RETURNING id").fetchone()["id"]
+    assert client.get(f"/jobs/{job_id}").json()["is_active"] is False
+
+
+@pytest.mark.parametrize("job_id, status", [(999999, 404), (0, 422), ("abc", 422), (2**53, 422)])
+def test_unknown_or_invalid_job_ids(three_jobs, client, job_id, status):
+    response = client.get(f"/jobs/{job_id}")
+    assert response.status_code == status
+    if status == 404:
+        assert response.json() == {"detail": "No job posting 999999."}

@@ -109,7 +109,7 @@ def query_vector(wants: Wants, embed: Embedder) -> np.ndarray:
 
 CANDIDATES_SQL = """
 SELECT id, source_id, title, company, location, remote, seniority, employment_type, skills,
-       salary_min, salary_max, posted_at,
+       salary_min, salary_max, salary_currency, posted_at,
        1 - (embedding <=> %(query)s) AS similarity
 FROM jobs
 WHERE {where}

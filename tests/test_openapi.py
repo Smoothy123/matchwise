@@ -36,6 +36,7 @@ def test_error_responses_are_declared():
         ("/profiles/{profile_id}/messages", "post"): {"409", "502", "503"},
         ("/profiles/{profile_id}/matches", "get"): {"404", "503"},
         ("/profiles/{profile_id}/chat", "post"): {"503"},
+        ("/jobs/{job_id}", "get"): {"404"},
     }
     for (path, method), codes in expected.items():
         for code in codes:

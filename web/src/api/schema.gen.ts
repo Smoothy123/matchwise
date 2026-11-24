@@ -38,6 +38,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/jobs/{job_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Job Detail
+         * @description One posting with its full description, for a detail view or a "[#1234]" reference in chat.
+         */
+        get: operations["job_detail_jobs__job_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/profiles/{profile_id}/messages": {
         parameters: {
             query?: never;
@@ -284,6 +304,41 @@ export interface components {
              */
             created_at: string;
         };
+        /** JobOut */
+        JobOut: {
+            /** Id */
+            id: number;
+            /** Title */
+            title: string;
+            /** Company */
+            company: string | null;
+            /** Location */
+            location: string | null;
+            /** Remote */
+            remote: boolean;
+            /** Seniority */
+            seniority: string;
+            /** Employment Type */
+            employment_type: string | null;
+            /** Functions */
+            functions: string[];
+            /** Industries */
+            industries: string[];
+            /** Skills */
+            skills: string[];
+            /** Salary Min */
+            salary_min: number | null;
+            /** Salary Max */
+            salary_max: number | null;
+            /** Salary Currency */
+            salary_currency: string | null;
+            /** Posted At */
+            posted_at: string | null;
+            /** Description */
+            description: string;
+            /** Is Active */
+            is_active: boolean;
+        };
         /** MatchOut */
         MatchOut: {
             /** Job Id */
@@ -304,6 +359,8 @@ export interface components {
             salary_min: number | null;
             /** Salary Max */
             salary_max: number | null;
+            /** Salary Currency */
+            salary_currency: string | null;
             /** Posted At */
             posted_at: string | null;
             /** Skills */
@@ -550,6 +607,46 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["SearchResult"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    job_detail_jobs__job_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                job_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JobOut"];
+                };
+            };
+            /** @description No posting with this id */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorOut"];
                 };
             };
             /** @description Validation Error */

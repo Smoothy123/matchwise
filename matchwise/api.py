@@ -16,7 +16,7 @@ from matchwise import agent, db, embeddings, llm, preferences, ranking, reasons
 from matchwise.config import cors_origins, get_settings, setup_logging
 from matchwise.preferences import Operation, Preferences
 from matchwise.ranking import Mode
-from matchwise.search import search_jobs
+from matchwise.search import get_job, search_jobs
 
 log = logging.getLogger(__name__)
 
@@ -153,6 +153,25 @@ class SearchResult(BaseModel):
     similarity: float
 
 
+class JobOut(BaseModel):
+    id: int
+    title: str
+    company: str | None
+    location: str | None
+    remote: bool
+    seniority: str
+    employment_type: str | None
+    functions: list[str]
+    industries: list[str]
+    skills: list[str]
+    salary_min: int | None   # per year
+    salary_max: int | None
+    salary_currency: str | None  # ISO 4217, e.g. "USD"
+    posted_at: datetime | None
+    description: str
+    is_active: bool          # false once the posting has left the daily feed
+
+
 class MessageIn(BaseModel):
     message: Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=2000)]
 
@@ -187,6 +206,7 @@ class MatchOut(BaseModel):
     employment_type: str | None
     salary_min: int | None
     salary_max: int | None
+    salary_currency: str | None  # ISO 4217, e.g. "USD"; None when no pay is listed
     posted_at: datetime | None
     skills: list[str]
     matched_skills: list[str]
@@ -267,6 +287,19 @@ def search(
 ) -> list[SearchResult]:
     query_vector = embed([q])[0]
     return search_jobs(conn, query_vector, limit)
+
+
+# The cap is the largest whole number JavaScript holds exactly; past it a browser would round the id.
+MAX_JS_SAFE_INT = 2**53 - 1
+
+
+@app.get("/jobs/{job_id}", responses={404: {"model": ErrorOut, "description": "No posting with this id"}})
+def job_detail(job_id: Annotated[int, Path(ge=1, le=MAX_JS_SAFE_INT)], conn: Conn) -> JobOut:
+    """One posting with its full description, for a detail view or a "[#1234]" reference in chat."""
+    job = get_job(conn, job_id)
+    if job is None:
+        raise HTTPException(404, f"No job posting {job_id}.")
+    return job
 
 
 @app.post("/profiles/{profile_id}/messages", responses=errors(409, 502, 503))

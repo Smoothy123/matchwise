@@ -1,4 +1,4 @@
-"""Semantic search: the active postings closest in meaning to a query vector."""
+"""Reading postings: semantic search over active ones, and one posting by id."""
 
 import numpy as np
 import psycopg
@@ -11,6 +11,14 @@ FROM jobs
 WHERE is_active AND embedding IS NOT NULL
 ORDER BY embedding <=> %(query)s
 LIMIT %(limit)s
+"""
+
+
+JOB_SQL = """
+SELECT id, title, company, location, remote, seniority, employment_type, functions, industries,
+       skills, salary_min, salary_max, salary_currency, posted_at, description, is_active
+FROM jobs
+WHERE id = %s
 """
 
 
@@ -30,3 +38,9 @@ def search_jobs(conn: psycopg.Connection, query_vector: np.ndarray, limit: int =
     with conn.transaction():  # the settings in tune_hnsw last only for this transaction
         tune_hnsw(conn, limit)
         return conn.execute(SEARCH_SQL, {"query": query_vector, "limit": limit}).fetchall()
+
+
+def get_job(conn: psycopg.Connection, job_id: int) -> dict | None:
+    """One posting with its full description. Removed postings are returned too (is_active is
+    false), so a link to one from an old chat or match can say it's gone instead of failing."""
+    return conn.execute(JOB_SQL, (job_id,)).fetchone()
