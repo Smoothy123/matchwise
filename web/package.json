@@ -18,7 +18,8 @@
     "test:watch": "vitest",
     "check": "npm run format:check && npm run lint && npm run typecheck && npm run test",
     "api:sync": "node scripts/fetch-openapi.mjs && npm run api:types",
-    "api:types": "openapi-typescript openapi.json --output src/api/schema.gen.ts"
+    "api:types": "openapi-typescript openapi.json --output src/api/schema.gen.ts",
+    "lighthouse": "node scripts/lighthouse.mjs"
   },
   "dependencies": {
     "@tanstack/react-query": "5.108.4",

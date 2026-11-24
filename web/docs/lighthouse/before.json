@@ -1,0 +1,91 @@
+{
+  "label": "before",
+  "measuredAt": "2026-11-24T17:48:59.891Z",
+  "lighthouse": "lighthouse@12.8.2",
+  "runs": 3,
+  "results": {
+    "/": {
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 91,
+      "fcpMs": 1053,
+      "lcpMs": 1533,
+      "tbtMs": 0,
+      "cls": 0,
+      "failing": [
+        "render-blocking-resources",
+        "uses-text-compression",
+        "robots-txt",
+        "network-dependency-tree-insight",
+        "render-blocking-insight"
+      ]
+    },
+    "/matches": {
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 91,
+      "fcpMs": 1064,
+      "lcpMs": 1770,
+      "tbtMs": 0,
+      "cls": 0.023,
+      "failing": [
+        "render-blocking-resources",
+        "uses-text-compression",
+        "robots-txt",
+        "network-dependency-tree-insight",
+        "render-blocking-insight"
+      ]
+    },
+    "/preferences": {
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 91,
+      "fcpMs": 1053,
+      "lcpMs": 1391,
+      "tbtMs": 0,
+      "cls": 0.059,
+      "failing": [
+        "render-blocking-resources",
+        "robots-txt",
+        "network-dependency-tree-insight",
+        "render-blocking-insight"
+      ]
+    },
+    "/search?q=icu%20nurse%20texas": {
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 91,
+      "fcpMs": 1063,
+      "lcpMs": 1549,
+      "tbtMs": 0,
+      "cls": 0.007,
+      "failing": [
+        "render-blocking-resources",
+        "uses-text-compression",
+        "robots-txt",
+        "network-dependency-tree-insight",
+        "render-blocking-insight"
+      ]
+    },
+    "/evals": {
+      "performance": 99,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 91,
+      "fcpMs": 1063,
+      "lcpMs": 1234,
+      "tbtMs": 0,
+      "cls": 0.069,
+      "failing": [
+        "render-blocking-resources",
+        "robots-txt",
+        "network-dependency-tree-insight",
+        "render-blocking-insight"
+      ]
+    }
+  }
+}
