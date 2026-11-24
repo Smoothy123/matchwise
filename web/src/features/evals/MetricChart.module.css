@@ -122,3 +122,34 @@
 .tipName {
   color: var(--color-text);
 }
+
+/* Forced colours: draw the marks in system colours, so they keep contrast with the background. */
+@media (forced-colors: active) {
+  .bar {
+    fill: CanvasText;
+  }
+
+  .whisker line,
+  .axis line,
+  .axis path {
+    stroke: CanvasText;
+  }
+
+  .halo line {
+    stroke: Canvas;
+  }
+
+  .grid {
+    stroke: GrayText;
+  }
+
+  .label,
+  .value,
+  .tick text {
+    fill: CanvasText;
+  }
+
+  .active .bar {
+    fill: Highlight;
+  }
+}

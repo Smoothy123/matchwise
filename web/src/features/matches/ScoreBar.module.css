@@ -71,3 +71,18 @@
   height: 0.75rem;
   border-radius: 3px;
 }
+
+/* Forced colours (Windows High Contrast) would repaint every part in one system colour, which
+   erases the breakdown. The parts keep their colours, and the empty rest gets an outline. */
+@media (forced-colors: active) {
+  .part,
+  .swatch {
+    forced-color-adjust: none;
+  }
+
+  .rest {
+    background: Canvas;
+    outline: 1px solid CanvasText;
+    outline-offset: -1px;
+  }
+}

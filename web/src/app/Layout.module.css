@@ -93,6 +93,10 @@
 
 .main {
   width: 100%;
+  /* At least a screen tall, so the footer starts below the fold: otherwise it sits on the first
+     screen and jumps down when the page's content arrives, a layout shift Lighthouse measured
+     (CLS up to 0.07). Below the fold, its move is never seen. */
+  min-height: 100dvh;
   max-width: var(--content-max);
   margin-inline: auto;
   padding: var(--space-5) var(--space-4) var(--space-7);
@@ -106,6 +110,14 @@
   max-width: var(--content-max);
   margin-inline: auto;
   padding: var(--space-3) var(--space-4);
+}
+
+/* Zoomed in (or a short screen), a sticky header would cover a large part of the page: let it
+   scroll away instead. 30rem tall is about 480px at normal size, 240px at 200% zoom. */
+@media (max-height: 30rem) {
+  .header {
+    position: static;
+  }
 }
 
 @media (min-width: 48rem) {

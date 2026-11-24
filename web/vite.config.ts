@@ -14,6 +14,24 @@ export default defineConfig({
     fs: { allow: [searchForWorkspaceRoot(process.cwd()), '../evals/results'] },
   },
   preview: { port: 4173, strictPort: true },
+  build: {
+    rolldownOptions: {
+      output: {
+        codeSplitting: {
+          groups: [
+            {
+              // The libraries every page needs, in their own chunk: its hash only changes when
+              // they're upgraded, so browsers keep it cached across deploys of the app code.
+              // Only these: a catch-all node_modules group would pull visx (used by the Evals
+              // page alone) into a chunk that every page loads.
+              name: 'vendor',
+              test: /[\\/]node_modules[\\/](react|react-dom|scheduler|react-router|@tanstack)[\\/]/,
+            },
+          ],
+        },
+      },
+    },
+  },
   test: {
     environment: 'jsdom',
     setupFiles: ['./src/test/setup.ts'],

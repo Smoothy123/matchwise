@@ -1,0 +1,88 @@
+{
+  "label": "after",
+  "measuredAt": "2026-11-24T18:11:51.466Z",
+  "lighthouse": "lighthouse@12.8.2",
+  "runs": 3,
+  "results": {
+    "/": {
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "fcpMs": 1053,
+      "lcpMs": 1372,
+      "tbtMs": 0,
+      "cls": 0,
+      "shifts": [],
+      "failing": [
+        "render-blocking-resources",
+        "network-dependency-tree-insight",
+        "render-blocking-insight"
+      ]
+    },
+    "/matches": {
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "fcpMs": 1059,
+      "lcpMs": 1451,
+      "tbtMs": 0,
+      "cls": 0,
+      "shifts": [],
+      "failing": [
+        "render-blocking-resources",
+        "network-dependency-tree-insight",
+        "render-blocking-insight"
+      ]
+    },
+    "/preferences": {
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "fcpMs": 1052,
+      "lcpMs": 1378,
+      "tbtMs": 0,
+      "cls": 0,
+      "shifts": [],
+      "failing": [
+        "render-blocking-resources",
+        "network-dependency-tree-insight",
+        "render-blocking-insight"
+      ]
+    },
+    "/search?q=icu%20nurse%20texas": {
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "fcpMs": 1060,
+      "lcpMs": 1391,
+      "tbtMs": 0,
+      "cls": 0,
+      "shifts": [],
+      "failing": [
+        "render-blocking-resources",
+        "network-dependency-tree-insight",
+        "render-blocking-insight"
+      ]
+    },
+    "/evals": {
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "fcpMs": 1059,
+      "lcpMs": 1216,
+      "tbtMs": 0,
+      "cls": 0,
+      "shifts": [],
+      "failing": [
+        "render-blocking-resources",
+        "network-dependency-tree-insight",
+        "render-blocking-insight"
+      ]
+    }
+  }
+}

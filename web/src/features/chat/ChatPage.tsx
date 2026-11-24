@@ -37,7 +37,7 @@ export default function ChatPage() {
   const contentKey = turns
     ? `${String(turns.length)}:${pending ? 'p' : ''}:${failed ? 'f' : ''}`
     : undefined;
-  const { endRef, hasUnseen, jumpToLatest } = useStickToBottom(contentKey);
+  const { endRef, positioned, hasUnseen, jumpToLatest } = useStickToBottom(contentKey);
 
   const llmOff = health.data?.llm_configured === false;
   let blockedReason: string | null = null;
@@ -59,17 +59,18 @@ export default function ChatPage() {
         title="Chat"
         description="Tell Matchwise what you want in your next job, and what you'd never take. It remembers, and finds roles that fit."
         actions={
-          (turns?.length ?? 0) > 0 ? (
-            <Button
-              size="sm"
-              onClick={() => {
-                setConfirmingClear(true);
-              }}
-              disabled={pending !== null || clear.isPending}
-            >
-              Clear conversation
-            </Button>
-          ) : null
+          // Always there, disabled while there's nothing to clear: appearing only once the
+          // history loaded, it pushed the conversation down (it wraps onto its own line on a
+          // phone), a layout shift.
+          <Button
+            size="sm"
+            onClick={() => {
+              setConfirmingClear(true);
+            }}
+            disabled={(turns?.length ?? 0) === 0 || pending !== null || clear.isPending}
+          >
+            Clear conversation
+          </Button>
         }
       />
 
@@ -95,7 +96,8 @@ export default function ChatPage() {
             retrying={history.isFetching}
           />
         ) : (
-          <>
+          // Hidden (but laid out) until scrolled to the latest message: see useStickToBottom.
+          <div style={positioned ? undefined : { visibility: 'hidden' }}>
             {!hasConversation ? (
               <div className={styles.welcome}>
                 <p>Start with what you&apos;re looking for. For example:</p>
@@ -143,7 +145,7 @@ export default function ChatPage() {
                 ) : null}
               </ol>
             </div>
-          </>
+          </div>
         )}
         <div ref={endRef} className={styles.end} />
       </section>

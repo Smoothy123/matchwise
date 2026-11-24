@@ -27,6 +27,18 @@
   font-size: var(--text-sm);
 }
 
+/* Tall enough for the "Try again" button, so switching between messages never changes it. */
+.reasons {
+  display: flex;
+  align-items: center;
+  min-height: 2rem;
+}
+
+.loading {
+  display: grid;
+  gap: var(--space-3);
+}
+
 .reasonsFailed {
   display: flex;
   flex-wrap: wrap;

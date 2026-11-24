@@ -1,0 +1,3 @@
+# A public demo: nothing here is hidden from search engines.
+User-agent: *
+Allow: /

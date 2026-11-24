@@ -7,6 +7,7 @@ import { Button } from '../../ui/Button';
 import { EmptyState } from '../../ui/EmptyState';
 import { ErrorState } from '../../ui/ErrorState';
 import { PageHeader } from '../../ui/PageHeader';
+import { Skeleton } from '../../ui/Skeleton';
 import { summarisePreferences } from '../preferences/summary';
 import { useProfileId } from '../profile/profileId';
 import { JobDrawer } from './JobDrawer';
@@ -174,27 +175,48 @@ export default function MatchesPage() {
         title="Matches"
         description={`Your ${String(MATCH_LIMIT)} best-fitting open roles: why each one fits, and where it doesn't.`}
       />
-      {summary && (summary.wants.length > 0 || summary.limits.length > 0) ? (
-        <p className={styles.summary}>
-          {summary.wants.length > 0 ? (
-            <>
-              <strong>Ranked for:</strong> {summary.wants.join(', ')}.{' '}
-            </>
-          ) : null}
-          {summary.limits.length > 0 ? (
-            <>
-              <strong>Hard limits:</strong> {summary.limits.join(', ')}.{' '}
-            </>
-          ) : null}
-          <Link to="/">Change them in the chat</Link>
-        </p>
-      ) : null}
-      {profile.data && mode && defaultMode ? (
-        <div className={styles.versions}>
-          <VersionPicker mode={mode} defaultMode={defaultMode} llmOn={llmOn} onChange={setMode} />
+      {/* Everything that depends on the profile appears together, in one container whose top
+          never moves. Inserting the summary and the version picker above a list that had already
+          rendered pushed it down: a layout shift Lighthouse measured at 0.26. */}
+      {profile.isPending || (profile.data && !mode) ? (
+        <div className={styles.loading} role="status">
+          <span className="visually-hidden">Loading your matches…</span>
+          <Skeleton width="min(40rem, 100%)" height="2.75rem" />
+          <Skeleton width="min(28rem, 100%)" height="4.5rem" />
+          {Array.from({ length: 3 }, (_, i) => (
+            <MatchCardSkeleton key={i} />
+          ))}
         </div>
-      ) : null}
-      <div className={styles.body}>{body}</div>
+      ) : (
+        <>
+          {summary && (summary.wants.length > 0 || summary.limits.length > 0) ? (
+            <p className={styles.summary}>
+              {summary.wants.length > 0 ? (
+                <>
+                  <strong>Ranked for:</strong> {summary.wants.join(', ')}.{' '}
+                </>
+              ) : null}
+              {summary.limits.length > 0 ? (
+                <>
+                  <strong>Hard limits:</strong> {summary.limits.join(', ')}.{' '}
+                </>
+              ) : null}
+              <Link to="/">Change them in the chat</Link>
+            </p>
+          ) : null}
+          {profile.data && mode && defaultMode ? (
+            <div className={styles.versions}>
+              <VersionPicker
+                mode={mode}
+                defaultMode={defaultMode}
+                llmOn={llmOn}
+                onChange={setMode}
+              />
+            </div>
+          ) : null}
+          <div className={styles.body}>{body}</div>
+        </>
+      )}
       <JobDrawer matches={matches} reasons={reasons} mode={mode ?? null} />
     </>
   );
@@ -230,7 +252,11 @@ function ReasonsStatus({
         <p>
           Reasons need the language model, which is off on this server. The ranking still works.
         </p>
-      ) : null}
+      ) : (
+        // Kept, not removed, once the reasons are in: an empty line collapsing would pull every
+        // card up (a small layout shift), and this says where the reasons come from.
+        <p>Each reason is written by the language model from the posting and your preferences.</p>
+      )}
     </div>
   );
 }

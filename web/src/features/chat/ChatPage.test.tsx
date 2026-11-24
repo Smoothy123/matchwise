@@ -66,6 +66,8 @@ function setup({ health = HEALTHY, history = [], answer }: Setup = {}) {
 }
 
 const input = () => screen.getByRole('textbox', { name: 'Message' });
+/** The chat page is lazy-loaded: wait for it before the first keystroke. */
+const findInput = () => screen.findByRole('textbox', { name: 'Message' });
 
 beforeEach(() => {
   localStorage.setItem(STORAGE_KEY, 'p1');
@@ -113,7 +115,7 @@ describe('sending', () => {
     const reply = deferred<Response>();
     const api = setup({ answer: () => reply.promise });
     const { user } = renderApp('/');
-    await user.type(input(), 'Backend roles, remote.{Enter}');
+    await user.type(await findInput(), 'Backend roles, remote.{Enter}');
 
     const log = screen.getByRole('log');
     expect(within(log).getByText('Backend roles, remote.')).toBeInTheDocument();
@@ -169,7 +171,7 @@ describe('sending', () => {
     const reply = deferred<Response>();
     setup({ answer: () => reply.promise });
     const { user } = renderApp('/');
-    await user.type(input(), 'Still there?{Enter}');
+    await user.type(await findInput(), 'Still there?{Enter}');
     await user.click(screen.getByRole('link', { name: 'Search' }));
     await user.click(screen.getByRole('link', { name: 'Chat' }));
     expect(await screen.findByText('Still there?')).toBeInTheDocument();
@@ -182,7 +184,7 @@ describe('the keyboard', () => {
   it('Shift+Enter starts a new line; Enter while an input method is composing does not send', async () => {
     const { calls } = setup();
     const { user } = renderApp('/');
-    await user.type(input(), 'Line one{Shift>}{Enter}{/Shift}Line two');
+    await user.type(await findInput(), 'Line one{Shift>}{Enter}{/Shift}Line two');
     expect(input()).toHaveValue('Line one\nLine two');
     fireEvent.keyDown(input(), { key: 'Enter', isComposing: true });
     expect(calls('POST', '/profiles/p1/chat')).toBe(0);
@@ -213,7 +215,10 @@ describe('failures', () => {
       },
     });
     const { user } = renderApp('/');
-    await user.type(input(), 'Data analyst roles{Enter}');
+    await user.type(
+      await screen.findByRole('textbox', { name: 'Message' }),
+      'Data analyst roles{Enter}',
+    );
     const alert = await screen.findByRole('alert');
     expect(alert).toHaveTextContent('Not answered. The language model is unavailable right now.');
 
@@ -233,7 +238,7 @@ describe('failures', () => {
       },
     });
     const { user } = renderApp('/');
-    await user.type(input(), 'Slow one{Enter}');
+    await user.type(await findInput(), 'Slow one{Enter}');
     expect(await screen.findByText('Late but saved.')).toBeInTheDocument();
     expect(screen.queryByRole('alert')).not.toBeInTheDocument();
   });

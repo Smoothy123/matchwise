@@ -19,6 +19,8 @@ export function useStickToBottom(contentKey: unknown) {
   const atBottom = useRef(true);
   const firstScroll = useRef(true);
   const [hasUnseen, setHasUnseen] = useState(false);
+  // False until the first scroll to the end: the conversation stays hidden until then.
+  const [positioned, setPositioned] = useState(false);
 
   useEffect(() => {
     const end = endRef.current;
@@ -50,16 +52,34 @@ export function useStickToBottom(contentKey: unknown) {
     if (contentKey === undefined) return; // nothing loaded yet
     if (firstScroll.current) {
       firstScroll.current = false;
-      scrollToEnd(false); // opening the page: start at the latest message, no animation
+      // Opening the page: start at the latest message. Not in this frame, though: scrolling in
+      // the same frame as the history appearing counted as a large layout shift (Lighthouse
+      // measured CLS 0.69), because the footer and the conversation moved and came into view at
+      // once. So the history is laid out hidden for one painted frame (nothing visible moves),
+      // then the next frame jumps to the end and reveals it: loading state, then the latest
+      // message, with no glimpse of the top in between.
+      let inner = 0;
+      const outer = requestAnimationFrame(() => {
+        inner = requestAnimationFrame(() => {
+          scrollToEnd(false);
+          setPositioned(true);
+        });
+      });
+      return () => {
+        cancelAnimationFrame(outer);
+        cancelAnimationFrame(inner);
+      };
     } else if (atBottom.current) {
       scrollToEnd(true);
     } else {
       setHasUnseen(true);
     }
+    return undefined;
   }, [contentKey, scrollToEnd]);
 
   return {
     endRef,
+    positioned,
     hasUnseen,
     jumpToLatest: () => {
       scrollToEnd(true);
