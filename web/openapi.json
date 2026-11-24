@@ -1,0 +1,1558 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Matchwise",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthOut"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search": {
+      "get": {
+        "summary": "Search",
+        "operationId": "search_search_get",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 500,
+              "description": "What you're looking for, in plain words",
+              "title": "Q"
+            },
+            "description": "What you're looking for, in plain words"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 50,
+              "minimum": 1,
+              "default": 10,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SearchResult"
+                  },
+                  "title": "Response Search Search Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/profiles/{profile_id}/messages": {
+      "post": {
+        "summary": "Post Message",
+        "description": "Read a plain-language message and update the profile's stored preferences.",
+        "operationId": "post_message_profiles__profile_id__messages_post",
+        "parameters": [
+          {
+            "name": "profile_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,64}$",
+              "title": "Profile Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageOut"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The profile changed while this message was processed; send it again",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The language model kept returning invalid output; nothing was changed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorOut"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The language model is not configured or is unavailable right now",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorOut"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get Messages",
+        "operationId": "get_messages_profiles__profile_id__messages_get",
+        "parameters": [
+          {
+            "name": "profile_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,64}$",
+              "title": "Profile Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HistoryItem"
+                  },
+                  "title": "Response Get Messages Profiles  Profile Id  Messages Get"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such profile: a profile exists once it has been sent a message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/profiles/{profile_id}": {
+      "get": {
+        "summary": "Get Profile",
+        "operationId": "get_profile_profiles__profile_id__get",
+        "parameters": [
+          {
+            "name": "profile_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,64}$",
+              "title": "Profile Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileOut"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such profile: a profile exists once it has been sent a message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/profiles/{profile_id}/matches": {
+      "get": {
+        "summary": "Get Matches",
+        "description": "The best-fitting active jobs for this profile, each with its score breakdown and a reason.",
+        "operationId": "get_matches_profiles__profile_id__matches_get",
+        "parameters": [
+          {
+            "name": "profile_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,64}$",
+              "title": "Profile Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 50,
+              "minimum": 1,
+              "default": 10,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "mode",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Mode"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Default: checked (filters + re-ranking + LLM limit check) when the LLM is configured, else full. vector and vector_filters are for comparison.",
+              "title": "Mode"
+            },
+            "description": "Default: checked (filters + re-ranking + LLM limit check) when the LLM is configured, else full. vector and vector_filters are for comparison."
+          },
+          {
+            "name": "explain",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Add a plain-language reason to each match (cached)",
+              "default": true,
+              "title": "Explain"
+            },
+            "description": "Add a plain-language reason to each match (cached)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MatchOut"
+                  },
+                  "title": "Response Get Matches Profiles  Profile Id  Matches Get"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such profile: a profile exists once it has been sent a message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid parameters (a list of problems), or the profile has only dealbreakers so there is nothing to search for yet (a message)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/HTTPValidationError"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorOut"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The language model is not configured or is unavailable right now",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorOut"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/profiles/{profile_id}/chat": {
+      "post": {
+        "summary": "Chat",
+        "description": "Talk to the agent. It remembers this conversation and the profile's stored preferences.",
+        "operationId": "chat_profiles__profile_id__chat_post",
+        "parameters": [
+          {
+            "name": "profile_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,64}$",
+              "title": "Profile Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The language model is not configured or is unavailable right now",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorOut"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get Chat",
+        "description": "The whole conversation, including every tool call and result.",
+        "operationId": "get_chat_profiles__profile_id__chat_get",
+        "parameters": [
+          {
+            "name": "profile_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,64}$",
+              "title": "Profile Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ChatMessageOut"
+                  },
+                  "title": "Response Get Chat Profiles  Profile Id  Chat Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Chat",
+        "description": "Forget the conversation; stored preferences stay.",
+        "operationId": "delete_chat_profiles__profile_id__chat_delete",
+        "parameters": [
+          {
+            "name": "profile_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,64}$",
+              "title": "Profile Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatResetOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ChatMessageOut": {
+        "properties": {
+          "turn": {
+            "type": "integer",
+            "title": "Turn"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "user",
+              "assistant",
+              "tool"
+            ],
+            "title": "Role"
+          },
+          "content": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Content"
+          },
+          "tool_calls": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/StoredToolCall"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tool Calls"
+          },
+          "tool_call_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tool Call Id"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "turn",
+          "role",
+          "content",
+          "tool_calls",
+          "tool_call_id",
+          "created_at"
+        ],
+        "title": "ChatMessageOut"
+      },
+      "ChatOut": {
+        "properties": {
+          "reply": {
+            "type": "string",
+            "title": "Reply"
+          },
+          "tool_calls": {
+            "items": {
+              "$ref": "#/components/schemas/ToolCallOut"
+            },
+            "type": "array",
+            "title": "Tool Calls"
+          }
+        },
+        "type": "object",
+        "required": [
+          "reply",
+          "tool_calls"
+        ],
+        "title": "ChatOut"
+      },
+      "ChatResetOut": {
+        "properties": {
+          "deleted_messages": {
+            "type": "integer",
+            "title": "Deleted Messages"
+          }
+        },
+        "type": "object",
+        "required": [
+          "deleted_messages"
+        ],
+        "title": "ChatResetOut"
+      },
+      "Dealbreakers": {
+        "properties": {
+          "exclude_title_words": {
+            "items": {
+              "type": "string",
+              "maxLength": 100,
+              "minLength": 1
+            },
+            "type": "array",
+            "title": "Exclude Title Words",
+            "default": []
+          },
+          "exclude_functions": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "Accounting/Auditing",
+                "Administrative",
+                "Advertising",
+                "Analyst",
+                "Art/Creative",
+                "Business Development",
+                "Consulting",
+                "Customer Service",
+                "Design",
+                "Distribution",
+                "Education",
+                "Engineering",
+                "Finance",
+                "General Business",
+                "Health Care Provider",
+                "Human Resources",
+                "Information Technology",
+                "Legal",
+                "Management",
+                "Manufacturing",
+                "Marketing",
+                "Other",
+                "Product Management",
+                "Production",
+                "Project Management",
+                "Public Relations",
+                "Purchasing",
+                "Quality Assurance",
+                "Research",
+                "Sales",
+                "Science",
+                "Strategy/Planning",
+                "Supply Chain",
+                "Training",
+                "Writing/Editing"
+              ]
+            },
+            "type": "array",
+            "title": "Exclude Functions",
+            "default": []
+          },
+          "exclude_industries": {
+            "items": {
+              "type": "string",
+              "maxLength": 100,
+              "minLength": 1
+            },
+            "type": "array",
+            "title": "Exclude Industries",
+            "default": []
+          },
+          "exclude_companies": {
+            "items": {
+              "type": "string",
+              "maxLength": 100,
+              "minLength": 1
+            },
+            "type": "array",
+            "title": "Exclude Companies",
+            "default": []
+          },
+          "exclude_description_phrases": {
+            "items": {
+              "type": "string",
+              "maxLength": 100,
+              "minLength": 1
+            },
+            "type": "array",
+            "title": "Exclude Description Phrases",
+            "default": []
+          },
+          "exclude_seniority": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "intern",
+                "entry",
+                "associate",
+                "mid_senior",
+                "director",
+                "executive"
+              ]
+            },
+            "type": "array",
+            "title": "Exclude Seniority",
+            "default": []
+          },
+          "exclude_employment_types": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "Full-time",
+                "Part-time",
+                "Contract",
+                "Temporary",
+                "Internship",
+                "Volunteer",
+                "Other"
+              ]
+            },
+            "type": "array",
+            "title": "Exclude Employment Types",
+            "default": []
+          },
+          "only_locations": {
+            "items": {
+              "type": "string",
+              "maxLength": 100,
+              "minLength": 1
+            },
+            "type": "array",
+            "title": "Only Locations",
+            "default": []
+          },
+          "only_remote": {
+            "type": "boolean",
+            "title": "Only Remote",
+            "default": false
+          },
+          "min_salary": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "exclusiveMinimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Min Salary"
+          }
+        },
+        "type": "object",
+        "title": "Dealbreakers",
+        "description": "Hard limits: a job that breaks any of these is never shown."
+      },
+      "ErrorOut": {
+        "properties": {
+          "detail": {
+            "type": "string",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "required": [
+          "detail"
+        ],
+        "title": "ErrorOut",
+        "description": "The body of every error except request validation (422), whose `detail` is a list."
+      },
+      "Explanation": {
+        "properties": {
+          "reason": {
+            "type": "string",
+            "title": "Reason"
+          },
+          "matched_preferences": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Matched Preferences"
+          },
+          "caveats": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Caveats"
+          }
+        },
+        "type": "object",
+        "required": [
+          "reason",
+          "matched_preferences",
+          "caveats"
+        ],
+        "title": "Explanation",
+        "description": "What the API returns for one match."
+      },
+      "FeatureScore": {
+        "properties": {
+          "value": {
+            "type": "number",
+            "title": "Value"
+          },
+          "weight": {
+            "type": "number",
+            "title": "Weight"
+          },
+          "contribution": {
+            "type": "number",
+            "title": "Contribution"
+          }
+        },
+        "type": "object",
+        "required": [
+          "value",
+          "weight",
+          "contribution"
+        ],
+        "title": "FeatureScore"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HealthOut": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "ok",
+            "title": "Status"
+          },
+          "jobs": {
+            "type": "integer",
+            "title": "Jobs"
+          },
+          "active_jobs": {
+            "type": "integer",
+            "title": "Active Jobs"
+          },
+          "embedded_jobs": {
+            "type": "integer",
+            "title": "Embedded Jobs"
+          },
+          "llm_configured": {
+            "type": "boolean",
+            "title": "Llm Configured"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "jobs",
+          "active_jobs",
+          "embedded_jobs",
+          "llm_configured"
+        ],
+        "title": "HealthOut"
+      },
+      "HistoryItem": {
+        "properties": {
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content"
+          },
+          "operations": {
+            "items": {
+              "$ref": "#/components/schemas/Operation"
+            },
+            "type": "array",
+            "title": "Operations"
+          },
+          "notes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Notes"
+          },
+          "model": {
+            "type": "string",
+            "title": "Model"
+          },
+          "prompt_version": {
+            "type": "string",
+            "title": "Prompt Version"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "version",
+          "content",
+          "operations",
+          "notes",
+          "model",
+          "prompt_version",
+          "created_at"
+        ],
+        "title": "HistoryItem"
+      },
+      "MatchOut": {
+        "properties": {
+          "job_id": {
+            "type": "integer",
+            "title": "Job Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "company": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Company"
+          },
+          "location": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location"
+          },
+          "remote": {
+            "type": "boolean",
+            "title": "Remote"
+          },
+          "seniority": {
+            "type": "string",
+            "title": "Seniority"
+          },
+          "employment_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Employment Type"
+          },
+          "salary_min": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Salary Min"
+          },
+          "salary_max": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Salary Max"
+          },
+          "posted_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Posted At"
+          },
+          "skills": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Skills"
+          },
+          "matched_skills": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Matched Skills"
+          },
+          "score": {
+            "type": "number",
+            "title": "Score"
+          },
+          "similarity": {
+            "type": "number",
+            "title": "Similarity"
+          },
+          "features": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/FeatureScore"
+            },
+            "type": "object",
+            "title": "Features"
+          },
+          "explanation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Explanation"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "limit_check": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "passed",
+                  "skipped",
+                  "no limits"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Limit Check"
+          }
+        },
+        "type": "object",
+        "required": [
+          "job_id",
+          "title",
+          "company",
+          "location",
+          "remote",
+          "seniority",
+          "employment_type",
+          "salary_min",
+          "salary_max",
+          "posted_at",
+          "skills",
+          "matched_skills",
+          "score",
+          "similarity",
+          "features"
+        ],
+        "title": "MatchOut"
+      },
+      "MessageIn": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "title": "MessageIn"
+      },
+      "MessageOut": {
+        "properties": {
+          "profile_id": {
+            "type": "string",
+            "title": "Profile Id"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "preferences": {
+            "$ref": "#/components/schemas/Preferences"
+          },
+          "operations": {
+            "items": {
+              "$ref": "#/components/schemas/Operation"
+            },
+            "type": "array",
+            "title": "Operations"
+          },
+          "notes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Notes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "profile_id",
+          "version",
+          "preferences",
+          "operations",
+          "notes"
+        ],
+        "title": "MessageOut"
+      },
+      "Mode": {
+        "type": "string",
+        "enum": [
+          "vector",
+          "vector_filters",
+          "full",
+          "checked"
+        ],
+        "title": "Mode"
+      },
+      "Operation": {
+        "properties": {
+          "op": {
+            "type": "string",
+            "enum": [
+              "add",
+              "remove",
+              "set",
+              "clear"
+            ],
+            "title": "Op",
+            "description": "add/remove for list fields, set/clear for single-value fields"
+          },
+          "field": {
+            "type": "string",
+            "enum": [
+              "wants.roles",
+              "wants.skills",
+              "wants.locations",
+              "wants.industries",
+              "wants.seniority",
+              "wants.remote",
+              "wants.min_salary",
+              "wants.other",
+              "dealbreakers.exclude_title_words",
+              "dealbreakers.exclude_functions",
+              "dealbreakers.exclude_industries",
+              "dealbreakers.exclude_companies",
+              "dealbreakers.exclude_description_phrases",
+              "dealbreakers.exclude_seniority",
+              "dealbreakers.exclude_employment_types",
+              "dealbreakers.only_locations",
+              "dealbreakers.only_remote",
+              "dealbreakers.min_salary"
+            ],
+            "title": "Field"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          },
+          "evidence": {
+            "type": "string",
+            "title": "Evidence",
+            "description": "The words in the message this change comes from"
+          }
+        },
+        "type": "object",
+        "required": [
+          "op",
+          "field",
+          "evidence"
+        ],
+        "title": "Operation"
+      },
+      "Preferences": {
+        "properties": {
+          "wants": {
+            "$ref": "#/components/schemas/Wants",
+            "default": {
+              "roles": [],
+              "skills": [],
+              "locations": [],
+              "industries": [],
+              "seniority": [],
+              "other": []
+            }
+          },
+          "dealbreakers": {
+            "$ref": "#/components/schemas/Dealbreakers",
+            "default": {
+              "exclude_title_words": [],
+              "exclude_functions": [],
+              "exclude_industries": [],
+              "exclude_companies": [],
+              "exclude_description_phrases": [],
+              "exclude_seniority": [],
+              "exclude_employment_types": [],
+              "only_locations": [],
+              "only_remote": false
+            }
+          }
+        },
+        "type": "object",
+        "title": "Preferences"
+      },
+      "ProfileOut": {
+        "properties": {
+          "profile_id": {
+            "type": "string",
+            "title": "Profile Id"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "preferences": {
+            "$ref": "#/components/schemas/Preferences"
+          }
+        },
+        "type": "object",
+        "required": [
+          "profile_id",
+          "version",
+          "preferences"
+        ],
+        "title": "ProfileOut"
+      },
+      "SearchResult": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "company": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Company"
+          },
+          "location": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location"
+          },
+          "remote": {
+            "type": "boolean",
+            "title": "Remote"
+          },
+          "seniority": {
+            "type": "string",
+            "title": "Seniority"
+          },
+          "skills": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Skills"
+          },
+          "snippet": {
+            "type": "string",
+            "title": "Snippet"
+          },
+          "similarity": {
+            "type": "number",
+            "title": "Similarity"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "company",
+          "location",
+          "remote",
+          "seniority",
+          "skills",
+          "snippet",
+          "similarity"
+        ],
+        "title": "SearchResult"
+      },
+      "StoredToolCall": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "function": {
+            "$ref": "#/components/schemas/ToolCallFunction"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "function"
+        ],
+        "title": "StoredToolCall",
+        "description": "A tool request as saved. Provider extras (Gemini's thought signatures) aren't returned:\nthe agent only needs them within a turn, and they mean nothing to a client."
+      },
+      "ToolCallFunction": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "arguments": {
+            "type": "string",
+            "title": "Arguments"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "arguments"
+        ],
+        "title": "ToolCallFunction"
+      },
+      "ToolCallOut": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "arguments": {
+            "type": "string",
+            "title": "Arguments"
+          },
+          "ok": {
+            "type": "boolean",
+            "title": "Ok"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "arguments",
+          "ok"
+        ],
+        "title": "ToolCallOut"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "Wants": {
+        "properties": {
+          "roles": {
+            "items": {
+              "type": "string",
+              "maxLength": 100,
+              "minLength": 1
+            },
+            "type": "array",
+            "title": "Roles",
+            "default": []
+          },
+          "skills": {
+            "items": {
+              "type": "string",
+              "maxLength": 100,
+              "minLength": 1
+            },
+            "type": "array",
+            "title": "Skills",
+            "default": []
+          },
+          "locations": {
+            "items": {
+              "type": "string",
+              "maxLength": 100,
+              "minLength": 1
+            },
+            "type": "array",
+            "title": "Locations",
+            "default": []
+          },
+          "industries": {
+            "items": {
+              "type": "string",
+              "maxLength": 100,
+              "minLength": 1
+            },
+            "type": "array",
+            "title": "Industries",
+            "default": []
+          },
+          "seniority": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "intern",
+                "entry",
+                "associate",
+                "mid_senior",
+                "director",
+                "executive"
+              ]
+            },
+            "type": "array",
+            "title": "Seniority",
+            "default": []
+          },
+          "remote": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Remote"
+          },
+          "min_salary": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "exclusiveMinimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Min Salary"
+          },
+          "other": {
+            "items": {
+              "type": "string",
+              "maxLength": 100,
+              "minLength": 1
+            },
+            "type": "array",
+            "title": "Other",
+            "default": []
+          }
+        },
+        "type": "object",
+        "title": "Wants",
+        "description": "Soft preferences: a job that matches more of these ranks higher."
+      }
+    }
+  }
+}

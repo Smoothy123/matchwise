@@ -1,9 +1,13 @@
 """The web frontend generates its TypeScript types from /openapi.json, so the schema must
 describe every response exactly: no untyped objects, and every error status a route can return."""
 
+import json
+from pathlib import Path
+
 from matchwise.api import app
 
 SCHEMA = app.openapi()
+FRONTEND_SNAPSHOT = Path(__file__).resolve().parent.parent / "web" / "openapi.json"
 
 
 def json_schema(path: str, method: str, status: str) -> dict:
@@ -55,3 +59,9 @@ def test_chat_history_types_its_tool_calls():
 def test_limit_check_lists_its_values():
     limit_check = SCHEMA["components"]["schemas"]["MatchOut"]["properties"]["limit_check"]
     assert limit_check["anyOf"][0]["enum"] == ["passed", "skipped", "no limits"]
+
+
+def test_the_frontend_types_were_generated_from_this_schema():
+    """web/openapi.json is what the frontend's TypeScript types are generated from."""
+    snapshot = json.loads(FRONTEND_SNAPSHOT.read_text())
+    assert snapshot == SCHEMA, "The API changed: with it running, run `npm run api:sync` in web/"

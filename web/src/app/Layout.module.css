@@ -1,0 +1,126 @@
+/* Mobile first: the base rules are for small screens, min-width queries add the wide layout. */
+
+.shell {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  min-height: 100dvh;
+}
+
+.skipLink {
+  position: absolute;
+  inset-inline-start: var(--space-3);
+  top: var(--space-3);
+  z-index: var(--z-overlay);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
+  color: var(--color-accent-text);
+  transform: translateY(-200%);
+}
+
+.skipLink:focus {
+  transform: none;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  border-block-end: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.headerInner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    'brand health'
+    'nav nav';
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding: var(--space-3) var(--space-3) 0;
+}
+
+.brand {
+  grid-area: brand;
+  color: var(--color-text);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  text-decoration: none;
+}
+
+.health {
+  grid-area: health;
+  justify-self: end;
+}
+
+.nav {
+  grid-area: nav;
+}
+
+.navList {
+  display: flex;
+  /* Wrap rather than scroll: a sideways-scrolling nav hides its last links with no hint, and
+     at 200% text size even a tight row can't hold them all. */
+  flex-wrap: wrap;
+  padding: 0;
+  list-style: none;
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  padding: 0 var(--space-2);
+  font-size: var(--text-sm);
+  border-block-end: 2px solid transparent;
+  color: var(--color-text-muted);
+  font-weight: var(--weight-medium);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.navLink:hover {
+  color: var(--color-text);
+}
+
+.active {
+  border-block-end-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.main {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding: var(--space-5) var(--space-4) var(--space-7);
+}
+
+.footer {
+  border-block-start: 1px solid var(--color-border);
+}
+
+.footerInner {
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding: var(--space-3) var(--space-4);
+}
+
+@media (min-width: 48rem) {
+  .headerInner {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: 'brand nav health';
+    padding: 0 var(--space-4);
+  }
+
+  .navLink {
+    padding: 0 var(--space-3);
+    font-size: var(--text-base);
+  }
+
+  .main {
+    padding-inline: var(--space-5);
+  }
+}

@@ -1,0 +1,28 @@
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-5);
+  margin-block-end: var(--space-5);
+}
+
+.text {
+  flex: 1 1 20rem;
+}
+
+.title {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+}
+
+.description {
+  margin-block-start: var(--space-2);
+  color: var(--color-text-muted);
+  max-width: 60ch;
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-2);
+}
