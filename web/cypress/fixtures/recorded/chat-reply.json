@@ -1,0 +1,15 @@
+{
+  "reply": "Got it! I've saved your preferences. Here are your top matches right now (note that your hard limits couldn't be fully checked automatically):\n\n* Tableau Consultant at XeoMatrix [#3592] (Remote)\n* Business Systems Analyst at SP Software Solutions [#1042] (Philadelphia, PA)\n* Data Analyst/Data Science/NLP (Intern apr 30) DIN01 at Data Glacier [#2595] (Remote, United States)\n* Senior Data Analyst - Alteryx at truData Solutions [#106] (Remote)\n* Sr. Analytics Engineer at Bamboo Health [#2394] (Remote, United States)\n\nWould you like me to explain why any of these fit?",
+  "tool_calls": [
+    {
+      "name": "update_preferences",
+      "arguments": "{\"message\":\"data analyst: SQL and Tableau, Chicago or remote. Never sales.\"}",
+      "ok": true
+    },
+    {
+      "name": "get_matches",
+      "arguments": "{}",
+      "ok": true
+    }
+  ]
+}

@@ -24,4 +24,31 @@ describe('summarisePreferences', () => {
     preferences.dealbreakers.exclude_description_phrases = [];
     expect(summarisePreferences(preferences)).toEqual({ wants: [], limits: [] });
   });
+
+  it('words every kind of hard limit', () => {
+    const { preferences } = makeProfile();
+    preferences.dealbreakers = {
+      exclude_title_words: [],
+      exclude_functions: ['Sales'],
+      exclude_industries: ['Staffing'],
+      exclude_companies: ['Acme'],
+      exclude_description_phrases: [],
+      exclude_seniority: ['intern'],
+      exclude_employment_types: ['Contract'],
+      only_locations: [],
+      only_remote: true,
+      min_salary: 70_000,
+    };
+    preferences.wants.remote = false;
+    expect(summarisePreferences(preferences).limits).toEqual([
+      'no Sales',
+      'no Staffing',
+      'not Acme',
+      'not Internship',
+      'not Contract',
+      'remote only',
+      'at least $70K a year',
+    ]);
+    expect(summarisePreferences(preferences).wants).toContain('on-site');
+  });
 });

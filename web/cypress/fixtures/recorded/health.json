@@ -1,0 +1,7 @@
+{
+  "status": "ok",
+  "jobs": 5450,
+  "active_jobs": 5000,
+  "embedded_jobs": 5000,
+  "llm_configured": true
+}

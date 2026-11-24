@@ -1,0 +1,505 @@
+[
+  {
+    "job_id": 3592,
+    "title": "Tableau Consultant",
+    "company": "XeoMatrix",
+    "location": "Austin, TX",
+    "remote": true,
+    "seniority": "unknown",
+    "employment_type": "Full-time",
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-17T22:39:26Z",
+    "skills": [
+      "tableau"
+    ],
+    "matched_skills": [
+      "tableau"
+    ],
+    "score": 0.724,
+    "similarity": 0.724029676674029,
+    "features": {
+      "similarity": {
+        "value": 1,
+        "weight": 0.5294,
+        "contribution": 0.5294
+      },
+      "skills": {
+        "value": 0.5736,
+        "weight": 0.2353,
+        "contribution": 0.135
+      },
+      "location": {
+        "value": 1,
+        "weight": 0.1765,
+        "contribution": 0.1765
+      },
+      "recency": {
+        "value": 0.605,
+        "weight": 0.0588,
+        "contribution": 0.0356
+      }
+    },
+    "explanation": null,
+    "limit_check": null
+  },
+  {
+    "job_id": 1042,
+    "title": "Business Systems Analyst",
+    "company": "SP Software Solutions",
+    "location": "Philadelphia, PA",
+    "remote": false,
+    "seniority": "associate",
+    "employment_type": "Contract",
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-15T19:35:52Z",
+    "skills": [
+      "data analysis",
+      "etl",
+      "sql",
+      "sql server",
+      "tableau"
+    ],
+    "matched_skills": [
+      "sql",
+      "tableau"
+    ],
+    "score": 0.7085,
+    "similarity": 0.7085207874464532,
+    "features": {
+      "similarity": {
+        "value": 0.9481,
+        "weight": 0.5294,
+        "contribution": 0.5019
+      },
+      "skills": {
+        "value": 1,
+        "weight": 0.2353,
+        "contribution": 0.2353
+      },
+      "location": {
+        "value": 0,
+        "weight": 0.1765,
+        "contribution": 0
+      },
+      "recency": {
+        "value": 0.4901,
+        "weight": 0.0588,
+        "contribution": 0.0288
+      }
+    },
+    "explanation": null,
+    "limit_check": null
+  },
+  {
+    "job_id": 2595,
+    "title": "Data Analyst/Data Science/NLP (Intern apr 30) DIN01",
+    "company": "Data Glacier",
+    "location": "United States",
+    "remote": true,
+    "seniority": "unknown",
+    "employment_type": "Internship",
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-07T02:55:04Z",
+    "skills": [
+      "data analysis",
+      "nlp",
+      "sql",
+      "statistics"
+    ],
+    "matched_skills": [
+      "sql"
+    ],
+    "score": 0.6942,
+    "similarity": 0.6942430320833318,
+    "features": {
+      "similarity": {
+        "value": 0.9003,
+        "weight": 0.5294,
+        "contribution": 0.4766
+      },
+      "skills": {
+        "value": 0.4264,
+        "weight": 0.2353,
+        "contribution": 0.1003
+      },
+      "location": {
+        "value": 1,
+        "weight": 0.1765,
+        "contribution": 0.1765
+      },
+      "recency": {
+        "value": 0.2072,
+        "weight": 0.0588,
+        "contribution": 0.0122
+      }
+    },
+    "explanation": null,
+    "limit_check": null
+  },
+  {
+    "job_id": 4707,
+    "title": "Business Intelligence Developer",
+    "company": "Insight Global",
+    "location": "San Diego, CA",
+    "remote": false,
+    "seniority": "mid_senior",
+    "employment_type": "Full-time",
+    "salary_min": 93600,
+    "salary_max": 135000,
+    "salary_currency": "USD",
+    "posted_at": "2024-04-18T20:37:11Z",
+    "skills": [
+      "data analysis",
+      "etl",
+      "power bi",
+      "python",
+      "sql",
+      "tableau"
+    ],
+    "matched_skills": [
+      "sql",
+      "tableau"
+    ],
+    "score": 0.6633,
+    "similarity": 0.6632990441740141,
+    "features": {
+      "similarity": {
+        "value": 0.7967,
+        "weight": 0.5294,
+        "contribution": 0.4218
+      },
+      "skills": {
+        "value": 1,
+        "weight": 0.2353,
+        "contribution": 0.2353
+      },
+      "location": {
+        "value": 0,
+        "weight": 0.1765,
+        "contribution": 0
+      },
+      "recency": {
+        "value": 0.6624,
+        "weight": 0.0588,
+        "contribution": 0.039
+      }
+    },
+    "explanation": null,
+    "limit_check": null
+  },
+  {
+    "job_id": 3070,
+    "title": "Data Science/NLP intern ( Apr 30)",
+    "company": "Data Glacier",
+    "location": "United States",
+    "remote": true,
+    "seniority": "unknown",
+    "employment_type": "Internship",
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-06T02:30:04Z",
+    "skills": [
+      "data analysis",
+      "nlp",
+      "sql",
+      "statistics"
+    ],
+    "matched_skills": [
+      "sql"
+    ],
+    "score": 0.6531,
+    "similarity": 0.6531234797092105,
+    "features": {
+      "similarity": {
+        "value": 0.7626,
+        "weight": 0.5294,
+        "contribution": 0.4037
+      },
+      "skills": {
+        "value": 0.4264,
+        "weight": 0.2353,
+        "contribution": 0.1003
+      },
+      "location": {
+        "value": 1,
+        "weight": 0.1765,
+        "contribution": 0.1765
+      },
+      "recency": {
+        "value": 0.1873,
+        "weight": 0.0588,
+        "contribution": 0.011
+      }
+    },
+    "explanation": null,
+    "limit_check": null
+  },
+  {
+    "job_id": 4633,
+    "title": "Informatica MDM-Business System Analyst",
+    "company": "USEReady",
+    "location": "Dallas, TX",
+    "remote": false,
+    "seniority": "mid_senior",
+    "employment_type": "Contract",
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-18T15:11:20Z",
+    "skills": [
+      "agile",
+      "aws",
+      "b2b",
+      "css",
+      "html",
+      "javascript",
+      "jira",
+      "looker",
+      "oracle",
+      "power bi",
+      "salesforce",
+      "sap",
+      "snowflake",
+      "sql",
+      "tableau"
+    ],
+    "matched_skills": [
+      "sql",
+      "tableau"
+    ],
+    "score": 0.6423,
+    "similarity": 0.6422698114949589,
+    "features": {
+      "similarity": {
+        "value": 0.7263,
+        "weight": 0.5294,
+        "contribution": 0.3845
+      },
+      "skills": {
+        "value": 1,
+        "weight": 0.2353,
+        "contribution": 0.2353
+      },
+      "location": {
+        "value": 0,
+        "weight": 0.1765,
+        "contribution": 0
+      },
+      "recency": {
+        "value": 0.6478,
+        "weight": 0.0588,
+        "contribution": 0.0381
+      }
+    },
+    "explanation": null,
+    "limit_check": null
+  },
+  {
+    "job_id": 3041,
+    "title": "Data and Reporting Manager with Financial Services and Tableau",
+    "company": "Central Point Partners",
+    "location": "Columbus, OH",
+    "remote": false,
+    "seniority": "mid_senior",
+    "employment_type": "Contract",
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-18T17:41:44Z",
+    "skills": [
+      "agile",
+      "negotiation",
+      "tableau"
+    ],
+    "matched_skills": [
+      "tableau"
+    ],
+    "score": 0.6387,
+    "similarity": 0.6387260390846683,
+    "features": {
+      "similarity": {
+        "value": 0.7144,
+        "weight": 0.5294,
+        "contribution": 0.3782
+      },
+      "skills": {
+        "value": 0.5736,
+        "weight": 0.2353,
+        "contribution": 0.135
+      },
+      "location": {
+        "value": 0,
+        "weight": 0.1765,
+        "contribution": 0
+      },
+      "recency": {
+        "value": 0.6545,
+        "weight": 0.0588,
+        "contribution": 0.0385
+      }
+    },
+    "explanation": null,
+    "limit_check": null
+  },
+  {
+    "job_id": 964,
+    "title": "Business Analyst",
+    "company": "Urbane Systems",
+    "location": "Washington DC-Baltimore Area",
+    "remote": false,
+    "seniority": "mid_senior",
+    "employment_type": "Contract",
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-11T17:57:21Z",
+    "skills": [
+      "accounting",
+      "agile",
+      "azure",
+      "power bi",
+      "project management",
+      "sap",
+      "sql",
+      "tableau"
+    ],
+    "matched_skills": [
+      "sql",
+      "tableau"
+    ],
+    "score": 0.6369,
+    "similarity": 0.6369000293672079,
+    "features": {
+      "similarity": {
+        "value": 0.7083,
+        "weight": 0.5294,
+        "contribution": 0.375
+      },
+      "skills": {
+        "value": 1,
+        "weight": 0.2353,
+        "contribution": 0.2353
+      },
+      "location": {
+        "value": 0,
+        "weight": 0.1765,
+        "contribution": 0
+      },
+      "recency": {
+        "value": 0.3276,
+        "weight": 0.0588,
+        "contribution": 0.0193
+      }
+    },
+    "explanation": null,
+    "limit_check": null
+  },
+  {
+    "job_id": 3549,
+    "title": "Data/AI Analyst I",
+    "company": "Synovus",
+    "location": "Columbus, GA",
+    "remote": false,
+    "seniority": "unknown",
+    "employment_type": "Full-time",
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-19T04:20:05Z",
+    "skills": [
+      "databricks",
+      "excel",
+      "power bi",
+      "powerpoint",
+      "sql",
+      "tableau"
+    ],
+    "matched_skills": [
+      "sql",
+      "tableau"
+    ],
+    "score": 0.6367,
+    "similarity": 0.6366779424740122,
+    "features": {
+      "similarity": {
+        "value": 0.7076,
+        "weight": 0.5294,
+        "contribution": 0.3746
+      },
+      "skills": {
+        "value": 1,
+        "weight": 0.2353,
+        "contribution": 0.2353
+      },
+      "location": {
+        "value": 0,
+        "weight": 0.1765,
+        "contribution": 0
+      },
+      "recency": {
+        "value": 0.6839,
+        "weight": 0.0588,
+        "contribution": 0.0402
+      }
+    },
+    "explanation": null,
+    "limit_check": null
+  },
+  {
+    "job_id": 4594,
+    "title": "Data Analyst",
+    "company": "DataAnnotation",
+    "location": "Buffalo-Niagara Falls Area",
+    "remote": true,
+    "seniority": "unknown",
+    "employment_type": "Contract",
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-18T17:33:03Z",
+    "skills": [
+      "c#",
+      "c++",
+      "html",
+      "javascript",
+      "python",
+      "sql"
+    ],
+    "matched_skills": [
+      "sql"
+    ],
+    "score": 0.6347,
+    "similarity": 0.6346796968770219,
+    "features": {
+      "similarity": {
+        "value": 0.7009,
+        "weight": 0.5294,
+        "contribution": 0.371
+      },
+      "skills": {
+        "value": 0.4264,
+        "weight": 0.2353,
+        "contribution": 0.1003
+      },
+      "location": {
+        "value": 1,
+        "weight": 0.1765,
+        "contribution": 0.1765
+      },
+      "recency": {
+        "value": 0.6541,
+        "weight": 0.0588,
+        "contribution": 0.0385
+      }
+    },
+    "explanation": null,
+    "limit_check": null
+  }
+]

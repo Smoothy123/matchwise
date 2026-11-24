@@ -1,0 +1,54 @@
+[
+  {
+    "version": 1,
+    "content": "data analyst: SQL and Tableau, Chicago or remote. Never sales.",
+    "operations": [
+      {
+        "op": "add",
+        "field": "wants.roles",
+        "value": "data analyst",
+        "evidence": "data analyst"
+      },
+      {
+        "op": "add",
+        "field": "wants.skills",
+        "value": "SQL",
+        "evidence": "SQL"
+      },
+      {
+        "op": "add",
+        "field": "wants.skills",
+        "value": "Tableau",
+        "evidence": "Tableau"
+      },
+      {
+        "op": "add",
+        "field": "wants.locations",
+        "value": "Chicago, IL",
+        "evidence": "Chicago"
+      },
+      {
+        "op": "set",
+        "field": "wants.remote",
+        "value": true,
+        "evidence": "remote"
+      },
+      {
+        "op": "add",
+        "field": "dealbreakers.exclude_title_words",
+        "value": "sales",
+        "evidence": "Never sales."
+      },
+      {
+        "op": "add",
+        "field": "dealbreakers.exclude_functions",
+        "value": "Sales",
+        "evidence": "Never sales."
+      }
+    ],
+    "notes": [],
+    "model": "gemini-3.5-flash-lite",
+    "prompt_version": "preferences-v2",
+    "created_at": "2026-11-24T17:16:36.141035Z"
+  }
+]

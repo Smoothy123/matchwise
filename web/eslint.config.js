@@ -25,5 +25,14 @@ export default defineConfig(
   jsxA11y.flatConfigs.recommended,
   { files: ['**/*.js', '**/*.mjs'], extends: [tseslint.configs.disableTypeChecked] },
   { files: ['scripts/**'], languageOptions: { globals: globals.node } },
+  {
+    // Cypress commands return chainables, not promises, and Chai assertions are property reads.
+    files: ['cypress/**/*.ts'],
+    rules: {
+      '@typescript-eslint/no-floating-promises': 'off',
+      '@typescript-eslint/no-unused-expressions': 'off',
+      '@typescript-eslint/no-namespace': 'off', // declaring a custom command extends Cypress's namespace
+    },
+  },
   prettier, // last: turns off every style rule that Prettier already handles
 );

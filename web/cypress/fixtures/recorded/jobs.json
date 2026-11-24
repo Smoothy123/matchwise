@@ -1,0 +1,425 @@
+{
+  "106": {
+    "id": 106,
+    "title": "Senior Data Analyst - Alteryx",
+    "company": "truData Solutions",
+    "location": "Santa Monica, CA",
+    "remote": true,
+    "seniority": "mid_senior",
+    "employment_type": "Contract",
+    "functions": [
+      "Analyst"
+    ],
+    "industries": [
+      "Retail Apparel and Fashion"
+    ],
+    "skills": [
+      "agile",
+      "confluence",
+      "data analysis",
+      "etl",
+      "excel",
+      "jira",
+      "power bi",
+      "python",
+      "sql",
+      "statistics",
+      "tableau",
+      "vba"
+    ],
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-15T20:58:37Z",
+    "description": "Job Purpose\nContractor will be required to analyze data and provide documentation for business objectives and user needs using Alteryx. This includes working with stakeholders, analyzing data from multiple systems, conducting data validation testing in order to implement reporting requirements. Employee will also be required to review, analyze and report on data from multiple internal and external sources. The employee must be able to communicate the results of their findings and make recommendations to management in the form of highly-digestible, easy-to-understand, expert-quality reports and visualizations.\nEssential Job Results\ncomplex datasets to derive meaningful insights and trends.data and discovers patterns, meaningful relationships, anomalies and trendsand maintain data models, databases, and dashboards for reporting purposes.patterns, trends, and correlations in data to aid decision-making processes.with cross-functional teams to gather requirements and define key performance indicators (KPIs).transform, and organize data for analysis using tools like SQL, Python, or R.statistical analysis and hypothesis testing to validate findings.data analysis findings as high-quality custom reports, dashboards and visualizationsvisualizations and presentations to effectively communicate insights to stakeholders.in the development and implementation of data-driven strategies and initiatives.support for ad-hoc data requests and troubleshooting data-related issues.data accuracy, integrity, and security across all data-related activitiesAlteryx Designer to automate data preparation, blending, and analysis tasks.and maintain Alteryx workflows to streamline data processes and improve efficiency.transform, and load (ETL) data from various sources including databases, spreadsheets, and APIs using Alteryx tools.advanced analytics, predictive modeling using Alteryx predictive tools.with stakeholders to understand business requirements and translate them into Alteryx workflows.and implement data validation processes to ensure accuracy and consistency of output.interactive dashboards and reports using Alteryx outputs integrated with visualization tools like Tableau or Power BI.training and support to team members on Alteryx best practices and techniques.issues and optimize Alteryx workflows for performance and scalability.updated on the latest features and capabilities of Alteryx platform to leverage its full potential for data analysis and automation.cleansingupdatesduties as assigned\nSupervisory Responsibilities\nNo\nJob Requirements\ndegree in Computer Science, Information Systems or Data Science related field. Equivalent experience is acceptable.years of work experience in data analysissupporting full Agile and Waterfall software development lifecycles (including understanding business processes, gathering user requirements, design, testing, deployment and training)analytical capabilitywritten, verbal and interpersonal skillshave ability to communicate, motivate and organize projects throughout the companySQL knowledge and experienceAlteryx experience requiredexperience in Jira, Confluence, Excel, Tableau and VBA preferred",
+    "is_active": true
+  },
+  "964": {
+    "id": 964,
+    "title": "Business Analyst",
+    "company": "Urbane Systems",
+    "location": "Washington DC-Baltimore Area",
+    "remote": false,
+    "seniority": "mid_senior",
+    "employment_type": "Contract",
+    "functions": [
+      "Information Technology"
+    ],
+    "industries": [
+      "Information Services"
+    ],
+    "skills": [
+      "accounting",
+      "agile",
+      "azure",
+      "power bi",
+      "project management",
+      "sap",
+      "sql",
+      "tableau"
+    ],
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-11T17:57:21Z",
+    "description": "Title: Sr. Business AnalystDuration: Long Term Location: Washington, DCHybrid Onsite: 4 days per week onsite from Day 1 currently. \nNO H1\nNeed USC or GC (Must Have)\nNeed Business Analyst Not Data Analyst.Must have financial Domain exp.We need candidates who can talk to users and Document Data Requirements.Worked with a team as an analyst on implementing a Data Mart / Data Warehouses. Skills / Experience RequiredMinimum 8-10 yrs. of relevant experience.Strong analytical skills coupled with capabilities to understand and interpret dataExperienced IT professional working on large data and reporting applications as well a strong understanding of Operational data stores, Data Warehouses and/or Data MartsStrong understanding of accounting concepts, finance and economic principles and working experience in general accounting procedures and reconciliationsBroad experience of middle and back office functions of financial organizationsExcellent skills in analyzing data, gathering requirements and working with clients and technical teams to translate requirements into solution.Proficient in the use of PL/SQL and ability to read data models, infer data flows and write complex queriesHands on experience with reporting tools (like Power BI, SAP BO, Tableau) and ability to perform ad hoc analysisStrong project management skills with a process orientation and ability to leverage Agile conceptsFamiliarity in using agile tools such as Azure devopsExcellent oral and written communications skills and experience interacting with both business and IT individuals.",
+    "is_active": true
+  },
+  "1042": {
+    "id": 1042,
+    "title": "Business Systems Analyst",
+    "company": "SP Software Solutions",
+    "location": "Philadelphia, PA",
+    "remote": false,
+    "seniority": "associate",
+    "employment_type": "Contract",
+    "functions": [
+      "Information Technology"
+    ],
+    "industries": [
+      "IT Services and IT Consulting"
+    ],
+    "skills": [
+      "data analysis",
+      "etl",
+      "sql",
+      "sql server",
+      "tableau"
+    ],
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-15T19:35:52Z",
+    "description": "Role: Business AnalystLocation: Hybrid Job - 3 Days in Office in Philadelphia DowntownClient: Insurance Company\nJD:This BSA sits on the Data Warehousing team. Requires experience creating Business Requirement Documents and Mapping documents for the development of ETL applications. This role requires extensive SQL experience in writing complex queries across multiple tables, data analysis and profiling skills for the creation of the mapping documents, and further discussion with data modelers for the necessary table designs.\nTop Skills DetailsExtensive SQL experience in writing complex queries across multiple tables from scratch.Source to target mapping within a Data Warehousing/ETL environment.Data Profiling experience - Understanding the relationships of data sources and producing business requirements from that data.Business analysis background, and ability to use SQL as far as writing queries.For analysis background- they deal with text files and making that data and landing it into the warehouse.Working with data coming from multiple sources. When they bring the data in they have a standard model. They have to conform data from various sources into this one data model.Additional Skills & Qualifications: Strong communication skills. Needs to have strong understand of business requirements. Ability to write business samples/rules and transformation documents. Ability to take on more than one project at once. Good understanding and knowledge of healthcare industry is preferred, but not required.\nEnvironment:Teradata & SQL Server Database-Data Stage ETL w/ Homegrown SQL/ETL tools-SSIS & Tableau for reporting",
+    "is_active": true
+  },
+  "2394": {
+    "id": 2394,
+    "title": "Sr. Analytics Engineer",
+    "company": "Bamboo Health",
+    "location": "United States",
+    "remote": true,
+    "seniority": "mid_senior",
+    "employment_type": "Full-time",
+    "functions": [
+      "Information Technology"
+    ],
+    "industries": [
+      "Hospitals and Health Care"
+    ],
+    "skills": [
+      "data analysis",
+      "excel",
+      "python",
+      "sql",
+      "statistics",
+      "tableau"
+    ],
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-09T08:59:08Z",
+    "description": "Bamboo Health is a leader in cloud-based care coordination software and analytics solutions focused on patients with complex needs, including those suffering from physical health and mental health issues and substance use disorders. We are driven by our mission of enabling better care for patients across the continuum. Our software solutions help healthcare professionals collaborate on shared patients across the spectrum of care. Join us in improving healthcare for all!\n\nSummary\n\nIn this position, you will play a key role in ensuring the quality, reliability, and continuity of our data. The ideal candidate will live and breathe data and be excited about building user-facing data products. This candidate will work with the Analytics and Visualization team along with internal stakeholders to develop reporting solutions powered by our unique data pipeline. Successful candidates will excel at creative problem solving, cross-team collaboration, and thinking independently about how to utilize data to address the challenges our customers face in physical and behavioral care coordination. If you’re a self-starter, excited about improving healthcare delivery, and thrive in a collaborative environment, this is the position for you!\n\nWhat You’ll Do\n\n Develop and maintain analytical data sources that drive the reporting solutions. Develop new dashboards and reporting capabilities that increase customer and user value. Improve efficiency in existing offerings to drive consistent, sustainable reporting products. Become the technical subject matter expert on reporting components of our product suite. Collaborate with the team and work cross functionally to drive implementation of solutions. Leverage data and data analysis techniques to deliver insights to stakeholders. Assist on various projects that contribute to business initiatives. Document knowledge in the form of knowledge base tech notes.\n\nWhat Success Looks Like…\n\nIn 3 months…\n\n You understand our reporting offerings and main customer use cases. You are comfortable with our data pipeline and architecture. You begin to build strong relationships with your peers on the analytics team.\n\nIn 6 months…\n\n You expand your scope of influence to other cross-functional stakeholders, including but not limited to product, engineering, marketing, and other key business area functions. You are building new reporting pipelines and capabilities that are in line with user needs.\n\nIn 12 months…\n\n You are the technical subject matter expert on reporting components of our product suite. You are collaborating with various business areas to deliver analytics that drive improved business decisions and increased value for the company. You are providing input and guidance on how to improve reporting and drive efficiencies.\n\nWhat You Need\n\n Bachelor’s Degree in a technical or quantitative discipline such as computer science, computer engineering, mathematics, economics, statistics, or a similar field. Advanced degree a plus. 5+ years of professional work experience in data analytics. Strong understanding of database technologies and ability to write code to gather data. Considerable SQL knowledge required. Strong working knowledge of Tableau with experience in building user-facing analytics solutions. Ability to read, understand and modify existing Python scripts. Ability to thrive in an energetic, fast-paced, and collaborative environment. A high level of judgment, analytical ability and creativity in investigating problems that require original and innovative solutions. Experience working a fast-paced, rapidly changing work environments. A work environment that is conducive to high quality virtual interactions. This includes but is not limited to being able to work from a quiet space with minimal interruptions or distractions, and a strong internet connection. The ability to travel periodically for work.\n\nWhat You Get\n\n Join one of the most innovative healthcare technology companies in the country. Have the autonomy to build something with an enthusiastically supportive team. Learn from working at the highest levels and on the most strategic priorities of the company, including from world class investors and advisors. Receive competitive compensation, including equity, with health, dental, vision and other benefits.\n\nBelonging at Bamboo\n\nWe Care. #BambooHealthValuesCare\n\nEvery human being has the right to the best possible healthcare. Our solutions enable healthcare professionals to see and treat every individual as a whole person by providing the right information, at the right time – regardless of physical, behavioral, or social barriers.\n\nWe’re a great place to work because we care. We continually seek to learn about our differences and ensure the unique identities and contributions of all employees are welcome, valued and celebrated.\n\nOur commitment to making a positive impact starts by recognizing and leveraging our differences, building inclusive teams, cultivating a sense of belonging, combating biases, and actively removing barriers to equity.\n\nBamboo Health is proud to be an Equal Employment Opportunity and affirmative action employer.\n\nTo protect our applicants from fraudulent recruitment activity, we recommend that all applicants verify the validity of an interview and hiring process by visiting our website www.bamboohealth.com. All valid job postings will be listed on our careers page. Bamboo Health does not conduct interviews via text and will not request sensitive information such as banking details during the application process.",
+    "is_active": true
+  },
+  "2398": {
+    "id": 2398,
+    "title": "Database Developer",
+    "company": "Russell Tobin",
+    "location": "Denver, CO",
+    "remote": true,
+    "seniority": "entry",
+    "employment_type": "Contract",
+    "functions": [
+      "Information Technology"
+    ],
+    "industries": [
+      "Staffing and Recruiting"
+    ],
+    "skills": [
+      "agile",
+      "azure",
+      "data analysis",
+      "databricks",
+      "hipaa",
+      "sql",
+      "sql server"
+    ],
+    "salary_min": 124800,
+    "salary_max": 145600,
+    "salary_currency": "USD",
+    "posted_at": "2024-04-17T21:56:58Z",
+    "description": "What are we looking for in our Database Developer?\n\nDatabase developer\n\nFully Remote role\n\nJob Summary:\n\nThe role involves serving as an SQL Developer within the IntrinsiQ Commercial Analytics reporting team. Key responsibilities include designing, implementing, and maintaining new data feeds and reporting deliverables while adhering to existing development standards. Collaboration with the Client Services team to refine business requirements and addressing data issues with existing reports is crucial. Additionally, performing ad-hoc data pulls to support analyses is part of the role.\n\nPosition Requirements:\n\nProficient in SQL Server (2016+) and T-SQL development, emphasizing data analysis, query optimization, and best practices.Experience in database design, development, troubleshooting, and support of data solutions.Familiarity with Azure Data and Analytics Solutions (Data Lake, Data Factory, Databricks, etc.).Knowledge of HIPAA best practices for securing protected health information.Ability to thrive in an agile, team-oriented environment.Excellent communication and documentation skills for presenting solutions to both technical and business audiences.Proven ability to prioritize and complete deliverables, including providing estimates to manage client expectations.Detail-oriented with strong organizational skills, capable of multitasking in a dynamic, fast-paced environment.Strong analytical skills, ensuring the full workflow of reporting requests is followed diligently.\n\n#CB\n\nRate/Salary: $60 to $70/hr on w2 (DOE)",
+    "is_active": true
+  },
+  "2595": {
+    "id": 2595,
+    "title": "Data Analyst/Data Science/NLP (Intern apr 30) DIN01",
+    "company": "Data Glacier",
+    "location": "United States",
+    "remote": true,
+    "seniority": "unknown",
+    "employment_type": "Internship",
+    "functions": [
+      "Information Technology"
+    ],
+    "industries": [
+      "IT Services and IT Consulting"
+    ],
+    "skills": [
+      "data analysis",
+      "nlp",
+      "sql",
+      "statistics"
+    ],
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-07T02:55:04Z",
+    "description": "The ideal candidate will use their passion for big data and analytics to provide insights to the business covering a range of topics. They will be responsible for conducting both recurring and ad hoc analysis for business users.  ResponsibilitiesUnderstand the day-to-day issues that our business faces, which can be better understood with data Compile and analyze data related to business' issues Develop clear visualizations to convey complicated data in a straightforward fashion\nQualificationsBachelor's or Master's degree in Statistics or Applied Mathematics or equivalent experience 1 - 2 years' Data Analysis experience Proficient in SQL",
+    "is_active": true
+  },
+  "3041": {
+    "id": 3041,
+    "title": "Data and Reporting Manager with Financial Services and Tableau",
+    "company": "Central Point Partners",
+    "location": "Columbus, OH",
+    "remote": false,
+    "seniority": "mid_senior",
+    "employment_type": "Contract",
+    "functions": [
+      "Management"
+    ],
+    "industries": [
+      "Financial Services"
+    ],
+    "skills": [
+      "agile",
+      "negotiation",
+      "tableau"
+    ],
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-18T17:41:44Z",
+    "description": "Huntington BankColumbus OHHybrid- work 3 days a week onsiteNeeded ASAPContract to Hire\nData and Analytics Manager- Must have Tableau and Financial Services \nJob Description:This individual will drive defining how to provide transparency and visibility to key data and analysis supporting the Value Management Office and delivery teams. They will play a key role in helping define the metrics and measurement of overall delivery effectiveness and end to end flow of work. They will manage a team tasked with defining data capture requirements, analyzing patterns and trends, synthesizing information into dashboards or presentations that covey insights and recommendations through storytelling, while maintaining a balance between the big picture and mastery of details.The Team:The Value Management Office (VMO) is responsible for helping drive a value-focused transformation across Huntington. The VMO includes the following functions:Working in direct partnership with our Finance and Strategy team to mature to an outcome driven organizationDriving the adoption of agile practices and standardsSupporting continuous prioritization of initiative in partnership with business partnersSupporting value tracking, IT execution alignment, and delivery flowDriving the continued evolution of our operational processes, training, coaching and communicationsProviding visibility through the development of reporting and analysisJob Responsibilities:Work with stakeholders to ensure that needs are clearly understood and that services meet those needsPlan and ensure the execution of work, and achievement of team goals Anticipate and analyze trends in technology while assessing the emerging technology’s impact(s) Coach and mentor team members through change and serve as a role model Actively participate in cross-functional initiatives, collaborating with team members to achieve and measure successGrasp technical concepts and make them easily understandable through various communication mediums like visualizations and presentationsCreate compelling, intuitive dashboards to enable colleagues with critical metrics, with a focus on data automation, anomaly detection, and actionable data visualizationsApply visualization techniques to data sources to make accurate and actionable analyses in a timely fashionBe a partner in the building of KPIs and metrics that help to gauge the health and success of our initiativesCreate self-service dashboards for internal business partners to learn, understand, have access to, and derive insights from data, metrics, and KPIsApply automation techniques to manual processes to create efficiency, improve accuracy, and build upon successes that create a suite of self-service assetsBasic Qualifications:10+ years of experience in strategy, management consulting, or similar skillset, experience working with analytics, and technical leadership and management experience on data-centric products Hands-on manager with a proven track record of leading and growing successful data teams Experience with TableauFinancial Services background Agile experience\nPreferred Qualifications:Understanding of IT project execution and delivery including agile delivery best practices, concepts and measure of successAbility to foster an inclusive and innovative working environment Demonstrated negotiation, influencing, partnership & presentation/communication skills Ability to understand business challenges and translate them into value added, data driven solutions Experienced at leveraging both structured and unstructured data sources Willingness and ability to learn new technologies on the job Demonstrated ability to communicate complex results to technical and non-technical audiences",
+    "is_active": true
+  },
+  "3070": {
+    "id": 3070,
+    "title": "Data Science/NLP intern ( Apr 30)",
+    "company": "Data Glacier",
+    "location": "United States",
+    "remote": true,
+    "seniority": "unknown",
+    "employment_type": "Internship",
+    "functions": [
+      "Engineering",
+      "Information Technology"
+    ],
+    "industries": [
+      "IT Services and IT Consulting"
+    ],
+    "skills": [
+      "data analysis",
+      "nlp",
+      "sql",
+      "statistics"
+    ],
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-06T02:30:04Z",
+    "description": "The ideal candidate will use their passion for big data and analytics to provide insights to the business covering a range of topics. They will be responsible for conducting both recurring and ad hoc analysis for business users.  ResponsibilitiesUnderstand the day-to-day issues that our business faces, which can be better understood with data Compile and analyze data related to business' issues Develop clear visualizations to convey complicated data in a straightforward fashion\nQualificationsBachelor's or Master's degree in Statistics or Applied Mathematics or equivalent experience 1 - 2 years' Data Analysis experience Proficient in SQL",
+    "is_active": true
+  },
+  "3549": {
+    "id": 3549,
+    "title": "Data/AI Analyst I",
+    "company": "Synovus",
+    "location": "Columbus, GA",
+    "remote": false,
+    "seniority": "unknown",
+    "employment_type": "Full-time",
+    "functions": [
+      "Other"
+    ],
+    "industries": [
+      "Financial Services"
+    ],
+    "skills": [
+      "databricks",
+      "excel",
+      "power bi",
+      "powerpoint",
+      "sql",
+      "tableau"
+    ],
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-19T04:20:05Z",
+    "description": "Job Summary\n\nProvides customer analytics and performance reporting that drive business priorities for internal parners in Marketing and Brand Experience, Consumer, Community and Wholesale Banking lines of business. Designs and maintains customer and segment scorecards, dashboards and reports that offer visibility into our customer base. Develops and delivers customer behavioral analyses that answer critical business questions, validate assumptions and debunk myths. Works with customer household, account and transaction data to support, execute, and measure business strategies to drive revenue, improve customer experience, and reduce costs.\n\nJob Duties And Responsibilities\n\nPerforms data mining and customer analysis. Works with business partners to define issues and information needs and translates them into specific data/technical requirements to support business initiatives and projects.Researches, compiles, and performs complex analysis on critical customer, account, and transactional data using tools such as SQL Assistant, Databricks, Power BI, etc.Maintains necessary processes, controls and procedures to ensure data accuracy and integrity. Leverages multiple internal or external information sources and ensures adherence to data management/data governance regulations and policies.Remains current on best practices of business analytics trends, techniques and tools. May identify emerging trends in technology and analysis as opportunities for future business growth and development.Manages multiple assignments simultaneously and completes assignments within established time frames. Keeps all facts straight and communicates key points succinctly.Presents complex material to all levels of management in a digestible, consumable manner.May work closely with the analytics' data science team to identify location, structure, and function of data related to modeling projects. Tracks down programs, data sources and crafting queries to power programs.May be responsible for designing and developing data visualization solutions according to business requirements to effectively communicate insights and provide performance measurement solutions to business decision makers.May be a liaison between business units, technology teams, finance teams and other support teams.May develop content for communication strategies across multiple lines of business; develops and supports communication tools; creates engaging and informative presentations that communicate results to management and executive audiences.Each team member is expected to be aware of risk within their functional area. This includes observing all policies, procedures, laws, regulations and risk limits specific to their role. Additionally, they should raise and report known or suspected violations to the appropriate Company authority in a timely fashion.Performs other related duties as required.\n\nThe information on this description has been designed to indicate the general nature and level of work performed by employees within this classification. It is not designed to contain or be interpreted as a comprehensive inventory of all duties, responsibilities, and qualifications required of employees assigned to this job.\n\nSynovus is an Equal Opportunity Employer supporting diversity in the workplace\n\nMinimum Education:\n\nBachelor's degree in Analytics, Statistics, Mathematics, Economics, Finance, Computer Science or a related quantitative discipline and/or business or an equivalent combination of education and experience.\n\nYears of Experience: \n\n2 Years\n\nMinimum experience:\n\nTwo or more years of hands-on data wrangling, reporting, analytics, data programming, or technical experience in consumer data and marketing database technology\n\nRequired Knowledge, Skills, & Abilities:\n\nKnowledge of the industry's standard business practices, products, and servicesComfortable working with fluid priorities and tight deadlinesStrong analytical skills with high attention to detail and accuracyDemonstrated data management skills utilizing a large and complex database environmentExcellent analytical, problem-solving, and conceptual skillsProficiency in basic data modeling principlesExcellent verbal and written communication skillsExcellent technical skills using tools such as SQL Assistant, SAS, Spotfire, Tableau, etc.Highly proficient in MS Word, MS Excel, MS PowerPoint\n\nPreferred Knowledge, Skills, & Abilities:\n\nJob related experience in the financial services industry",
+    "is_active": true
+  },
+  "3592": {
+    "id": 3592,
+    "title": "Tableau Consultant",
+    "company": "XeoMatrix",
+    "location": "Austin, TX",
+    "remote": true,
+    "seniority": "unknown",
+    "employment_type": "Full-time",
+    "functions": [
+      "Information Technology"
+    ],
+    "industries": [
+      "Information Technology & Services"
+    ],
+    "skills": [
+      "tableau"
+    ],
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-17T22:39:26Z",
+    "description": "Tableau Consultant We are currently seeking an experienced BI professional with 3+ years of Tableau and data visualization experience. This candidate must possess technical, business analysis, and communication skills. This position offers an opportunity to work directly with business teams to design strategic solutions that visualize complex data in a focused manner. This individual will work closely with customers to gather requirements, prototype designs, and develop the final deliverable. Familiarity with the Tableau architecture and best practices is a must. Position Requirements: * 3+ years experience with implementing Tableau solutions* Experience with the Tableau Desktop & Tableau Prep* Expertise in dashboard and data visualization design* Advanced skills in data analysis and data discovery* Experience with Tableau Server or Tableau Cloud* Tableau Administration experience with security & permissions* Strong communication skills: ability to lead IT architecture design sessions and/or business dashboard working sessions* Strong SQL, relational database, & data warehousing skills* Experience with REST APIs is a plus* Industry experience in Retail, Finance, Supply Chain, Pharmaceuticals, and/or Manufacturing* Agile development experience is a plus* Experience with Redshift, BigQuery, Snowflake, Databricks, Azure SQL Database is a plus* Experience with Matillion, Fivetran, Azure Data Factory, AWS Glue is a plus XeoMatrix is an Equal Opportunity Employer and does not discriminate on the basis of race, color, religion, sex, age, national origin, disability, veteran status, sexual orientation or any other classification protected by Federal, State, or local law. Employment decisions are based solely on qualifications, merit, and business need.",
+    "is_active": true
+  },
+  "4521": {
+    "id": 4521,
+    "title": "Data Analyst",
+    "company": "DataAnnotation",
+    "location": "Greater Chicago Area",
+    "remote": true,
+    "seniority": "unknown",
+    "employment_type": "Contract",
+    "functions": [
+      "Analyst",
+      "Engineering",
+      "Research"
+    ],
+    "industries": [
+      "Computer and Network Security",
+      "Engineering Services",
+      "Software Development"
+    ],
+    "skills": [
+      "c#",
+      "c++",
+      "html",
+      "javascript",
+      "python",
+      "sql"
+    ],
+    "salary_min": 60000,
+    "salary_max": 75000,
+    "salary_currency": "USD",
+    "posted_at": "2024-04-18T17:11:17Z",
+    "description": "DataAnnotation is committed to creating quality AI. Join our team to help train AI chatbots while gaining the flexibility of remote work and choosing your own schedule. \nWe are looking for a proficient Data Analyst to join our team to train our AI chatbots. You will work with the chatbots that we are building in order to measure their progress, as well as write and evaluate code.\nIn this role you will need to be proficient in at least one programming language (Python, JavaScript, HTML, C++, C# and SQL) and able to solve coding problems (think LeetCode, HackerRank, etc). For each coding problem, you must be able to explain how your solution solves the problem.\nBenefits:\nThis is a full-time or part-time REMOTE positionYou’ll be able to choose which projects you want to work onYou can work on your own scheduleProjects are paid hourly, starting at $40+ USD per hour, with bonuses for high-quality and high-volume work\nResponsibilities:\nCome up with diverse problems and solutions for a coding chatbotWrite high-quality answers and code snippetsEvaluate code quality produced by AI models for correctness and performance\nQualifications:\nFluency in English (native or bilingual)Proficient in at least one programming language (Python, JavaScript, HTML, C++, C# and SQL)Excellent writing and grammar skillsA bachelor's degree (completed or in progress)\nNote: Data Annotation payment is made via PayPal. We will never ask for any money from you. PayPal will handle any currency conversions from USD.",
+    "is_active": true
+  },
+  "4594": {
+    "id": 4594,
+    "title": "Data Analyst",
+    "company": "DataAnnotation",
+    "location": "Buffalo-Niagara Falls Area",
+    "remote": true,
+    "seniority": "unknown",
+    "employment_type": "Contract",
+    "functions": [
+      "Analyst",
+      "Engineering",
+      "Research"
+    ],
+    "industries": [
+      "Computer and Network Security",
+      "Engineering Services",
+      "Software Development"
+    ],
+    "skills": [
+      "c#",
+      "c++",
+      "html",
+      "javascript",
+      "python",
+      "sql"
+    ],
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-18T17:33:03Z",
+    "description": "DataAnnotation is committed to creating quality AI. Join our team to help train AI chatbots while gaining the flexibility of remote work and choosing your own schedule. \nWe are looking for a proficient Data Analyst to join our team to train our AI chatbots. You will work with the chatbots that we are building in order to measure their progress, as well as write and evaluate code.\nIn this role you will need to be proficient in at least one programming language (Python, JavaScript, HTML, C++, C# and SQL) and able to solve coding problems (think LeetCode, HackerRank, etc). For each coding problem, you must be able to explain how your solution solves the problem.\nBenefits:\nThis is a full-time or part-time REMOTE positionYou’ll be able to choose which projects you want to work onYou can work on your own scheduleProjects are paid hourly, starting at $40+ USD per hour, with bonuses for high-quality and high-volume work\nResponsibilities:\nCome up with diverse problems and solutions for a coding chatbotWrite high-quality answers and code snippetsEvaluate code quality produced by AI models for correctness and performance\nQualifications:\nFluency in English (native or bilingual)Proficient in at least one programming language (Python, JavaScript, HTML, C++, C# and SQL)Excellent writing and grammar skillsA bachelor's degree (completed or in progress)\nNote: Data Annotation payment is made via PayPal. We will never ask for any money from you. PayPal will handle any currency conversions from USD.",
+    "is_active": true
+  },
+  "4633": {
+    "id": 4633,
+    "title": "Informatica MDM-Business System Analyst",
+    "company": "USEReady",
+    "location": "Dallas, TX",
+    "remote": false,
+    "seniority": "mid_senior",
+    "employment_type": "Contract",
+    "functions": [
+      "Consulting"
+    ],
+    "industries": [
+      "IT Services and IT Consulting"
+    ],
+    "skills": [
+      "agile",
+      "aws",
+      "b2b",
+      "css",
+      "html",
+      "javascript",
+      "jira",
+      "looker",
+      "oracle",
+      "power bi",
+      "salesforce",
+      "sap",
+      "snowflake",
+      "sql",
+      "tableau"
+    ],
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-18T15:11:20Z",
+    "description": "At USEReady,We empower people to succeed with data. USEReady is a data and analytics firm that provides the strategies, tools, capability and capacity that businesses need to turn their data into a competitive advantage. USEReady partners with cloud and data ecosystem leaders like Tableau, Salesforce, Snowflake and Amazon Web Services, and has been named Tableau partner of the year multiple times.\nHeadquartered in NYC, the company has 600+ employees across offices in the U.S., Canada, Singapore and India and specializes in financial services. USEReady’s deep analytics expertise, unique player/coach approach and focus on fast results makes the company a perfect partner for a cloud-first, digital world.\nJob Title: Senior Sales Leader (SVP/VP)Location: East CoastJob Type: Fulltime\nJob Description:Business Requirements AnalysisPartners with business stakeholders to analyze, define and document business requirements, within and across functional areasDrives best practices during requirements gathering and data modelingHas a strong focus on gathering core requirements, beyond stated requirements and correctly places these within a broader contextUnderstands business environment and helps to connect/align relevant business stakeholdersAbility to understand and validate user stories in Jira and ensure all important parts of a story are present, including acceptance criteria\n Solution DesignCommunicate business requirements to architects, developers and vendors and identify optimal approaches to technically achieve business requirements Advises on solutions prepared by peers or supporting team/vendor, and champions good design practices\nQualifications:10-12 years of experience working as a Business Systems Analyst in all phases of the software development process – including requirements gathering, design, implementation, release, and maintenanceBachelor's in Information Systems, Computer Science, Business or related fieldExperience designing and implementation experience with Informatica MDM (preferred) or other tools like Oracle, Reltio, SAP MDG.Experience with Sales data and knowledge of B2B Customer and/or Supplier data domains.Familiarity with web services and API ecosystems, or cloud environments. Deep knowledge of master data management concepts. Some hands-on experience configuring Match & Merge rules, trust & validation rules in MDM. Strong understanding on Informatica DQ data quality, data profiling and metadata management along with integration of MDM C360 and/or S360 with IDQ.Working knowledge of how to leverage D&B as an external data authority.Strong understanding of customer, partner and/or supplier account hierarchiesFamiliarity with reporting and visualization tools like Tableau, Power BI, Looker etc.Proven experience working in Agile software development lifecycle.Hands-on experience in Oracle SQL & PLSQL.Some experience of HTML, JavaScript and Css preferred.",
+    "is_active": true
+  },
+  "4707": {
+    "id": 4707,
+    "title": "Business Intelligence Developer",
+    "company": "Insight Global",
+    "location": "San Diego, CA",
+    "remote": false,
+    "seniority": "mid_senior",
+    "employment_type": "Full-time",
+    "functions": [
+      "Analyst",
+      "Design",
+      "Project Management"
+    ],
+    "industries": [
+      "Engineering Services",
+      "IT Services and IT Consulting"
+    ],
+    "skills": [
+      "data analysis",
+      "etl",
+      "power bi",
+      "python",
+      "sql",
+      "tableau"
+    ],
+    "salary_min": 93600,
+    "salary_max": 135000,
+    "salary_currency": "USD",
+    "posted_at": "2024-04-18T20:37:11Z",
+    "description": "Insight Global is seeking a highly skilled and experienced Senior Tableau Developer and/or Data Analyst to join our dynamic team. The ideal candidate will have over 7 years of hands-on experience in developing data visualizations, scripting, and creating interactive dashboards using Tableau. This effort is supporting a multi-year DoD facilities & construction contract. A clearance is not required, however, applicants must be suitable for government employment. \nThis project will serve a branch of the military as the footprint for all project and data management. You will be required onsite 4x a week and remote for one day.\nMust Haves: Bachelor's degree in Computer Science, Information Systems, or related field.Minimum of 7 years of experience working with Tableau in a professional setting.Proficiency in Tableau Desktop, Tableau Server, and Tableau Prep Builder.Strong understanding of data visualization principles and best practices.Experience with scripting languages such as SQL, Python, or R.US Citizen and suitability for federal employment  Pluses: Tableau certification(s) (e.g., Tableau Desktop Certified Professional).Experience with other BI tools such as Power BI or QlikView.Knowledge of data warehousing concepts and ETL processes. Day to Day: Design, develop, and maintain Tableau dashboards and reports to meet business requirements.Collaborate with stakeholders to understand their data visualization needs and translate them into effective Tableau solutions.Perform data analysis and visualization to uncover insights and trends.Optimize Tableau workbooks and dashboards for performance and usability.Implement best practices for data visualization and dashboard design.Provide guidance and mentorship to junior Tableau developers.",
+    "is_active": true
+  }
+}

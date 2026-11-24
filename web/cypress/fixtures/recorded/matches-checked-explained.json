@@ -1,0 +1,613 @@
+[
+  {
+    "job_id": 3592,
+    "title": "Tableau Consultant",
+    "company": "XeoMatrix",
+    "location": "Austin, TX",
+    "remote": true,
+    "seniority": "unknown",
+    "employment_type": "Full-time",
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-17T22:39:26Z",
+    "skills": [
+      "tableau"
+    ],
+    "matched_skills": [
+      "tableau"
+    ],
+    "score": 0.8764,
+    "similarity": 0.724029676674029,
+    "features": {
+      "similarity": {
+        "value": 1,
+        "weight": 0.5294,
+        "contribution": 0.5294
+      },
+      "skills": {
+        "value": 0.5736,
+        "weight": 0.2353,
+        "contribution": 0.135
+      },
+      "location": {
+        "value": 1,
+        "weight": 0.1765,
+        "contribution": 0.1765
+      },
+      "recency": {
+        "value": 0.605,
+        "weight": 0.0588,
+        "contribution": 0.0356
+      }
+    },
+    "explanation": {
+      "reason": "This Tableau Consultant role matches your Tableau skill preference, but it is a consulting role located in Austin, TX rather than a data analyst role in Chicago.",
+      "matched_preferences": [
+        "skill: tableau"
+      ],
+      "caveats": [
+        "Role is Tableau Consultant, not data analyst",
+        "Location is Austin, TX, not one of your places (Chicago, IL)",
+        "Not listed as remote",
+        "Doesn't mention: sql"
+      ]
+    },
+    "limit_check": "passed"
+  },
+  {
+    "job_id": 1042,
+    "title": "Business Systems Analyst",
+    "company": "SP Software Solutions",
+    "location": "Philadelphia, PA",
+    "remote": false,
+    "seniority": "associate",
+    "employment_type": "Contract",
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-15T19:35:52Z",
+    "skills": [
+      "data analysis",
+      "etl",
+      "sql",
+      "sql server",
+      "tableau"
+    ],
+    "matched_skills": [
+      "sql",
+      "tableau"
+    ],
+    "score": 0.766,
+    "similarity": 0.7085207874464532,
+    "features": {
+      "similarity": {
+        "value": 0.9481,
+        "weight": 0.5294,
+        "contribution": 0.5019
+      },
+      "skills": {
+        "value": 1,
+        "weight": 0.2353,
+        "contribution": 0.2353
+      },
+      "location": {
+        "value": 0,
+        "weight": 0.1765,
+        "contribution": 0
+      },
+      "recency": {
+        "value": 0.4901,
+        "weight": 0.0588,
+        "contribution": 0.0288
+      }
+    },
+    "explanation": {
+      "reason": "This Business Systems Analyst role matches your data analyst role preference along with your SQL and Tableau skills.",
+      "matched_preferences": [
+        "role: data analyst",
+        "skill: sql",
+        "skill: tableau"
+      ],
+      "caveats": [
+        "Location is Philadelphia, PA, not one of your places (Chicago, IL)",
+        "Not listed as remote"
+      ]
+    },
+    "limit_check": "passed"
+  },
+  {
+    "job_id": 2595,
+    "title": "Data Analyst/Data Science/NLP (Intern apr 30) DIN01",
+    "company": "Data Glacier",
+    "location": "United States",
+    "remote": true,
+    "seniority": "unknown",
+    "employment_type": "Internship",
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-07T02:55:04Z",
+    "skills": [
+      "data analysis",
+      "nlp",
+      "sql",
+      "statistics"
+    ],
+    "matched_skills": [
+      "sql"
+    ],
+    "score": 0.7656,
+    "similarity": 0.6942430320833318,
+    "features": {
+      "similarity": {
+        "value": 0.9003,
+        "weight": 0.5294,
+        "contribution": 0.4766
+      },
+      "skills": {
+        "value": 0.4264,
+        "weight": 0.2353,
+        "contribution": 0.1003
+      },
+      "location": {
+        "value": 1,
+        "weight": 0.1765,
+        "contribution": 0.1765
+      },
+      "recency": {
+        "value": 0.2072,
+        "weight": 0.0588,
+        "contribution": 0.0122
+      }
+    },
+    "explanation": {
+      "reason": "This Data Analyst internship matches your data analyst role and SQL skill preferences, and is remote.",
+      "matched_preferences": [
+        "role: data analyst",
+        "skill: sql",
+        "prefers remote work"
+      ],
+      "caveats": [
+        "Level is Internship",
+        "Location is United States (remote), not one of your places (Chicago, IL)",
+        "Doesn't mention: tableau"
+      ]
+    },
+    "limit_check": "passed"
+  },
+  {
+    "job_id": 106,
+    "title": "Senior Data Analyst - Alteryx",
+    "company": "truData Solutions",
+    "location": "Santa Monica, CA",
+    "remote": true,
+    "seniority": "mid_senior",
+    "employment_type": "Contract",
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-15T20:58:37Z",
+    "skills": [
+      "agile",
+      "confluence",
+      "data analysis",
+      "etl",
+      "excel",
+      "jira",
+      "power bi",
+      "python",
+      "sql",
+      "statistics",
+      "tableau",
+      "vba"
+    ],
+    "matched_skills": [
+      "sql",
+      "tableau"
+    ],
+    "score": 0.7389,
+    "similarity": 0.593542182830443,
+    "features": {
+      "similarity": {
+        "value": 0.5631,
+        "weight": 0.5294,
+        "contribution": 0.2981
+      },
+      "skills": {
+        "value": 1,
+        "weight": 0.2353,
+        "contribution": 0.2353
+      },
+      "location": {
+        "value": 1,
+        "weight": 0.1765,
+        "contribution": 0.1765
+      },
+      "recency": {
+        "value": 0.4929,
+        "weight": 0.0588,
+        "contribution": 0.029
+      }
+    },
+    "explanation": {
+      "reason": "This Senior Data Analyst role matches your data analyst role, SQL, and Tableau preferences, and allows remote work.",
+      "matched_preferences": [
+        "role: data analyst",
+        "skill: sql",
+        "skill: tableau",
+        "prefers remote work"
+      ],
+      "caveats": [
+        "Level is Mid-senior level · Contract",
+        "Location is Santa Monica, CA (remote), not one of your places (Chicago, IL)"
+      ]
+    },
+    "limit_check": "passed"
+  },
+  {
+    "job_id": 2394,
+    "title": "Sr. Analytics Engineer",
+    "company": "Bamboo Health",
+    "location": "United States",
+    "remote": true,
+    "seniority": "mid_senior",
+    "employment_type": "Full-time",
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-09T08:59:08Z",
+    "skills": [
+      "data analysis",
+      "excel",
+      "python",
+      "sql",
+      "statistics",
+      "tableau"
+    ],
+    "matched_skills": [
+      "sql",
+      "tableau"
+    ],
+    "score": 0.6996,
+    "similarity": 0.579139725123694,
+    "features": {
+      "similarity": {
+        "value": 0.5149,
+        "weight": 0.5294,
+        "contribution": 0.2726
+      },
+      "skills": {
+        "value": 1,
+        "weight": 0.2353,
+        "contribution": 0.2353
+      },
+      "location": {
+        "value": 1,
+        "weight": 0.1765,
+        "contribution": 0.1765
+      },
+      "recency": {
+        "value": 0.259,
+        "weight": 0.0588,
+        "contribution": 0.0152
+      }
+    },
+    "explanation": {
+      "reason": "This Sr. Analytics Engineer role involves data analysis and matches your SQL, Tableau, and remote work preferences.",
+      "matched_preferences": [
+        "skill: sql",
+        "skill: tableau",
+        "prefers remote work"
+      ],
+      "caveats": [
+        "Role is Sr. Analytics Engineer, not data analyst",
+        "Level is Mid-senior level · Full-time",
+        "Location is United States (remote), not one of your places (Chicago, IL)"
+      ]
+    },
+    "limit_check": "passed"
+  },
+  {
+    "job_id": 4707,
+    "title": "Business Intelligence Developer",
+    "company": "Insight Global",
+    "location": "San Diego, CA",
+    "remote": false,
+    "seniority": "mid_senior",
+    "employment_type": "Full-time",
+    "salary_min": 93600,
+    "salary_max": 135000,
+    "salary_currency": "USD",
+    "posted_at": "2024-04-18T20:37:11Z",
+    "skills": [
+      "data analysis",
+      "etl",
+      "power bi",
+      "python",
+      "sql",
+      "tableau"
+    ],
+    "matched_skills": [
+      "sql",
+      "tableau"
+    ],
+    "score": 0.696,
+    "similarity": 0.6632990441740141,
+    "features": {
+      "similarity": {
+        "value": 0.7967,
+        "weight": 0.5294,
+        "contribution": 0.4218
+      },
+      "skills": {
+        "value": 1,
+        "weight": 0.2353,
+        "contribution": 0.2353
+      },
+      "location": {
+        "value": 0,
+        "weight": 0.1765,
+        "contribution": 0
+      },
+      "recency": {
+        "value": 0.6624,
+        "weight": 0.0588,
+        "contribution": 0.039
+      }
+    },
+    "explanation": {
+      "reason": "This Business Intelligence Developer / Data Analyst role matches your interest in data analysis and requires both SQL and Tableau.",
+      "matched_preferences": [
+        "role: data analyst",
+        "skill: sql",
+        "skill: tableau"
+      ],
+      "caveats": [
+        "Location is San Diego, CA, not one of your places (Chicago, IL)",
+        "Not listed as remote"
+      ]
+    },
+    "limit_check": "passed"
+  },
+  {
+    "job_id": 3070,
+    "title": "Data Science/NLP intern ( Apr 30)",
+    "company": "Data Glacier",
+    "location": "United States",
+    "remote": true,
+    "seniority": "unknown",
+    "employment_type": "Internship",
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-06T02:30:04Z",
+    "skills": [
+      "data analysis",
+      "nlp",
+      "sql",
+      "statistics"
+    ],
+    "matched_skills": [
+      "sql"
+    ],
+    "score": 0.6916,
+    "similarity": 0.6531234797092105,
+    "features": {
+      "similarity": {
+        "value": 0.7626,
+        "weight": 0.5294,
+        "contribution": 0.4037
+      },
+      "skills": {
+        "value": 0.4264,
+        "weight": 0.2353,
+        "contribution": 0.1003
+      },
+      "location": {
+        "value": 1,
+        "weight": 0.1765,
+        "contribution": 0.1765
+      },
+      "recency": {
+        "value": 0.1873,
+        "weight": 0.0588,
+        "contribution": 0.011
+      }
+    },
+    "explanation": {
+      "reason": "This Data Science/NLP intern position matches your interest in data analysis and asks for SQL proficiency.",
+      "matched_preferences": [
+        "role: data analyst",
+        "skill: sql",
+        "prefers remote work"
+      ],
+      "caveats": [
+        "Doesn't mention: tableau"
+      ]
+    },
+    "limit_check": "passed"
+  },
+  {
+    "job_id": 4594,
+    "title": "Data Analyst",
+    "company": "DataAnnotation",
+    "location": "Buffalo-Niagara Falls Area",
+    "remote": true,
+    "seniority": "unknown",
+    "employment_type": "Contract",
+    "salary_min": null,
+    "salary_max": null,
+    "salary_currency": null,
+    "posted_at": "2024-04-18T17:33:03Z",
+    "skills": [
+      "c#",
+      "c++",
+      "html",
+      "javascript",
+      "python",
+      "sql"
+    ],
+    "matched_skills": [
+      "sql"
+    ],
+    "score": 0.6863,
+    "similarity": 0.6346796968770219,
+    "features": {
+      "similarity": {
+        "value": 0.7009,
+        "weight": 0.5294,
+        "contribution": 0.371
+      },
+      "skills": {
+        "value": 0.4264,
+        "weight": 0.2353,
+        "contribution": 0.1003
+      },
+      "location": {
+        "value": 1,
+        "weight": 0.1765,
+        "contribution": 0.1765
+      },
+      "recency": {
+        "value": 0.6541,
+        "weight": 0.0588,
+        "contribution": 0.0385
+      }
+    },
+    "explanation": {
+      "reason": "This Data Analyst role aligns with your preference for remote work and data analysis, and lists SQL as a required programming language.",
+      "matched_preferences": [
+        "role: data analyst",
+        "skill: sql",
+        "prefers remote work"
+      ],
+      "caveats": [
+        "Doesn't mention: tableau"
+      ]
+    },
+    "limit_check": "passed"
+  },
+  {
+    "job_id": 4521,
+    "title": "Data Analyst",
+    "company": "DataAnnotation",
+    "location": "Greater Chicago Area",
+    "remote": true,
+    "seniority": "unknown",
+    "employment_type": "Contract",
+    "salary_min": 60000,
+    "salary_max": 75000,
+    "salary_currency": "USD",
+    "posted_at": "2024-04-18T17:11:17Z",
+    "skills": [
+      "c#",
+      "c++",
+      "html",
+      "javascript",
+      "python",
+      "sql"
+    ],
+    "matched_skills": [
+      "sql"
+    ],
+    "score": 0.6783,
+    "similarity": 0.6301658970018698,
+    "features": {
+      "similarity": {
+        "value": 0.6858,
+        "weight": 0.5294,
+        "contribution": 0.363
+      },
+      "skills": {
+        "value": 0.4264,
+        "weight": 0.2353,
+        "contribution": 0.1003
+      },
+      "location": {
+        "value": 1,
+        "weight": 0.1765,
+        "contribution": 0.1765
+      },
+      "recency": {
+        "value": 0.6531,
+        "weight": 0.0588,
+        "contribution": 0.0384
+      }
+    },
+    "explanation": {
+      "reason": "This Data Analyst position is remote, matches your target location in the Greater Chicago Area, and requires SQL proficiency.",
+      "matched_preferences": [
+        "role: data analyst",
+        "skill: sql",
+        "place: Chicago, IL",
+        "prefers remote work"
+      ],
+      "caveats": [
+        "Doesn't mention: tableau"
+      ]
+    },
+    "limit_check": "passed"
+  },
+  {
+    "job_id": 2398,
+    "title": "Database Developer",
+    "company": "Russell Tobin",
+    "location": "Denver, CO",
+    "remote": true,
+    "seniority": "entry",
+    "employment_type": "Contract",
+    "salary_min": 124800,
+    "salary_max": 145600,
+    "salary_currency": "USD",
+    "posted_at": "2024-04-17T21:56:58Z",
+    "skills": [
+      "agile",
+      "azure",
+      "data analysis",
+      "databricks",
+      "hipaa",
+      "sql",
+      "sql server"
+    ],
+    "matched_skills": [
+      "sql"
+    ],
+    "score": 0.6726,
+    "similarity": 0.6286205496048272,
+    "features": {
+      "similarity": {
+        "value": 0.6806,
+        "weight": 0.5294,
+        "contribution": 0.3603
+      },
+      "skills": {
+        "value": 0.4264,
+        "weight": 0.2353,
+        "contribution": 0.1003
+      },
+      "location": {
+        "value": 1,
+        "weight": 0.1765,
+        "contribution": 0.1765
+      },
+      "recency": {
+        "value": 0.6033,
+        "weight": 0.0588,
+        "contribution": 0.0355
+      }
+    },
+    "explanation": {
+      "reason": "This Database Developer role incorporates data analysis tasks and requires SQL expertise in a remote setting.",
+      "matched_preferences": [
+        "role: data analyst",
+        "skill: sql",
+        "prefers remote work"
+      ],
+      "caveats": [
+        "Doesn't mention: tableau"
+      ]
+    },
+    "limit_check": "passed"
+  }
+]

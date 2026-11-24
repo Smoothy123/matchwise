@@ -16,10 +16,14 @@
     "format:check": "prettier --check .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "check": "npm run format:check && npm run lint && npm run typecheck && npm run test",
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm run test:coverage",
     "api:sync": "node scripts/fetch-openapi.mjs && npm run api:types",
     "api:types": "openapi-typescript openapi.json --output src/api/schema.gen.ts",
-    "lighthouse": "node scripts/lighthouse.mjs"
+    "lighthouse": "node scripts/lighthouse.mjs",
+    "test:coverage": "vitest run --coverage",
+    "e2e": "npm run build && node scripts/e2e.mjs",
+    "e2e:live": "npm run build && node scripts/e2e.mjs --live",
+    "e2e:open": "cypress open"
   },
   "dependencies": {
     "@tanstack/react-query": "5.108.4",
@@ -41,7 +45,9 @@
     "@types/react": "18.3.31",
     "@types/react-dom": "18.3.7",
     "@vitejs/plugin-react": "6.3.0",
+    "@vitest/coverage-v8": "5.1.1",
     "axe-core": "4.14.1",
+    "cypress": "16.3.0",
     "eslint": "9.39.5",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-jsx-a11y": "6.10.2",

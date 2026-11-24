@@ -1,0 +1,39 @@
+{
+  "profile_id": "recorded-profile",
+  "version": 1,
+  "preferences": {
+    "wants": {
+      "roles": [
+        "data analyst"
+      ],
+      "skills": [
+        "sql",
+        "tableau"
+      ],
+      "locations": [
+        "Chicago, IL"
+      ],
+      "industries": [],
+      "seniority": [],
+      "remote": true,
+      "min_salary": null,
+      "other": []
+    },
+    "dealbreakers": {
+      "exclude_title_words": [
+        "sales"
+      ],
+      "exclude_functions": [
+        "Sales"
+      ],
+      "exclude_industries": [],
+      "exclude_companies": [],
+      "exclude_description_phrases": [],
+      "exclude_seniority": [],
+      "exclude_employment_types": [],
+      "only_locations": [],
+      "only_remote": false,
+      "min_salary": null
+    }
+  }
+}

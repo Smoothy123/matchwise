@@ -38,6 +38,22 @@ export default defineConfig({
     // Vitest blanks CSS by default; tokens.test.ts reads the real tokens to check contrast.
     css: { include: [/tokens\.css/] },
     restoreMocks: true,
+    coverage: {
+      provider: 'v8',
+      include: ['src/**/*.{ts,tsx}'],
+      // main.tsx only runs in a real browser (it mounts the app): the Cypress tests cover it.
+      exclude: [
+        'src/**/*.test.{ts,tsx}',
+        'src/test/**',
+        'src/api/schema.gen.ts',
+        'src/vite-env.d.ts',
+        'src/main.tsx',
+      ],
+      reporter: ['text-summary', 'html'],
+      // A little under today's numbers (96 / 88 / 95 / 98): enough to fail the build if a change
+      // leaves new code untested, without failing it over one refactored line.
+      thresholds: { statements: 95, branches: 85, functions: 93, lines: 95 },
+    },
     unstubGlobals: true,
   },
 });
