@@ -4,7 +4,7 @@ import { API_URL } from '../api/client';
 import { useHealth } from '../api/queries';
 import { Button } from '../ui/Button';
 import styles from './StatusBanner.module.css';
-import { useOnlineStatus } from './useOnlineStatus';
+import { useOnlineStatus } from '../lib/useOnlineStatus';
 
 /**
  * Explains, in words, anything that limits what works right now. The live region is always in
@@ -41,7 +41,7 @@ export function StatusBanner() {
   }
 
   return (
-    <div role="status" className={styles.region}>
+    <div role="status" aria-label="Connection status" className={styles.region}>
       {message ? <div className={`${styles.banner} ${styles[tone]}`}>{message}</div> : null}
     </div>
   );

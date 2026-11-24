@@ -4,7 +4,15 @@
  */
 import { QueryClient, useQuery } from '@tanstack/react-query';
 
-import { ApiError, getHealth, getJob, getMatches, getProfile, type MatchQuery } from './client';
+import {
+  ApiError,
+  getChat,
+  getHealth,
+  getJob,
+  getMatches,
+  getProfile,
+  type MatchQuery,
+} from './client';
 
 /** Retry up to twice, and only when a retry can help (network trouble, a busy LLM: 502/503). */
 export function shouldRetry(failureCount: number, error: unknown): boolean {
@@ -44,6 +52,8 @@ export const queryKeys = {
   matches: (profileId: string, version: number, query: MatchQuery) =>
     ['matches', profileId, version, query] as const,
   job: (jobId: number) => ['job', jobId] as const,
+  chat: (profileId: string) => ['chat', profileId] as const,
+  preferenceHistory: (profileId: string) => ['preference-history', profileId] as const,
 };
 
 export const HEALTH_POLL_MS = 30_000;
@@ -85,5 +95,13 @@ export function useJob(jobId: number | null) {
     queryFn: ({ signal }) => getJob(jobId ?? 0, signal),
     enabled: jobId !== null,
     staleTime: 5 * 60_000, // postings change at most once a day (the refresh)
+  });
+}
+
+/** The whole conversation, including every tool call and result. */
+export function useChatHistory(profileId: string) {
+  return useQuery({
+    queryKey: queryKeys.chat(profileId),
+    queryFn: ({ signal }) => getChat(profileId, signal),
   });
 }

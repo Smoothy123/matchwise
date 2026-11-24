@@ -65,7 +65,7 @@ describe('API status', () => {
     renderApp();
     expect(screen.getByText('Checking API…')).toBeInTheDocument();
     expect(await screen.findByText('API online · LLM on')).toBeInTheDocument();
-    expect(screen.getByRole('status', { name: '' })).toBeEmptyDOMElement();
+    expect(screen.getByRole('status', { name: 'Connection status' })).toBeEmptyDOMElement();
   });
 
   it('explains what still works when the LLM is off', async () => {
@@ -95,7 +95,7 @@ describe('API status', () => {
     await screen.findByText('API online · LLM on');
     vi.spyOn(navigator, 'onLine', 'get').mockReturnValue(false);
     window.dispatchEvent(new Event('offline'));
-    expect(await screen.findByText(/You're offline/)).toBeInTheDocument();
+    expect(await screen.findByText(/You're offline. Matchwise will carry on/)).toBeInTheDocument();
   });
 });
 

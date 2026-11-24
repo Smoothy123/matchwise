@@ -98,3 +98,47 @@ export function makeJob(overrides: Partial<Job> = {}): Job {
     ...overrides,
   };
 }
+
+// ---------- chat history rows, as GET /profiles/{id}/chat returns them ----------
+
+import type { ChatMessage } from '../api/client';
+
+const AT = '2026-11-24T12:00:00Z';
+
+export const chatRows = {
+  user: (turn: number, content: string): ChatMessage => ({
+    turn,
+    role: 'user',
+    content,
+    tool_calls: null,
+    tool_call_id: null,
+    created_at: AT,
+  }),
+  toolRequest: (turn: number, calls: [id: string, name: string, args: object][]): ChatMessage => ({
+    turn,
+    role: 'assistant',
+    content: null,
+    tool_calls: calls.map(([id, name, args]) => ({
+      id,
+      function: { name, arguments: JSON.stringify(args) },
+    })),
+    tool_call_id: null,
+    created_at: AT,
+  }),
+  toolResult: (turn: number, id: string, outcome: object): ChatMessage => ({
+    turn,
+    role: 'tool',
+    content: JSON.stringify(outcome),
+    tool_calls: null,
+    tool_call_id: id,
+    created_at: AT,
+  }),
+  reply: (turn: number, content: string): ChatMessage => ({
+    turn,
+    role: 'assistant',
+    content,
+    tool_calls: null,
+    tool_call_id: null,
+    created_at: AT,
+  }),
+};
