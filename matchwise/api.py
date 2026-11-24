@@ -9,6 +9,7 @@ from typing import Annotated, Any, Literal
 import psycopg
 from fastapi import Depends, FastAPI, HTTPException, Path, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, StringConstraints
 
@@ -48,6 +49,9 @@ app.add_middleware(
     allow_headers=["Content-Type"],
     max_age=600,  # browsers may reuse a preflight answer for 10 minutes
 )
+# JSON compresses well (matches with reasons: about 5x). Responses under 1 KB aren't worth it.
+# Added after CORS, so it's the outer layer and compresses the final response, headers included.
+app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 
 # ---------- dependencies ----------

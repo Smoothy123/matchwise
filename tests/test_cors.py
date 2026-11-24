@@ -66,3 +66,14 @@ def test_responses_carry_the_header_only_for_allowed_origins(db_url, monkeypatch
     # Error responses need it too, or the browser hides the status and the frontend can't show it.
     assert missing.status_code == 404
     assert missing.headers["access-control-allow-origin"] == allowed_origin
+
+
+def test_large_responses_are_compressed_and_keep_their_cors_header(db_url, monkeypatch, allowed_origin):
+    monkeypatch.setenv("DATABASE_URL", db_url)
+    with TestClient(app) as client:
+        large = client.get("/openapi.json", headers={"Origin": allowed_origin, "Accept-Encoding": "gzip"})
+        small = client.get("/health", headers={"Accept-Encoding": "gzip"})
+    assert large.headers["content-encoding"] == "gzip"
+    assert large.headers["access-control-allow-origin"] == allowed_origin
+    assert large.json()["info"]["title"] == "Matchwise"  # the client decompresses it transparently
+    assert "content-encoding" not in small.headers  # under 1 KB: sent as is
