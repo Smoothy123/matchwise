@@ -24,6 +24,16 @@
   --color-danger: #b3261e;
   --color-danger-soft: #fbe7e5;
 
+  /* Ranking features, in the fixed order the score bar draws them. A validated categorical
+     palette (CVD-safe on adjacent pairs, light and dark). Marks only, never text. Three light
+     steps are under 3:1 on white, so every bar also has a text equivalent and a table view. */
+  --color-feature-similarity: #2a78d6;
+  --color-feature-skills: #eb6834;
+  --color-feature-location: #1baf7a;
+  --color-feature-seniority: #eda100;
+  --color-feature-salary: #e87ba4;
+  --color-feature-recency: #008300;
+
   /* ---------- type ---------- */
   /* System fonts: nothing to download, so no flash of unstyled text and no layout shift. */
   --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -87,6 +97,12 @@
     --color-warning-soft: #38290f;
     --color-danger: #ff8a80;
     --color-danger-soft: #3d1a17;
+    --color-feature-similarity: #3987e5;
+    --color-feature-skills: #d95926;
+    --color-feature-location: #199e70;
+    --color-feature-seniority: #c98500;
+    --color-feature-salary: #d55181;
+    --color-feature-recency: #0ca30c;
     --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
     --shadow-md: 0 4px 16px rgb(0 0 0 / 0.5);
 

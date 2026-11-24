@@ -16,6 +16,9 @@ export type Operation = Schemas['Operation'];
 export type HistoryItem = Schemas['HistoryItem'];
 export type Match = Schemas['MatchOut'];
 export type Mode = Schemas['Mode'];
+export type FeatureScore = Schemas['FeatureScore'];
+export type Explanation = Schemas['Explanation'];
+export type Job = Schemas['JobOut'];
 export type ChatReply = Schemas['ChatOut'];
 export type ChatMessage = Schemas['ChatMessageOut'];
 export type ChatReset = Schemas['ChatResetOut'];
@@ -31,6 +34,8 @@ type Ok<P extends keyof paths, M extends 'get' | 'post' | 'delete'> = paths[P][M
 type QueryOf<P extends keyof paths> = paths[P]['get'] extends { parameters: { query?: infer Q } }
   ? NonNullable<Q>
   : never;
+
+export type MatchQuery = QueryOf<'/profiles/{profile_id}/matches'>;
 
 // ---------- errors ----------
 
@@ -181,16 +186,16 @@ export async function getPreferenceHistory(profileId: string, signal?: AbortSign
   }
 }
 
-export function getMatches(
-  profileId: string,
-  query: QueryOf<'/profiles/{profile_id}/matches'>,
-  signal?: AbortSignal,
-) {
+export function getMatches(profileId: string, query: MatchQuery, signal?: AbortSignal) {
   return request<Ok<'/profiles/{profile_id}/matches', 'get'>>(`${profilePath(profileId)}/matches`, {
     query,
     signal,
     timeoutMs: TIMEOUTS.matches,
   });
+}
+
+export function getJob(jobId: number, signal?: AbortSignal) {
+  return request<Ok<'/jobs/{job_id}', 'get'>>(`/jobs/${String(jobId)}`, { signal });
 }
 
 export function getChat(profileId: string, signal?: AbortSignal) {

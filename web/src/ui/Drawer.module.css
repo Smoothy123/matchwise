@@ -1,0 +1,60 @@
+.drawer {
+  /* Phones: the whole screen. */
+  width: 100%;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.drawer::backdrop {
+  background: rgb(0 0 0 / 0.45);
+}
+
+.panel {
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain; /* scrolling the panel never scrolls the page behind it */
+  padding: var(--space-5) var(--space-4) var(--space-7);
+}
+
+.close {
+  position: sticky;
+  top: 0;
+  float: right;
+  display: grid;
+  place-items: center;
+  width: var(--tap-min);
+  height: var(--tap-min);
+  margin: calc(-1 * var(--space-2)) calc(-1 * var(--space-2)) 0 var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--text-xl);
+  line-height: 1;
+  cursor: pointer;
+}
+
+.close:hover {
+  background: var(--color-surface-muted);
+}
+
+@media (min-width: 48rem) {
+  /* Wider screens: a panel on the right, the list still visible beside it. */
+  .drawer {
+    width: min(40rem, 90vw);
+    margin-inline-start: auto;
+    border-inline-start: 1px solid var(--color-border);
+    box-shadow: var(--shadow-md);
+  }
+
+  .panel {
+    padding-inline: var(--space-6);
+  }
+}

@@ -1,0 +1,132 @@
+.detail {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.header {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.title {
+  font-size: var(--text-xl);
+  overflow-wrap: anywhere;
+}
+
+.where,
+.muted {
+  color: var(--color-text-muted);
+}
+
+.facts,
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-2);
+  padding: 0;
+  list-style: none;
+  font-size: var(--text-sm);
+}
+
+.facts li,
+.skills li {
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-muted);
+}
+
+.skills .yourSkill {
+  background: var(--color-success-soft);
+  color: var(--color-success);
+  font-weight: var(--weight-medium);
+}
+
+.notice {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-warning-soft);
+  color: var(--color-warning);
+}
+
+.section {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.section h3 {
+  font-size: var(--text-lg);
+}
+
+.section h4 {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.matched {
+  padding: 0;
+  list-style: none;
+  color: var(--color-success);
+}
+
+.caveats {
+  padding-inline-start: var(--space-4);
+  color: var(--color-text-muted);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.table th,
+.table td {
+  padding: var(--space-2);
+  border-block-end: 1px solid var(--color-border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.table td {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table thead th:not(:first-child) {
+  text-align: end;
+}
+
+.table tfoot th,
+.table tfoot td {
+  border-block-end: none;
+  font-weight: var(--weight-bold);
+}
+
+.table tfoot th {
+  text-align: end;
+}
+
+.swatch {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-inline-end: var(--space-2);
+  border-radius: 3px;
+  vertical-align: -0.05em;
+}
+
+.partHelp {
+  display: block;
+  color: var(--color-text-muted);
+  font-weight: var(--weight-normal);
+}
+
+.loading {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.description {
+  white-space: pre-line; /* the dataset keeps the posting's own line breaks */
+  overflow-wrap: anywhere;
+}
