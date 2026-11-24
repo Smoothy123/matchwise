@@ -1,6 +1,6 @@
-# The web frontend: formatting, lint, types, unit and component tests, then the end-to-end tests
-# in a real browser on the production build. The end-to-end tests replay responses recorded from
-# the real API, so no backend, database or LLM key is needed here.
+# The web frontend: formatting, lint, types, unit and component tests with coverage, then the
+# end-to-end tests in a real browser on the production build and on the demo build. They replay
+# responses recorded from the real API, so no backend, database or LLM key is needed here.
 name: Web
 
 on:
@@ -29,6 +29,8 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm run e2e
+      # The public demo build must work with no backend at all.
+      - run: npm run e2e:demo
       - if: failure()
         uses: actions/upload-artifact@v4
         with:
